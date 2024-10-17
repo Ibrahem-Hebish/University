@@ -1,0 +1,15 @@
+{
+  "jwt": {
+    "Issuer": "SchoolProject",
+    "Audience": "http://127.0.0.1:5500",
+    "LifeTime": 3,
+    "SigningKey": "AmigtBYwib39Dpwxhfu921VZishf395Slw"
+  },
+  "Email": {
+    "Port": 465,
+    "ClientEmail": "Smtp.gmail.com",
+    "Email": "ibrahemhebish@gmail.com",
+    "Name": "Ibrahem",
+    "Password": "phjvwgnamoqgzrba"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "parallelizeAssemblies": true,
+  "parallelizeTestCollections" :  true
+}
