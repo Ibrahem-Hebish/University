@@ -1,7 +1,9 @@
-﻿namespace SchoolProject.Infrustructure.StudentSubjectRepositories;
+﻿using Microsoft.Extensions.Caching.Memory;
 
-public class StudentSubjectRepository(AppDbContext AppDbContext)
-        : SchoolRepositery<StudentSubject>(AppDbContext)
+namespace SchoolProject.Infrustructure.StudentSubjectRepositories;
+
+public class StudentSubjectRepository(AppDbContext AppDbContext, IMemoryCache memoryCache)
+        : SchoolRepositery<StudentSubject>(AppDbContext, memoryCache)
     , IStudentSubjectRepository
 {
 }

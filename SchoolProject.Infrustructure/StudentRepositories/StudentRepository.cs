@@ -1,7 +1,9 @@
-﻿namespace SchoolProject.Infrustructure.StudentRepositories;
+﻿using Microsoft.Extensions.Caching.Memory;
 
-public class StudentRepository(AppDbContext appDbContext)
-        : SchoolRepositery<Student>(appDbContext)
+namespace SchoolProject.Infrustructure.StudentRepositories;
+
+public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : SchoolRepositery<Student>(appDbContext, memoryCache)
     , IStudentRepository
 {
     public DbSet<Student> Students { get; set; } = appDbContext.Set<Student>();
@@ -30,22 +32,15 @@ public class StudentRepository(AppDbContext appDbContext)
         Expression<Func<Student, bool>> filter
         , bool AsNoTracking = false)
     {
-        if (AsNoTracking)
-        {
-            var students = await Students.AsNoTracking()
-                .Include(s => s.Subjects)
-                .Include(s => s.Department)
-                .Where(filter)
-                .ToListAsync();
-
-            return students;
-        }
-        var students2 = await Students.Where(filter)
+        var students = Students
             .Include(s => s.Subjects)
             .Include(s => s.Department)
-            .ToListAsync();
+            .Where(filter);
 
-        return students2;
+        if (AsNoTracking)
+            students = students.AsNoTracking();
+
+        return await students.ToListAsync();
     }
 
     public override async Task<Student> GetOneAsync(

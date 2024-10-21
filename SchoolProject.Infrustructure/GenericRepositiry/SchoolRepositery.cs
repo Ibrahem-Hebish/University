@@ -1,68 +1,30 @@
-﻿namespace SchoolProject.Infrustructure.GenericRepositiry;
+﻿using Microsoft.Extensions.Caching.Memory;
 
-public class SchoolRepositery<T>(AppDbContext appDbContext)
+namespace SchoolProject.Infrustructure.GenericRepositiry;
+
+public class SchoolRepositery<T>(AppDbContext appDbContext, IMemoryCache memoryCache)
     : IRepositiry<T> where T : class
 {
-    public virtual async Task<T> AddAsync(T entity)
+    public async Task<T> FindAsync(int id)
     {
-        appDbContext.Set<T>().Add(entity);
-
-        await appDbContext.SaveChangesAsync();
-
-        return entity;
-    }
-    public virtual async Task<ICollection<T>> AddRangeAsync(
-        ICollection<T> entities)
-    {
-        appDbContext.Set<T>().AddRange(entities);
-
-        await appDbContext.SaveChangesAsync();
-
-        return entities;
-    }
-    public virtual async Task<bool> DeleteAsync(T entity)
-    {
-        appDbContext.Set<T>().Remove(entity);
-
-        await appDbContext.SaveChangesAsync();
-
-        return true;
-    }
-    public virtual async Task<ICollection<T>> GetAllAsync(
-        bool AsNoTracking = false)
-    {
-        if (AsNoTracking)
+        if (!memoryCache.TryGetValue($"{typeof(T).Name}:{id}", out T? result))
         {
-            var students = await appDbContext.Set<T>()
-                .AsNoTracking()
-                .ToListAsync();
+            T? Entity = await appDbContext.Set<T>()
+            .FindAsync(id);
 
-            return students;
+            var options = SetMemoryCacheOptions();
+
+            memoryCache.Set($"{typeof(T).Name}:{id}", Entity, options);
+
+            await Console.Out.WriteLineAsync($"{typeof(T).Name} with id {id} is comming from DB");
+
+            return Entity!;
         }
-        var students2 = await appDbContext.Set<T>()
-            .ToListAsync();
+        await Console.Out.WriteLineAsync($"{typeof(T).Name} with id {id} is comming from Cacheing");
 
-        return students2;
+        return result!;
     }
-    public virtual async Task<ICollection<T>> GetAllWhere(
-        Expression<Func<T, bool>> filter
-        , bool AsNoTracking = false)
-    {
-        if (AsNoTracking)
-        {
-            var students = await appDbContext.Set<T>()
-                .AsNoTracking()
-                .Where(filter)
-                .ToListAsync();
 
-            return students;
-        }
-        var students2 = await appDbContext.Set<T>()
-            .Where(filter)
-            .ToListAsync();
-
-        return students2;
-    }
     public virtual async Task<T> GetOneAsync(
         Expression<Func<T, bool>> filter
         , bool AsNoTracking = false)
@@ -80,11 +42,88 @@ public class SchoolRepositery<T>(AppDbContext appDbContext)
 
         return entity2!;
     }
-    public async Task<T> UpdateAsync(T entity)
+    public virtual async Task<ICollection<T>> GetAllAsync(
+        bool AsNoTracking = false)
+    {
+        if (!memoryCache.TryGetValue(typeof(T).Name, out ICollection<T>? value))
+        {
+
+            var query = appDbContext.Set<T>().AsQueryable();
+
+            var options = SetMemoryCacheOptions();
+
+            if (AsNoTracking)
+                query = query.AsNoTracking();
+
+            memoryCache.Set(typeof(T).Name, query, options);
+
+            return await query.ToListAsync();
+        }
+        return value!;
+    }
+    public virtual async Task<ICollection<T>> GetAllWhere(
+        Expression<Func<T, bool>> filter
+        , bool AsNoTracking = false)
+    {
+        var query = appDbContext.Set<T>().AsQueryable();
+        if (!memoryCache.TryGetValue($"{typeof(T).Name} {filter.Name}", out IQueryable<T>? value))
+        {
+            if (AsNoTracking)
+                query = query.AsNoTracking();
+
+            var options = SetMemoryCacheOptions();
+
+            memoryCache.Set($"{typeof(T).Name} {filter.Name}", query, options);
+
+            return await query.Where(filter).ToListAsync();
+        }
+        return await value!.ToListAsync();
+    }
+
+
+    public virtual async Task<T> AddAsync(T entity)
+    {
+        appDbContext.Set<T>().Add(entity);
+
+        await appDbContext.SaveChangesAsync();
+
+        memoryCache.Remove(typeof(T).Name);
+
+        return entity;
+    }
+    public virtual async Task<ICollection<T>> AddRangeAsync(
+        ICollection<T> entities)
+    {
+        appDbContext.Set<T>().AddRange(entities);
+
+        await appDbContext.SaveChangesAsync();
+
+        memoryCache.Remove(typeof(T).Name);
+
+        return entities;
+    }
+    public virtual async Task<bool> DeleteAsync(T entity, int id)
+    {
+        appDbContext.Set<T>().Remove(entity);
+
+        await appDbContext.SaveChangesAsync();
+
+        memoryCache.Remove(typeof(T).Name);
+
+        memoryCache.Remove($"{typeof(T).Name}:{id}");
+
+        return true;
+    }
+
+    public async Task<T> UpdateAsync(T entity, int id)
     {
         appDbContext.Set<T>().Update(entity);
 
         await appDbContext.SaveChangesAsync();
+
+        memoryCache.Remove(typeof(T).Name);
+
+        memoryCache.Remove($"{typeof(T).Name}:{id}");
 
         return entity;
     }
@@ -109,11 +148,15 @@ public class SchoolRepositery<T>(AppDbContext appDbContext)
         appDbContext.Database.RollbackTransaction();
     }
 
-    public async Task<T> FindAsync(int id)
+    private static MemoryCacheEntryOptions SetMemoryCacheOptions()
     {
-        T? Entity = await appDbContext.Set<T>()
-            .FindAsync(id);
+        var options = new MemoryCacheEntryOptions()
+        {
+            AbsoluteExpiration = DateTimeOffset.Now.AddMinutes(2),
+            SlidingExpiration = TimeSpan.FromMinutes(1),
+            Priority = CacheItemPriority.Normal,
+        };
 
-        return Entity!;
+        return options;
     }
 }

@@ -4,6 +4,9 @@ public record GetStudentById(
     int Id)
     : IRequest<Response<GetStudentDto>>
 { }
+public record GetAllStudents()
+    : IRequest<Response<List<GetStudentDto>>>
+{ }
 public record GetStudentByName(
     string name)
     : IRequest<Response<GetStudentDto>>

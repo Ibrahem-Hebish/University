@@ -5,7 +5,50 @@ public class StudentServices(
 
     : IStudentService
 {
+    public async Task<Student> GetStudentById(int id)
+    {
+        var student = await studentRepository.FindAsync(id);
 
+        return student;
+    }
+
+    public async Task<List<Student>> GetAll()
+    {
+        var students = await studentRepository.GetAllAsync(true);
+
+        return [.. students];
+    }
+
+    public IQueryable<Student> GetAsQueriable()
+    {
+        return studentRepository.AsNoTracking()
+            .Include(s => s.Subjects)
+            .Include(s => s.Department);
+    }
+
+
+    public async Task<Student> GetStudentByName(string name)
+    {
+        var student = await studentRepository.GetOneAsync(s => s.Name.Contains(name), true);
+        return student;
+    }
+
+    public async Task<ICollection<Student>> GroupStudentsByDepartment(string depname)
+    {
+        var DepStudents = await studentRepository.GetAllWhere(s =>
+        s.Department.Name.ToLower() == depname.ToLower(), true);
+
+        return DepStudents.ToList();
+    }
+
+    public async Task<ICollection<Student>> GroupStudentsBySubject(string subname)
+    {
+        var DepStudents = await studentRepository.GetAllWhere
+            (s => s.Subjects.Select(s => s.Name.ToLower())
+            .Any(n => n == subname.ToLower()), true);
+
+        return DepStudents.ToList();
+    }
     public async Task<Student> AddAsync(Student student)
     {
         var exsistingStudent = await studentRepository
@@ -20,13 +63,23 @@ public class StudentServices(
         return newStudent;
     }
 
+    public async Task<Student> Update(Student student)
+    {
+        var exsistingStudent = await studentRepository.FindAsync(student.Id);
+
+        if (exsistingStudent is null) return null!;
+
+        var s = await studentRepository.UpdateAsync(student, student.Id);
+        return s;
+    }
+
     public async Task<bool> DeleteStudent(int id)
     {
         var student = await studentRepository.FindAsync(id);
 
         if (student is not null)
         {
-            await studentRepository.DeleteAsync(student);
+            await studentRepository.DeleteAsync(student, id);
 
             return true;
         }
@@ -62,59 +115,4 @@ public class StudentServices(
         }
         return students;
     }
-
-    public async Task<List<Student>> GetAll()
-    {
-        var students = await studentRepository.GetAllAsync(true);
-
-        return [.. students];
-    }
-
-    public IQueryable<Student> GetAsQueriable()
-    {
-        return studentRepository.AsNoTracking()
-            .Include(s => s.Subjects)
-            .Include(s => s.Department);
-    }
-
-    public async Task<Student> GetStudentById(int id)
-    {
-        var student = await studentRepository.FindAsync(id);
-
-        return student;
-    }
-
-    public async Task<Student> GetStudentByName(string name)
-    {
-        var student = await studentRepository.GetOneAsync(s => s.Name == name, true);
-        return student;
-    }
-
-    public async Task<ICollection<Student>> GroupStudentsByDepartment(string depname)
-    {
-        var DepStudents = await studentRepository.GetAllWhere(s =>
-        s.Department.Name.Equals(depname, StringComparison.CurrentCultureIgnoreCase), true);
-
-        return DepStudents;
-    }
-
-    public async Task<ICollection<Student>> GroupStudentsBySubject(string subname)
-    {
-        var DepStudents = await studentRepository.GetAllWhere
-            (s => s.Subjects.Select(s => s.Name.ToLower())
-            .Any(n => n.Equals(subname, StringComparison.CurrentCultureIgnoreCase)), true);
-
-        return DepStudents;
-    }
-
-    public async Task<Student> Update(Student student)
-    {
-        var exsistingStudent = await studentRepository.FindAsync(student.Id);
-
-        if (exsistingStudent is null) return null!;
-
-        var s = await studentRepository.UpdateAsync(student);
-        return s;
-    }
-
 }

@@ -1,7 +1,9 @@
-﻿namespace SchoolProject.Infrustructure.UserRefreshTokenReposirory;
+﻿using Microsoft.Extensions.Caching.Memory;
 
-public class UserTokenRepository(AppDbContext appDbContext)
-        : SchoolRepositery<UserToken>(appDbContext)
+namespace SchoolProject.Infrustructure.UserRefreshTokenReposirory;
+
+public class UserTokenRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : SchoolRepositery<UserToken>(appDbContext, memoryCache)
     , IUserTokenRepository
 {
 }

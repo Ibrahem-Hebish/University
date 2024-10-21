@@ -5,6 +5,8 @@ public static class DependancyInjection
     public static IServiceCollection AddInfrustructure(
         this IServiceCollection services)
     {
+        services.AddMemoryCache();
+
         services.AddDbContext<AppDbContext>();
 
         services.AddScoped(typeof(IRepositiry<>), typeof(SchoolRepositery<>));

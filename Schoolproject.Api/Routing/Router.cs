@@ -9,6 +9,8 @@
 
             public const string GetById = postfix + "id";
 
+            public const string GetAll = postfix + "GetAlld";
+
             public const string GetByName = postfix + "name";
 
             public const string GroupBySubname = postfix + "GroupBySubname";

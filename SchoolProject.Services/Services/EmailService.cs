@@ -19,7 +19,7 @@ public class EmailService(
                 sendemailsetting.CurrentValue.ClientEmail,
                 sendemailsetting.CurrentValue.Port,
                 true);
-            //new ConfigurationBuilder().AddEnvironmentVariables().Build();
+
             client.Authenticate(
                 sendemailsetting.CurrentValue.Email,
                 configuration["sendingemailpassword"]);

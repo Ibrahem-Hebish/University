@@ -108,7 +108,7 @@ public class Authontication(
         {
             userToken.IsExpired = true;
             userToken.IsUsed = false;
-            await userTokenRepository.UpdateAsync(userToken);
+            await userTokenRepository.UpdateAsync(userToken, userToken.Id);
             return ("Refresh Token is expired");
         }
 

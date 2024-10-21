@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
+using SchoolProject.Infrustructure.SubjectRepositories;
 
 namespace SchoolProject.Core.CQSR.Handlers.StudentHandlers;
 
@@ -8,33 +9,33 @@ public class StudentHandler(
     IMemoryCache cache)
 
     : ResponseHandler,
-    IRequestHandler<GetStudentById, Response<GetStudentDto>>
+    IRequestHandler<GetStudentById, Response<GetStudentDto>>,
+    IRequestHandler<GetAllStudents, Response<List<GetStudentDto>>>
 
 {
     public async Task<Response<GetStudentDto>> Handle(
         GetStudentById request,
         CancellationToken cancellationToken)
     {
-        var key = $"student: {request.Id}";
 
-        if (!cache.TryGetValue(key, out Student? student))
-        {
-            student = await studentService.GetStudentById(request.Id);
+        var student = await studentService.GetStudentById(request.Id);
 
-            var cacheoptions = new MemoryCacheEntryOptions()
-                .SetAbsoluteExpiration(TimeSpan.FromMinutes(5))
-                .SetSlidingExpiration(TimeSpan.FromMinutes(2))
-                .SetPriority(CacheItemPriority.Normal);
-
-            if (student is null) return NotFouned<GetStudentDto>();
-
-            cache.Set(key, student, cacheoptions);
-        }
-        else Console.WriteLine("it is coming from cache");
+        if (student is null) return NotFouned<GetStudentDto>();
 
         var s_dto = mapper.Map<GetStudentDto>(student);
 
         return Success(s_dto);
+    }
+
+    public async Task<Response<List<GetStudentDto>>> Handle(GetAllStudents request, CancellationToken cancellationToken)
+    {
+        var students = await studentService.GetAll();
+
+        if (students is null) return NotFouned<List<GetStudentDto>>();
+
+        var studentsDtos = mapper.Map<List<GetStudentDto>>(students);
+
+        return Success(studentsDtos);
     }
 }
 public class GetStudentByNameHandler(
@@ -101,6 +102,8 @@ public class GroupStudentByDepartmentIdHandler(
 }
 public class AddStudentByIdHandler(
     IStudentService studentService,
+    IStudentSubjectservice studentSubjectService,
+    ISubjectRepository subjectRepository,
     IMapper mapper)
     : ResponseHandler,
       IRequestHandler<AddStudennt, Response<string>>
@@ -114,7 +117,18 @@ public class AddStudentByIdHandler(
         var s = await studentService.AddAsync(student);
 
         if (s != null)
+        {
+            List<StudentSubject> StudentSubject = [];
+            foreach (var subject in request.Subjects)
+            {
+                var Subject = await subjectRepository.GetOneAsync(s => s.Name.ToLower() == subject.ToLower());
+                if (Subject is not null)
+                    StudentSubject.Add(new StudentSubject() { StuId = s.Id, SubId = Subject.Id });
+            }
+            await studentSubjectService.AddRangeAsync(StudentSubject);
             return Created<string>();
+
+        }
 
         return UnprocessableEntity<string>();
     }

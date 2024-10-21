@@ -21,8 +21,6 @@ public static class DependancyInjection
         services.AddScoped(
             typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
-        services.AddMemoryCache();
-
         return services;
     }
 }

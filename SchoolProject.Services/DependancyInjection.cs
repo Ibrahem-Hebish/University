@@ -2,7 +2,6 @@
 
 public static class DependancyInjection
 {
-    private static readonly IConfiguration configuration;
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddScoped<IAuthontication, Authontication>();
@@ -33,6 +32,9 @@ public static class DependancyInjection
             .Build()
             .GetSection("jwt").Get<JwtOptions>();
 
+        var environmentvariablesConfiguration = new ConfigurationBuilder()
+            .AddEnvironmentVariables().Build();
+
         services.AddAuthentication()
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
                 {
@@ -48,7 +50,7 @@ public static class DependancyInjection
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(
                             Encoding.UTF8.GetBytes(
-                                configuration["signingkey"]!))
+                                environmentvariablesConfiguration["signingkey"]!))
                     };
                 });
 

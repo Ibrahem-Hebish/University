@@ -26,7 +26,6 @@ public static class AppExtensions
 
         if (option is not null) app.UseRequestLocalization(option.Value);
 
-
         app.UseHttpsRedirection();
 
         app.UseCors("local");

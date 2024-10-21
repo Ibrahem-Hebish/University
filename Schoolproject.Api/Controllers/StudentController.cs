@@ -22,6 +22,17 @@ public class StudentController(
 
         return NewRsponse(s_dto);
     }
+    [HttpGet]
+    [Route(Router.StudentRouter.GetAll)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [EnableRateLimiting(policyName: "slidingPolicy")]
+    public async Task<ActionResult<GetStudentDto>> Get()
+    {
+        var s_dto = await mediator.Send(new GetAllStudents());
+
+        return NewRsponse(s_dto);
+    }
 
     [HttpGet]
     [Route(Router.StudentRouter.GetByName)]
@@ -111,7 +122,6 @@ public class StudentController(
     [Route(Router.StudentRouter.DeleteStudent)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [Authorize(Roles = "SuperAdmin")]
     public async Task<ActionResult<string>> Delete(
         int id)
     {
