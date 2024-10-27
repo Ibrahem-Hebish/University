@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Pagination;
+﻿namespace UniversityProject.Core.Pagination;
 
 public static class Paginate
 {

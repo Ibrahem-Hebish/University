@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Commands.StudentCommands;
+﻿namespace UniversityProject.Core.CQSR.Commands.StudentCommands;
 
 public record DeleteStudennt(
     int id)

@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Services.Services;
+﻿namespace UniversityProject.Services.Services;
 
 public class UserService(
     AppDbContext AppDBcontext,

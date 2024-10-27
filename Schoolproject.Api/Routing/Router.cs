@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Api.Routing
+﻿namespace UniversityProject.Api.Routing
 {
     public static class Router
     {
@@ -9,7 +9,7 @@
 
             public const string GetById = postfix + "id";
 
-            public const string GetAll = postfix + "GetAlld";
+            public const string GetAll = postfix + "GetAll";
 
             public const string GetByName = postfix + "name";
 
@@ -97,6 +97,21 @@
             public const string postfix = rule + "Email/";
 
             public const string SendEmail = postfix + "SendEmail";
+
+        }
+        public static class DoctorRouter
+        {
+            public const string postfix = rule + "Doctor/";
+
+            public const string Get = postfix + "Get/{id}";
+
+            public const string GetAll = postfix + "GetAll";
+
+            public const string GetDoctorSubjects = postfix + "GetDoctorSubjects/{id}";
+
+            public const string Delete = postfix + "Delete/{id}";
+
+            public const string ChangeDoctorOffice = postfix + "ChangeDoctorOffice";
 
         }
     }

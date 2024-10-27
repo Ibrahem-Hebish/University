@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Mapping.StudentMapping;
+﻿namespace UniversityProject.Core.Mapping.StudentMapping;
 
 public partial class StudentMapping : Profile
 {

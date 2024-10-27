@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.ValidationBehavior;
+﻿namespace UniversityProject.Core.ValidationBehavior;
 
 public class ValidationBehavior<TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators)

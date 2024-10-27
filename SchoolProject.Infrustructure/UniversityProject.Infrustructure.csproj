@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="DepartmentRepositories\**" />
+    <Compile Remove="StudentSubjectRepositories\**" />
+    <Compile Remove="SubjectRepositories\**" />
+    <Compile Remove="UserRefreshTokenReposirory\**" />
+    <EmbeddedResource Remove="DepartmentRepositories\**" />
+    <EmbeddedResource Remove="StudentSubjectRepositories\**" />
+    <EmbeddedResource Remove="SubjectRepositories\**" />
+    <EmbeddedResource Remove="UserRefreshTokenReposirory\**" />
+    <None Remove="DepartmentRepositories\**" />
+    <None Remove="StudentSubjectRepositories\**" />
+    <None Remove="SubjectRepositories\**" />
+    <None Remove="UserRefreshTokenReposirory\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFrameworkCore.EncryptColumn" Version="6.0.8" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.8" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\SchoolProject.Data\UniversityProject.Data.csproj" />
+  </ItemGroup>
+
+</Project>

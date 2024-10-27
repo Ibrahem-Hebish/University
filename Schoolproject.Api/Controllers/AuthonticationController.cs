@@ -1,10 +1,8 @@
-﻿using SchoolProject.Infrustructure.Data;
-
-namespace Schoolproject.Api.Controllers;
+﻿namespace Universityproject.Api.Controllers;
 
 public class AuthonticationController(
-    IMediator mediator, AppDbContext appdbcontext)
-    : AppController(mediator)
+    IMediator mediator)
+    : AppController
 {
     [HttpPost]
     [Route(Router.AuthonticationRouter.SignIn)]

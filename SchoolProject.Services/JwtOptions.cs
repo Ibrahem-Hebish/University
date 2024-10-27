@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Services;
+﻿namespace UniversityProject.Services;
 
 public class JwtOptions
 {

@@ -1,6 +1,6 @@
-﻿using Claim = SchoolProject.Data.Helper.Claim;
+﻿using Claim = UniversityProject.Data.Helper.Claim;
 
-namespace SchoolProject.Services.Services;
+namespace UniversityProject.Services.Services;
 
 public class RoleServices(
     RoleManager<Role> roleManager,

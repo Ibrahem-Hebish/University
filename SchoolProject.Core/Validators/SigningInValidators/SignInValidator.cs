@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Validators.SigningInValidators;
+﻿namespace UniversityProject.Core.Validators.SigningInValidators;
 
 public class SignInValidator
     : AbstractValidator<SignIn>

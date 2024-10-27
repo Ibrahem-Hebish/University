@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Dtos.SigningIn;
+﻿namespace UniversityProject.Core.Dtos.SigningIn;
 
 public class RefreshTokenDto
 {

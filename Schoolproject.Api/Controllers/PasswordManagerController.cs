@@ -1,8 +1,8 @@
-﻿namespace Schoolproject.Api.Controllers;
+﻿namespace Universityproject.Api.Controllers;
 
 public class PasswordManagerController(
     IMediator mediator)
-    : AppController(mediator)
+    : AppController
 {
     [HttpPost]
     [Route(Router.UserRouter.ChangePassword)]

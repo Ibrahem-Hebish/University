@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Commands.AuthonticationCommands;
+﻿namespace UniversityProject.Core.CQSR.Commands.AuthonticationCommands;
 
 public class SignInCommand
     : SignIn, IRequest<Response<JwtToken>>

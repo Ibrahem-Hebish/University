@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Services.Services;
+﻿namespace UniversityProject.Services.Services;
 
 public class StudentServices(
     IStudentRepository studentRepository)
@@ -8,6 +8,7 @@ public class StudentServices(
     public async Task<Student> GetStudentById(int id)
     {
         var student = await studentRepository.FindAsync(id);
+
 
         return student;
     }

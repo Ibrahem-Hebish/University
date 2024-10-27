@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Dtos.RoleDtos;
+﻿namespace UniversityProject.Core.Dtos.RoleDtos;
 
 public class GetRoleDto
 {

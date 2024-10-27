@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Data.Configuration;
+﻿namespace UniversityProject.Data.Configuration;
 
 internal class StudentConfiguration
     : IEntityTypeConfiguration<Student>
@@ -21,7 +21,25 @@ internal class StudentConfiguration
 
         builder.HasMany(x => x.Subjects)
             .WithMany(x => x.Students)
-            .UsingEntity<StudentSubject>();
+            .UsingEntity<StudentSubject>(x =>
+            x.HasOne(x => x.subject)
+            .WithMany(x => x.Studentsubjects)
+            .OnDelete(DeleteBehavior.ClientNoAction),
+            x =>
+            x.HasOne(x => x.student)
+            .WithMany(x => x.Studentsubjects)
+            .OnDelete(DeleteBehavior.Cascade));
+
+        builder.HasMany(x => x.Sections)
+            .WithMany(x => x.Students)
+            .UsingEntity<StudentSections>(x =>
+            x.HasOne(x => x.Section)
+            .WithMany(x => x.StudentSections)
+            .OnDelete(DeleteBehavior.ClientNoAction),
+            x =>
+            x.HasOne(x => x.student)
+            .WithMany(x => x.StudentSections)
+            .OnDelete(DeleteBehavior.Cascade));
 
         builder.ToTable("Students");
     }

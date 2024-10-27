@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Pagination;
+﻿namespace UniversityProject.Core.Pagination;
 
 public class PaginationResponse<T>
 {

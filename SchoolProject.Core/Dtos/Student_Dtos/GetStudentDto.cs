@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Dtos.Student_Dtos;
+﻿namespace UniversityProject.Core.Dtos.Student_Dtos;
 
 public class GetStudentDto
 {
@@ -6,6 +6,6 @@ public class GetStudentDto
     public string Phone { get; set; } = null!;
     public string Address { get; set; } = null!;
     public string DepName { get; set; } = null!;
-    public List<string> Subjects { get; set; } = null!;
-
+    public int Level { get; set; }
+    public int Term { get; set; }
 }

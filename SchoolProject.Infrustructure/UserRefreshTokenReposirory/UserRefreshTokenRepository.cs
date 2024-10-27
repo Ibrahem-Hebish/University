@@ -1,9 +1,7 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-
-namespace SchoolProject.Infrustructure.UserRefreshTokenReposirory;
+﻿namespace UniversityProject.Infrustructure.UserRefreshTokenReposirory;
 
 public class UserTokenRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : SchoolRepositery<UserToken>(appDbContext, memoryCache)
+        : UniversityRepositery<UserToken>(appDbContext, memoryCache)
     , IUserTokenRepository
 {
 }

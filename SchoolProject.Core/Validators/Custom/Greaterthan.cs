@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Validators.Custom;
+﻿namespace UniversityProject.Core.Validators.Custom;
 
 public class GreaterthanAttribute
     : ValidationAttribute

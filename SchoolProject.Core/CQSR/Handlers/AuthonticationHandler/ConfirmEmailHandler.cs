@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace SchoolProject.Core.CQSR.Handlers.AuthonticationHandler;
+﻿namespace UniversityProject.Core.CQSR.Handlers.AuthonticationHandler;
 
 public class ConfirmEmailHandler(UserManager<User> userManager)
         : ResponseHandler,

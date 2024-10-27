@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Data.Entities;
+﻿namespace UniversityProject.Data.Entities;
 
 public class UserToken
 {
@@ -11,9 +11,9 @@ public class UserToken
 
     public DateTime AddedDate { get; set; }
     public DateTime ExpiredDate { get; set; }
-    public string AccessToken { get; set; } = null!;
-    public string Token { get; set; } = null!;
+    public string AccessToken { get; set; }
+    public string Token { get; set; }
     [InverseProperty(nameof(User.Tokens))]
-    public User User { get; set; } = null!;
+    public virtual User User { get; set; }
 
 }

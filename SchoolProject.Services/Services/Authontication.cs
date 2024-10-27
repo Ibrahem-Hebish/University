@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace SchoolProject.Services.Services;
+﻿namespace UniversityProject.Services.Services;
 
 public class Authontication(
     IOptionsMonitor<JwtOptions> jwtOptions,

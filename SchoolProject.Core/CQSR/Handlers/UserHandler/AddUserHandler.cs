@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Handlers.UserHandler;
+﻿namespace UniversityProject.Core.CQSR.Handlers.UserHandler;
 
 public class AddUserHandler(IUserService userService, IMapper mapper) :
     ResponseHandler,

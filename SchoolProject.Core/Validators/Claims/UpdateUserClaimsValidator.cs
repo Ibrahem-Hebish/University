@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Validators.Claims;
+﻿namespace UniversityProject.Core.Validators.Claims;
 
 public class UpdateUserClaimsValidator
     : AbstractValidator<Updateuserclaims>

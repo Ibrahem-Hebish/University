@@ -1,13 +1,5 @@
-﻿using FluentAssertions;
-using Microsoft.AspNetCore.Mvc.Testing;
-using SchoolProject.Core.CQSR.Commands.StudentCommands;
-using SchoolProject.Core.Dtos.Student_Dtos;
-using SchoolProject.Core.Response;
-using System.Net;
-using System.Net.Http.Json;
-using System.Text.Json;
-
-namespace SchoolProject.Testing.integrationtests
+﻿
+namespace UniversityProject.Testing.integrationtests
 {
     public class StudentControllerTests(WebApplicationFactory<Program> factory)
         : IClassFixture<WebApplicationFactory<Program>>
@@ -48,7 +40,7 @@ namespace SchoolProject.Testing.integrationtests
         {
             var client = factory.CreateClient();
             var newstudent = new AddStudennt()
-            { Name = "Ibrahem Ahmed", Address = "Elrahbien", Phone = "01224127241", DepId = 1, Subjects = ["OOP", "Physics"] };
+            { Name = "Ibrahem Ahmed", Address = "Elrahbien", Phone = "01224127241", DepId = 1, Level = 1, Term = 1 };
             var response = await client.PostAsJsonAsync("https://localhost:7056/Api/V1/Student/AddNewStudent", newstudent);
             var responsebody = await response.Content.ReadAsStringAsync();
             var data = JsonSerializer.Deserialize<Response<string>>(responsebody, new JsonSerializerOptions

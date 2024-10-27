@@ -4314,9 +4314,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\SchoolProject.Data.csproj",
-      "projectName": "SchoolProject.Data",
-      "projectPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\SchoolProject.Data.csproj",
+      "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
+      "projectName": "UniversityProject.Data",
+      "projectPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
       "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\obj\\",
       "projectStyle": "PackageReference",

@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Data.Helper;
+﻿namespace UniversityProject.Data.Helper;
 
 public class SystemClaim
 {

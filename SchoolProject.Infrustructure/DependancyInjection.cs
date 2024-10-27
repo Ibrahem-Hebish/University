@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Infrustructure;
+﻿namespace UniversityProject.Infrustructure;
 
 public static class DependancyInjection
 {
@@ -9,9 +9,27 @@ public static class DependancyInjection
 
         services.AddDbContext<AppDbContext>();
 
-        services.AddScoped(typeof(IRepositiry<>), typeof(SchoolRepositery<>));
+        services.AddScoped(typeof(IRepositiry<>), typeof(UniversityRepositery<>));
 
         services.AddScoped<IStudentRepository, StudentRepository>();
+
+        services.AddScoped<IOfficeRepository, OfficeRepository>();
+
+        services.AddScoped<ILabRepository, LabRepository>();
+
+        services.AddScoped<IHallRepository, HallRepository>();
+
+        services.AddScoped<IDoctorRepository, DoctorRepository>();
+
+        services.AddScoped<ITeachingAssistantRepository, TeachingAssistantRepository>();
+
+        services.AddScoped<ISectionRepository, SectionRepository>();
+
+        services.AddScoped<IStudentDoctorRepository, StudentDoctorsRepository>();
+
+        services.AddScoped<IStudentTeachingAssistantsRepository, StudentTeachingAssistantsRepository>();
+
+        services.AddScoped<IStudentSectionsRepository, StudentSectionsRepository>();
 
         services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 

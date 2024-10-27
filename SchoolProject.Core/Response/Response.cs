@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Response;
+﻿namespace UniversityProject.Core.Response;
 
 public class Response<T>
 {

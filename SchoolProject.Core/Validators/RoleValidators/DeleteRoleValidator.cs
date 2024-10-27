@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Validators.RoleValidators;
+﻿namespace UniversityProject.Core.Validators.RoleValidators;
 
 public class DeleteRoleValidator
     : AbstractValidator<DeleteRole>

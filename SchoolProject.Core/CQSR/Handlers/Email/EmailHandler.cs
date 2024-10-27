@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Handlers.Email;
+﻿namespace UniversityProject.Core.CQSR.Handlers.Email;
 
 public class EmailHandler(
     IEmailService emailService)

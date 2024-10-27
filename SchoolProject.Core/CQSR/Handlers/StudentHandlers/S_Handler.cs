@@ -1,16 +1,24 @@
-﻿using Microsoft.Extensions.Caching.Memory;
-using SchoolProject.Infrustructure.SubjectRepositories;
-
-namespace SchoolProject.Core.CQSR.Handlers.StudentHandlers;
+﻿
+namespace UniversityProject.Core.CQSR.Handlers.StudentHandlers;
 
 public class StudentHandler(
     IStudentService studentService,
-    IMapper mapper,
-    IMemoryCache cache)
+    IStudentRepository studentRepository,
+    IStudentSubjectRepository studentSubjectRepository,
+    ISubjectRepository subjectRepository,
+    ISectionRepository sectionRepository,
+    IMapper mapper)
 
     : ResponseHandler,
     IRequestHandler<GetStudentById, Response<GetStudentDto>>,
-    IRequestHandler<GetAllStudents, Response<List<GetStudentDto>>>
+    IRequestHandler<GetAllStudents, Response<List<GetStudentDto>>>,
+    IRequestHandler<GetStudentByName, Response<GetStudentDto>>,
+    IRequestHandler<GroupStudentsBySub, Response<List<GetStudentDto>>>,
+    IRequestHandler<GroupStudentsByDep, Response<List<GetStudentDto>>>,
+    IRequestHandler<StudentPagination, PaginationResponse<GetStudentDto>>,
+    IRequestHandler<AddStudennt, Response<string>>,
+    IRequestHandler<UpdateStudent, Response<GetStudentDto>>,
+    IRequestHandler<DeleteStudennt, Response<string>>
 
 {
     public async Task<Response<GetStudentDto>> Handle(
@@ -31,21 +39,13 @@ public class StudentHandler(
     {
         var students = await studentService.GetAll();
 
-        if (students is null) return NotFouned<List<GetStudentDto>>();
+        if (students is null || students.Count == 0) return NotFouned<List<GetStudentDto>>();
 
         var studentsDtos = mapper.Map<List<GetStudentDto>>(students);
 
         return Success(studentsDtos);
     }
-}
-public class GetStudentByNameHandler(
-    IStudentService studentService,
-    IMapper mapper)
 
-: ResponseHandler,
-  IRequestHandler<GetStudentByName, Response<GetStudentDto>>
-
-{
     public async Task<Response<GetStudentDto>> Handle(
         GetStudentByName request,
         CancellationToken cancellationToken)
@@ -58,15 +58,6 @@ public class GetStudentByNameHandler(
 
         return Success(s_dto);
     }
-}
-
-public class GroupStudentBySubjectIdHandler(
-    IStudentService studentService,
-    IMapper mapper)
-
-: ResponseHandler,
-    IRequestHandler<GroupStudentsBySub, Response<List<GetStudentDto>>>
-{
     public async Task<Response<List<GetStudentDto>>> Handle(
         GroupStudentsBySub request,
         CancellationToken cancellationToken)
@@ -79,14 +70,6 @@ public class GroupStudentBySubjectIdHandler(
 
         return Success(studentDtos);
     }
-}
-public class GroupStudentByDepartmentIdHandler(
-    IStudentService studentService,
-    IMapper mapper)
-
-    : ResponseHandler,
-      IRequestHandler<GroupStudentsByDep, Response<List<GetStudentDto>>>
-{
     public async Task<Response<List<GetStudentDto>>> Handle(
         GroupStudentsByDep request,
         CancellationToken cancellationToken)
@@ -99,86 +82,121 @@ public class GroupStudentByDepartmentIdHandler(
 
         return Success(studentDtos);
     }
-}
-public class AddStudentByIdHandler(
-    IStudentService studentService,
-    IStudentSubjectservice studentSubjectService,
-    ISubjectRepository subjectRepository,
-    IMapper mapper)
-    : ResponseHandler,
-      IRequestHandler<AddStudennt, Response<string>>
-{
+    public async Task<PaginationResponse<GetStudentDto>> Handle(
+        StudentPagination request,
+        CancellationToken cancellationToken)
+    {
+        Expression<Func<Student, GetStudentDto>> expression = s => new GetStudentDto()
+        {
+            Name = s.Name,
+            Address = s.Address,
+            Phone = s.Phone,
+            DepName = s.Department.Name,
+            Term = s.Term,
+            Level = s.Level,
+        };
+
+        var Students = studentService.Filter(request.StudentOrder, request.search);
+
+        var studentsdtos = Students.Select(expression);
+
+        var paginatedlist = await studentsdtos.ToPaginate(request.pagenum, request.pagesize);
+
+        return paginatedlist;
+    }
     public async Task<Response<string>> Handle(
         AddStudennt request,
         CancellationToken cancellationToken)
     {
-        var student = mapper.Map<Student>(request);
+        var StudentsNumber = await studentRepository.GetAllWhere(x =>
+        x.Level == request.Level && x.Term == request.Term);
 
-        var s = await studentService.AddAsync(student);
+        if (StudentsNumber.Count == 200)
+            return BadRequest<string>("Sorry,We can not exceed 200 student,So we can not accept this student");
 
-        if (s != null)
+        using var transaction = studentSubjectRepository.BeginTransaction();
+        try
         {
-            List<StudentSubject> StudentSubject = [];
-            foreach (var subject in request.Subjects)
+            var student = mapper.Map<Student>(request);
+
+            var Courses = await subjectRepository.GetAllWhere(x =>
+                                      x.Level == request.Level && x.Term == request.Term);
+
+            student.Subjects.AddRange(Courses);
+
+            var Sections = await sectionRepository.GetAllWhere(x =>
+            x.Level.Equals(request.Level) && x.Term.Equals(request.Term));
+
+            List<Section> StudentSections = [];
+
+            var DistincitSections = Sections.DistinctBy(x => x.Subject).ToList();
+
+            foreach (var section in DistincitSections)
             {
-                var Subject = await subjectRepository.GetOneAsync(s => s.Name.ToLower() == subject.ToLower());
-                if (Subject is not null)
-                    StudentSubject.Add(new StudentSubject() { StuId = s.Id, SubId = Subject.Id });
+                var SectionGroup = Sections.Where(x => x.Name.Equals(section.Name)).ToList();
+
+                foreach (var sectionInGroup in SectionGroup)
+                {
+                    if (sectionInGroup.Students.Count < 70)
+                    {
+                        StudentSections.Add(sectionInGroup);
+                        break;
+                    }
+                }
             }
-            await studentSubjectService.AddRangeAsync(StudentSubject);
+
+            student.Sections.AddRange(StudentSections);
+
+            List<Doctor> doctors = [];
+
+            foreach (var Course in Courses)
+                doctors.Add(Course.Doctor);
+
+            List<TeachingAssistant> TeachingAssistants = [];
+
+            foreach (var Section in StudentSections)
+                TeachingAssistants.Add(Section.TeachingAssistant);
+
+            student.Doctors.AddRange(doctors);
+
+            student.TeachingAssistants.AddRange(TeachingAssistants.Distinct());
+
+            var s = await studentService.AddAsync(student);
+
+            transaction.Commit();
+
             return Created<string>();
 
         }
-
-        return UnprocessableEntity<string>();
+        catch (Exception ex)
+        {
+            transaction.Rollback();
+            await Console.Out.WriteLineAsync(ex.ToString());
+            return BadRequest<string>("Something went wrong,please try again later");
+        }
     }
-}
-public class UpdateStudentByIdHandler(
-    IStudentService studentService,
-    IMapper mapper,
-    AppDbContext appdbcontext)
-: ResponseHandler, IRequestHandler<UpdateStudent, Response<GetStudentDto>>
-{
     public async Task<Response<GetStudentDto>> Handle(
         UpdateStudent request,
         CancellationToken cancellationToken)
     {
+        var ExsistingStudent = await studentService.GetStudentById(request.Id);
+
+        if (ExsistingStudent == null)
+            return BadRequest<GetStudentDto>("Student is not found");
+
         var student = mapper.Map<Student>(request);
 
-        if (!appdbcontext.Students.Any(s => s.Id == request.Id))
-            return UnprocessableEntity(mapper.Map<GetStudentDto>(student));
+        ExsistingStudent.Address = student.Address;
+        ExsistingStudent.Name = student.Name;
+        ExsistingStudent.Phone = student.Phone;
 
-        List<StudentSubject> studentSubjects = new List<StudentSubject>();
+        await studentRepository.UpdateAsync(ExsistingStudent, request.Id);
 
-        foreach (var subject in request.Subjects)
-        {
-            var sub = appdbcontext.Subjects.FirstOrDefault(x => x.Name.ToLower() == subject.ToLower());
+        var StudentDto = mapper.Map<GetStudentDto>(ExsistingStudent);
 
-            if (sub is not null)
-                studentSubjects.Add(new StudentSubject() { StuId = request.Id, SubId = sub.Id });
+        return Success(StudentDto, "Updated Successfully");
 
-        }
-
-        appdbcontext.StudentSubjects.RemoveRange
-            (appdbcontext.StudentSubjects.Where(s => s.StuId == request.Id));
-
-        await appdbcontext.StudentSubjects.AddRangeAsync(studentSubjects);
-
-        await appdbcontext.SaveChangesAsync();
-
-        var s = await studentService.Update(student);
-
-        var dto = mapper.Map<GetStudentDto>(s);
-
-        return Success(dto);
     }
-}
-public class DeleteStudentByIdHandler(
-    IStudentService studentService)
-
-    : ResponseHandler,
-    IRequestHandler<DeleteStudennt, Response<string>>
-{
     public async Task<Response<string>> Handle(
         DeleteStudennt request,
         CancellationToken cancellationToken)
@@ -189,34 +207,5 @@ public class DeleteStudentByIdHandler(
             return NotFouned<string>();
         return Deleted<string>();
 
-    }
-}
-public class StudentPaginationIdHandler(IStudentService studentService)
-: ResponseHandler, IRequestHandler<StudentPagination, PaginationResponse<GetStudentDto>>
-{
-    public async Task<PaginationResponse<GetStudentDto>> Handle(
-        StudentPagination request,
-        CancellationToken cancellationToken)
-    {
-        Expression<Func<Student, GetStudentDto>> expression = s => new GetStudentDto()
-        {
-            Name = s.Name,
-
-            Address = s.Address,
-
-            Phone = s.Phone,
-
-            DepName = s.Department.Name,
-
-            Subjects = s.Subjects.Select(s => s.Name).ToList()
-        };
-
-        var Students = studentService.Filter(request.StudentOrder, request.search);
-
-        var studentsdtos = Students.Select(expression);
-
-        var paginatedlist = await studentsdtos.ToPaginate(request.pagenum, request.pagesize);
-
-        return paginatedlist;
     }
 }

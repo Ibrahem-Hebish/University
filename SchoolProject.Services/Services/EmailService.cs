@@ -1,6 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-
-namespace SchoolProject.Services.Services;
+﻿
+namespace UniversityProject.Services.Services;
 
 public class EmailService(
     IOptionsMonitor<SendEmailSetting> sendemailsetting, IConfiguration configuration)

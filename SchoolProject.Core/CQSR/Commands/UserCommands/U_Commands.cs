@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Commands.UserCommands;
+﻿namespace UniversityProject.Core.CQSR.Commands.UserCommands;
 
 public record AddNewUser(
     AddUser addUser)

@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Validators.Email;
+﻿namespace UniversityProject.Core.Validators.Email;
 
 public class SendEmailValidator
     : AbstractValidator<SendEmailCommand>

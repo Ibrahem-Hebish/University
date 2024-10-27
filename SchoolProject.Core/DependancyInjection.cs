@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using SchoolProject.Core.ValidationBehavior;
-using SchoolProject.Core.Validators.RoleValidators;
+using UniversityProject.Core.ValidationBehavior;
+using UniversityProject.Core.Validators.RoleValidators;
 using System.Reflection;
 
-namespace SchoolProject.Core;
+namespace UniversityProject.Core;
 
 public static class DependancyInjection
 {

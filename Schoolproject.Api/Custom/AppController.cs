@@ -1,12 +1,11 @@
-﻿using SchoolProject.Core.Response;
-using System.Net;
-
-namespace Schoolproject.Api.Custom;
+﻿namespace Universityproject.Api.Custom;
 
 [ApiController]
 [ProducesResponseType(StatusCodes.Status400BadRequest)]
 [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-public class AppController(IMediator mediator)
+[EnableRateLimiting(policyName: "slidingPolicy")]
+
+public class AppController()
             : ControllerBase
 {
 

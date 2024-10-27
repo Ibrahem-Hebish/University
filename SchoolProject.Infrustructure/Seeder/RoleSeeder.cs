@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Infrustructure.Seeder;
+﻿namespace UniversityProject.Infrustructure.Seeder;
 
 public class RoleSeeder
 {

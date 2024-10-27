@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Handlers.AuthonticationHandler;
+﻿namespace UniversityProject.Core.CQSR.Handlers.AuthonticationHandler;
 
 public class ValidateTokenHandler(IAuthontication authonticationService)
         : ResponseHandler,

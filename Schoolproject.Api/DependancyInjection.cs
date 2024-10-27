@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.RateLimiting;
-using System.Threading.RateLimiting;
-
-namespace Schoolproject.Api;
+﻿namespace Universityproject.Api;
 
 public static class DependancyInjection
 {

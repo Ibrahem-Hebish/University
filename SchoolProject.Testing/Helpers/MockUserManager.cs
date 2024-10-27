@@ -1,10 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Moq;
-using SchoolProject.Data.Entities;
-
-namespace SchoolProject.Testing.Helpers
+﻿
+namespace UniversityProject.Testing.Helpers
 {
     public static class MockUserManager
     {

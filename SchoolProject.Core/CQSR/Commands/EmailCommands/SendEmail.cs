@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Commands.EmailCommands;
+﻿namespace UniversityProject.Core.CQSR.Commands.EmailCommands;
 
 public class SendEmailCommand
     : IRequest<Response<string>>

@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Response;
+﻿namespace UniversityProject.Core.Response;
 
 public class ResponseHandler
 {
@@ -29,13 +29,13 @@ public class ResponseHandler
             Success = false,
         };
     }
-    public Response<T> Success<T>(T data)
+    public Response<T> Success<T>(T data, string message = null!)
     {
         return new Response<T>()
         {
             Data = data,
             StatusCode = HttpStatusCode.OK,
-            message = "Success",
+            message = message ?? "Success",
             Success = true,
         };
     }

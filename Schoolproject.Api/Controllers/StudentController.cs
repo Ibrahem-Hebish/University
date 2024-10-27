@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNetCore.RateLimiting;
-using SchoolProject.Core.Dtos.Student_Dtos;
+﻿using UniversityProject.Core.Dtos.Student_Dtos;
 
-namespace Schoolproject.Api.Controllers;
+namespace Universityproject.Api.Controllers;
 
 public class StudentController(
-    IMediator mediator, IConfiguration configuration)
-    : AppController(mediator)
+    IMediator mediator)
+    : AppController
 {
 
     [HttpGet]
@@ -26,7 +25,6 @@ public class StudentController(
     [Route(Router.StudentRouter.GetAll)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [EnableRateLimiting(policyName: "slidingPolicy")]
     public async Task<ActionResult<GetStudentDto>> Get()
     {
         var s_dto = await mediator.Send(new GetAllStudents());

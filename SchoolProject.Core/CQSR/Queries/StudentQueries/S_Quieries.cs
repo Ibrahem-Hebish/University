@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Queries.StudentQueries;
+﻿namespace UniversityProject.Core.CQSR.Queries.StudentQueries;
 
 public record GetStudentById(
     int Id)

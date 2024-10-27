@@ -1,8 +1,8 @@
-﻿namespace Schoolproject.Api.Controllers;
+﻿namespace Universityproject.Api.Controllers;
 
 public class UserController(
     IMediator mediator)
-    : AppController(mediator)
+    : AppController
 {
     [HttpGet]
     [Route(Router.UserRouter.GetById)]

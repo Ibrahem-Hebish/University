@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Dtos.User_Dtos;
+﻿namespace UniversityProject.Core.Dtos.User_Dtos;
 
 public class GetUserDto
 {

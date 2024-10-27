@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Infrustructure.SubjectRepositories;
+﻿namespace UniversityProject.Infrustructure.SubjectRepositories;
 
 public interface ISubjectRepository
     : IRepositiry<Subject>

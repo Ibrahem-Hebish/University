@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Infrustructure.UserTokenRepositories;
+﻿namespace UniversityProject.Infrustructure.UserTokenRepositories;
 
 public interface IUserTokenRepository
     : IRepositiry<UserToken>

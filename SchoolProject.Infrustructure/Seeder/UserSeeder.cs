@@ -1,6 +1,6 @@
 ﻿
 
-namespace SchoolProject.Infrustructure.Seeder;
+namespace UniversityProject.Infrustructure.Seeder;
 
 public static class UserSeeder
 {

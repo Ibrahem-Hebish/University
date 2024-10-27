@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Queries.UserQueries;
+﻿namespace UniversityProject.Core.CQSR.Queries.UserQueries;
 
 public record GetUserById(
     int id)

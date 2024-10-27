@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Mapping.RoleMapping;
+﻿namespace UniversityProject.Core.Mapping.RoleMapping;
 
 public partial class RoleMappings : Profile
 {

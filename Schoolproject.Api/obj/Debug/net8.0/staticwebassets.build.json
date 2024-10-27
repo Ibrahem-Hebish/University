@@ -1,8 +1,8 @@
 {
   "Version": 1,
-  "Hash": "yoD+XXUqjTfhr7qpaXZAuT7lqwLmNLVXTDtXDKRigus=",
-  "Source": "Schoolproject.Api",
-  "BasePath": "_content/Schoolproject.Api",
+  "Hash": "scEpBgj/WRAvvGdtuq5W7sWcOC3AQrCwfBR7YXCotMo=",
+  "Source": "Universityproject.Api",
+  "BasePath": "_content/Universityproject.Api",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],

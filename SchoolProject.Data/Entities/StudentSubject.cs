@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Data.Entities;
+﻿namespace UniversityProject.Data.Entities;
 
 public class StudentSubject
 {

@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.Validators.UseValidators;
+﻿namespace UniversityProject.Core.Validators.UseValidators;
 
 public class SendEmilForResetPasswordVAlidator
     : AbstractValidator<SendEmilForResetPassword>

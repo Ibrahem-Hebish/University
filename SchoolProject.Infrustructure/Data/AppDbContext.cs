@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Infrustructure.Data;
+﻿namespace UniversityProject.Infrustructure.Data;
 
 public class AppDbContext
     : IdentityDbContext<User, Role, int, IdentityUserClaim<int>,
@@ -9,7 +9,15 @@ public class AppDbContext
     public DbSet<Subject> Subjects { get; set; }
     public DbSet<Department> Departments { get; set; }
     public DbSet<StudentSubject> StudentSubjects { get; set; }
-    public DbSet<DepartmentSubject> DepartmentSubjects { get; set; }
+    public DbSet<Hall> Halls { get; set; }
+    public DbSet<Lab> Labs { get; set; }
+    public DbSet<Office> Offices { get; set; }
+    public DbSet<Doctor> Doctors { get; set; }
+    public DbSet<TeachingAssistant> TeachingAssistants { get; set; }
+    public DbSet<StudentTeachingAssistants> StudentTeachingAssistants { get; set; }
+    public DbSet<Section> Sections { get; set; }
+    public DbSet<StudentSections> StudentSections { get; set; }
+    public DbSet<StudentDoctors> StudentDoctorss { get; set; }
     public override DbSet<User> Users { get; set; }
     public override DbSet<Role> Roles { get; set; }
     public new DbSet<UserToken> UserTokens { get; set; }

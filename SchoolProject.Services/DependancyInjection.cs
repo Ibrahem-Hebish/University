@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Services;
+﻿namespace UniversityProject.Services;
 
 public static class DependancyInjection
 {
@@ -7,8 +7,6 @@ public static class DependancyInjection
         services.AddScoped<IAuthontication, Authontication>();
 
         services.AddScoped<IStudentService, StudentServices>();
-
-        services.AddScoped<IStudentSubjectservice, StudentSubjectservice>();
 
         services.AddScoped<IRoleServices, RoleServices>();
 

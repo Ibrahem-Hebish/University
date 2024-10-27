@@ -1,6 +1,6 @@
 ﻿using Claim = System.Security.Claims.Claim;
 
-namespace SchoolProject.Core.CQSR.Handlers.RoleHandler;
+namespace UniversityProject.Core.CQSR.Handlers.RoleHandler;
 
 public class RoleHandler(
     AppDbContext appDbContext,

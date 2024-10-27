@@ -1,6 +1,6 @@
-﻿namespace SchoolProject.Data.Configuration;
+﻿namespace UniversityProject.Data.Configuration;
 
-public class StudentSubjectConfiguration
+public partial class StudentSubjectConfiguration
     : IEntityTypeConfiguration<StudentSubject>
 {
     public void Configure(EntityTypeBuilder<StudentSubject> builder)

@@ -1,4 +1,4 @@
-﻿namespace Schoolproject.Api;
+﻿namespace Universityproject.Api;
 
 public static class AppExtensions
 {

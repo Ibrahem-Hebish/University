@@ -1,4 +1,4 @@
-﻿namespace SchoolProject.Core.CQSR.Queries.RoleQueries;
+﻿namespace UniversityProject.Core.CQSR.Queries.RoleQueries;
 
 public record GetRole(
     int id)
