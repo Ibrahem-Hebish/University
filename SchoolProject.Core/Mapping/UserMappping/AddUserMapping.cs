@@ -4,6 +4,6 @@ public partial class UserMappings
 {
     public void AddUser()
     {
-        CreateMap<AddUser, User>();
+        CreateMap<AddNewUser, User>();
     }
 }

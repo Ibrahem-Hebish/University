@@ -11,24 +11,24 @@ public class ChangePasswordHandler(
         ChangePassword request,
         CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByEmailAsync(request._email);
+        var user = await userManager.FindByEmailAsync(request.Email);
 
         if (user is null)
             return BadRequest<string>("Emial or password is wrong");
 
-        var checkpassword = await userManager.CheckPasswordAsync(user, request._password);
+        var checkpassword = await userManager.CheckPasswordAsync(user, request.Password);
 
         if (!checkpassword)
             return BadRequest<string>("Emial or password is wrong");
 
         var result = await userManager.ChangePasswordAsync(
                                                            user,
-                                                           request._password,
-                                                           request._newpassword);
+                                                           request.Password,
+                                                           request.Newpassword);
 
         if (!result.Succeeded)
             return InternalServerError<string>();
 
-        return Success(request._newpassword);
+        return Success(request.Newpassword);
     }
 }

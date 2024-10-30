@@ -5,12 +5,12 @@ public class ConfirmCodeToResetPasswordValidator
 {
     public ConfirmCodeToResetPasswordValidator()
     {
-        RuleFor(x => x.email)
+        RuleFor(x => x.Email)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null")
             .EmailAddress();
 
-        RuleFor(x => x.code)
+        RuleFor(x => x.Code)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null");
     }

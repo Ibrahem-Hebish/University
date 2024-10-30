@@ -19,15 +19,15 @@ internal class StudentConfiguration
             .HasColumnType("VARCHAR")
             .HasMaxLength(100);
 
-        builder.HasMany(x => x.Subjects)
+        builder.HasMany(x => x.Courses)
             .WithMany(x => x.Students)
-            .UsingEntity<StudentSubject>(x =>
-            x.HasOne(x => x.subject)
-            .WithMany(x => x.Studentsubjects)
+            .UsingEntity<StudentCourse>(x =>
+            x.HasOne(x => x.Course)
+            .WithMany(x => x.StudentCourses)
             .OnDelete(DeleteBehavior.ClientNoAction),
             x =>
-            x.HasOne(x => x.student)
-            .WithMany(x => x.Studentsubjects)
+            x.HasOne(x => x.Student)
+            .WithMany(x => x.StudentCourses)
             .OnDelete(DeleteBehavior.Cascade));
 
         builder.HasMany(x => x.Sections)

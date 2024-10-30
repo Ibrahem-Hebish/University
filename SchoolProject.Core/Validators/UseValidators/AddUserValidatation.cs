@@ -1,7 +1,7 @@
 ﻿namespace UniversityProject.Core.Validators.UseValidators;
 
 public class AddUserValidatation
-    : AbstractValidator<AddUser>
+    : AbstractValidator<AddNewUser>
 {
     public AddUserValidatation()
     {

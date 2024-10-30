@@ -4,8 +4,8 @@ namespace UniversityProject.Core.CQSR.Handlers.StudentHandlers;
 public class StudentHandler(
     IStudentService studentService,
     IStudentRepository studentRepository,
-    IStudentSubjectRepository studentSubjectRepository,
-    ISubjectRepository subjectRepository,
+    IStudentCourseRepository studentCourseRepository,
+    ICourseRepository CourseRepository,
     ISectionRepository sectionRepository,
     IMapper mapper)
 
@@ -50,7 +50,7 @@ public class StudentHandler(
         GetStudentByName request,
         CancellationToken cancellationToken)
     {
-        var Student = await studentService.GetStudentByName(request.name);
+        var Student = await studentService.GetStudentByName(request.Name);
 
         if (Student is null) return NotFouned<GetStudentDto>();
 
@@ -62,7 +62,7 @@ public class StudentHandler(
         GroupStudentsBySub request,
         CancellationToken cancellationToken)
     {
-        var Student = await studentService.GroupStudentsBySubject(request.name);
+        var Student = await studentService.GroupStudentsByCourse(request.Name);
 
         if (Student.Count == 0) return NotFouned<List<GetStudentDto>>();
 
@@ -74,7 +74,7 @@ public class StudentHandler(
         GroupStudentsByDep request,
         CancellationToken cancellationToken)
     {
-        var Student = await studentService.GroupStudentsByDepartment(request.name);
+        var Student = await studentService.GroupStudentsByDepartment(request.Name);
 
         if (Student.Count == 0) return NotFouned<List<GetStudentDto>>();
 
@@ -96,11 +96,11 @@ public class StudentHandler(
             Level = s.Level,
         };
 
-        var Students = studentService.Filter(request.StudentOrder, request.search);
+        var Students = studentService.Filter(request.StudentOrder, request.Search);
 
         var studentsdtos = Students.Select(expression);
 
-        var paginatedlist = await studentsdtos.ToPaginate(request.pagenum, request.pagesize);
+        var paginatedlist = await studentsdtos.ToPaginate(request.Pagenum, request.Pagesize);
 
         return paginatedlist;
     }
@@ -114,22 +114,22 @@ public class StudentHandler(
         if (StudentsNumber.Count == 200)
             return BadRequest<string>("Sorry,We can not exceed 200 student,So we can not accept this student");
 
-        using var transaction = studentSubjectRepository.BeginTransaction();
+        using var transaction = studentCourseRepository.BeginTransaction();
         try
         {
             var student = mapper.Map<Student>(request);
 
-            var Courses = await subjectRepository.GetAllWhere(x =>
+            var Courses = await CourseRepository.GetAllWhere(x =>
                                       x.Level == request.Level && x.Term == request.Term);
 
-            student.Subjects.AddRange(Courses);
+            student.Courses.AddRange(Courses);
 
             var Sections = await sectionRepository.GetAllWhere(x =>
             x.Level.Equals(request.Level) && x.Term.Equals(request.Term));
 
             List<Section> StudentSections = [];
 
-            var DistincitSections = Sections.DistinctBy(x => x.Subject).ToList();
+            var DistincitSections = Sections.DistinctBy(x => x.Course).ToList();
 
             foreach (var section in DistincitSections)
             {
@@ -201,7 +201,7 @@ public class StudentHandler(
         DeleteStudennt request,
         CancellationToken cancellationToken)
     {
-        var s = await studentService.DeleteStudent(request.id);
+        var s = await studentService.DeleteStudent(request.Id);
 
         if (s == false)
             return NotFouned<string>();

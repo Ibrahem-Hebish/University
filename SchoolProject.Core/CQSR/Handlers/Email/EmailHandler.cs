@@ -14,7 +14,7 @@ public class EmailHandler(
         var result = await emailService
             .SendEmailAsync(request.Email,
                             request.message,
-                            request.subject);
+                            request.Course);
 
         if (result == "Success") return NoContent<string>("Sending email complated");
 

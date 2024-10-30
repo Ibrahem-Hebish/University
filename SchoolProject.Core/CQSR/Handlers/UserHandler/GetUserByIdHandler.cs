@@ -11,7 +11,10 @@ public class GetUserByIdHandler(
         GetUserById request,
         CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByIdAsync(request.id.ToString());
+        if (request.Id <= 0)
+            return new Response<GetUserDto>();
+
+        var user = await userManager.FindByIdAsync(request.Id.ToString());
 
         if (user is null) return NotFouned<GetUserDto>();
 

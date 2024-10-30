@@ -19,7 +19,11 @@ public class DepartmentConfiguration
             .WithOne(x => x.Department)
             .HasForeignKey(x => x.DepId);
 
-        builder.HasMany(x => x.Subjects)
+        builder.HasMany(x => x.Courses)
+            .WithOne(x => x.Department)
+            .HasForeignKey(x => x.DepartmentId);
+
+        builder.HasMany(x => x.Sections)
             .WithOne(x => x.Department)
             .HasForeignKey(x => x.DepartmentId);
 

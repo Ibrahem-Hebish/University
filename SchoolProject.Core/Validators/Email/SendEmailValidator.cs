@@ -13,8 +13,8 @@ public class SendEmailValidator
             .NotEmpty().WithMessage("message can not be empty")
             .NotNull().WithMessage("message can not be null");
 
-        RuleFor(x => x.subject)
-            .NotEmpty().WithMessage("subject can not be empty")
-            .NotNull().WithMessage("subject can not be null");
+        RuleFor(x => x.Course)
+            .NotEmpty().WithMessage("Course can not be empty")
+            .NotNull().WithMessage("Course can not be null");
     }
 }

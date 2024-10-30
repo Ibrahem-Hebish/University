@@ -53,7 +53,7 @@ public class StudentController(
     public async Task<ActionResult<List<GetStudentDto>>> Paginate(
         [FromQuery] StudentPagination sp)
     {
-        if (sp.pagenum <= 0 || sp.pagesize <= 0) return BadRequest();
+        if (sp.Pagenum <= 0 || sp.Pagesize <= 0) return BadRequest();
 
         var S_Dtos = await mediator.Send(sp);
 

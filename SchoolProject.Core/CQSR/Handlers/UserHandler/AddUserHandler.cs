@@ -10,9 +10,9 @@ public class AddUserHandler(IUserService userService, IMapper mapper) :
         AddNewUser request,
         CancellationToken cancellationToken)
     {
-        var user = mapper.Map<User>(request.addUser);
+        var user = mapper.Map<User>(request);
 
-        var result = await userService.Register(user, request.addUser.Password);
+        var result = await userService.Register(user, request.Password);
 
         switch (result)
         {

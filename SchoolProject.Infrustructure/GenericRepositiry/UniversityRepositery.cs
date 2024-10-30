@@ -88,13 +88,13 @@ public class UniversityRepositery<T>
 
     public virtual async Task<T> AddAsync(T entity)
     {
-        _appDbContext.Set<T>().Add(entity);
+        var Result = _appDbContext.Set<T>().Add(entity);
 
         await _appDbContext.SaveChangesAsync();
 
         _memoryCache.Remove(typeof(T).Name);
 
-        return entity;
+        return Result.Entity;
     }
     public virtual async Task<ICollection<T>> AddRangeAsync(
         ICollection<T> entities)
@@ -122,7 +122,7 @@ public class UniversityRepositery<T>
 
     public async Task<bool> DeleteRangeAsync(ICollection<T> entities)
     {
-        await _appDbContext.Set<T>().AddRangeAsync(entities);
+        _appDbContext.Set<T>().RemoveRange(entities);
 
         await _appDbContext.SaveChangesAsync();
 
@@ -175,5 +175,8 @@ public class UniversityRepositery<T>
         return options;
     }
 
-
+    public async Task SaveChangesAsync()
+    {
+        await _appDbContext.SaveChangesAsync();
+    }
 }

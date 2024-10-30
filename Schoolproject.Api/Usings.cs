@@ -22,15 +22,17 @@ global using UniversityProject.Core.CQSR.Commands.UserCommands;
 global using UniversityProject.Core.CQSR.Queries.DoctorQueries;
 global using UniversityProject.Core.CQSR.Queries.RoleQueries;
 global using UniversityProject.Core.CQSR.Queries.StudentQueries;
+global using UniversityProject.Core.CQSR.Queries.Teaching_Assistants_Quiries;
 global using UniversityProject.Core.CQSR.Queries.UserQueries;
 global using UniversityProject.Core.Dtos.DoctorDtos;
-global using UniversityProject.Core.Dtos.SubjectDtos;
-global using UniversityProject.Core.Dtos.User_Dtos;
+global using UniversityProject.Core.Dtos.CourseDtos;
+global using UniversityProject.Core.Dtos.Teaching_Assistant_Dtos;
 global using UniversityProject.Core.Response;
 global using UniversityProject.Data.Entities;
 global using UniversityProject.Infrustructure;
 global using UniversityProject.Infrustructure.Seeder;
 global using UniversityProject.Services;
+
 
 
 

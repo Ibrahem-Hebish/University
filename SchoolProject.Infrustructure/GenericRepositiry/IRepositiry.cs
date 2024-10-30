@@ -14,6 +14,7 @@ public interface IRepositiry<T>
     Task<bool> DeleteRangeAsync(ICollection<T> entities);
 
     IQueryable<T> AsNoTracking();
+    Task SaveChangesAsync();
     IDbContextTransaction BeginTransaction();
     void CommitTransaction();
     void RollbackTransaction();

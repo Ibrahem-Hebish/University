@@ -19,7 +19,7 @@ public class HallConfiguration
            .HasColumnType("VARCHAR")
            .HasMaxLength(3);
 
-        builder.HasMany(x => x.Subjects)
+        builder.HasMany(x => x.Courses)
             .WithOne(x => x.Hall)
             .HasForeignKey(x => x.HallName);
 

@@ -5,5 +5,6 @@ public partial class DoctorMapping : Profile
     public DoctorMapping()
     {
         GetDoctorMap();
+        AddDoctorMap();
     }
 }

@@ -1,8 +1,7 @@
 ﻿namespace UniversityProject.Core.CQSR.Commands.UserCommands;
 
-public record AddNewUser(
-    AddUser addUser)
-    : IRequest<Response<string>>
+public class AddNewUser : AddUser,
+     IRequest<Response<string>>
 { }
 
 public record AddRoleToUser(
@@ -13,26 +12,26 @@ public record AddRoleToUser(
 public class ChangePassword
     : IRequest<Response<string>>
 {
-    public string _email { get; set; } = null!;
+    public string Email { get; set; } = null!;
 
-    public string _password { get; set; } = null!;
+    public string Password { get; set; } = null!;
 
-    public string _newpassword { get; set; } = null!;
+    public string Newpassword { get; set; } = null!;
 
-    public string _confirmnewpassword { get; set; } = null!;
+    public string Confirmnewpassword { get; set; } = null!;
 }
 
 public record SendEmilForResetPassword(
-    string email)
+    string Email)
     : IRequest<Response<string>>
 { }
 
 public record ConfirmCodeToResetPassword(
-    string code, string email)
+    string Code, string Email)
     : IRequest<Response<string>>
 { }
 
 public record ResetPassword(
-    string email, string password, string confirmpasswod)
+    string Email, string Password, string Confirmpasswod)
     : IRequest<Response<string>>
 { }

@@ -19,14 +19,14 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
         if (AsNoTracking)
         {
             var students = await base._appDbContext.Students.AsNoTracking()
-                .Include(s => s.Subjects)
+                .Include(s => s.Courses)
                 .Include(s => s.Department)
                 .ToListAsync();
 
             return students;
         }
 
-        var students2 = await base._appDbContext.Students.Include(s => s.Subjects)
+        var students2 = await base._appDbContext.Students.Include(s => s.Courses)
             .Include(s => s.Department)
             .ToListAsync();
 
@@ -38,7 +38,7 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
         , bool AsNoTracking = false)
     {
         var students = base._appDbContext.Students
-            .Include(s => s.Subjects)
+            .Include(s => s.Courses)
             .Include(s => s.Department)
             .Where(filter);
 
@@ -59,7 +59,7 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
             if (entity is not null)
             {
                 base._appDbContext.Entry(entity)
-                    .Collection(s => s.Subjects)
+                    .Collection(s => s.Courses)
                     .Load();
 
                 base._appDbContext.Entry(entity)
@@ -76,7 +76,7 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
             if (entity is not null)
             {
                 base._appDbContext.Entry(entity)
-                    .Collection(s => s.Subjects)
+                    .Collection(s => s.Courses)
                     .Load();
 
                 base._appDbContext.Entry(entity)
@@ -99,11 +99,15 @@ public class SectionRepository(AppDbContext appDbContext, IMemoryCache memoryCac
 {
     public async override Task<ICollection<Section>> GetAllWhere(Expression<Func<Section, bool>> filter, bool AsNoTracking = false)
     {
-        var Section = await base._appDbContext.Sections
+        var Sections = _appDbContext.Sections
             .Include(s => s.TeachingAssistant)
             .Include(s => s.Students)
-            .Where(filter).ToListAsync();
-        return Section;
+            .Where(filter);
+        await Console.Out.WriteLineAsync(Sections.ToQueryString());
+        if (AsNoTracking)
+            Sections.AsNoTracking();
+
+        return await Sections.ToListAsync();
     }
 }
 public class DoctorRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
@@ -118,7 +122,7 @@ public class DoctorRepository(AppDbContext appDbContext, IMemoryCache memoryCach
         {
             await _appDbContext.Entry(Doctor).Reference(d => d.Department).LoadAsync();
 
-            await _appDbContext.Entry(Doctor).Collection(d => d.Subjects).LoadAsync();
+            await _appDbContext.Entry(Doctor).Collection(d => d.Courses).LoadAsync();
         }
 
         return Doctor!;
@@ -129,45 +133,48 @@ public class DoctorRepository(AppDbContext appDbContext, IMemoryCache memoryCach
     }
 
 }
-public class TeachingAssistantRepository
-    : UniversityRepositery<TeachingAssistant>
+public class TeachingAssistantRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<TeachingAssistant>(appDbContext, memoryCache)
     , ITeachingAssistantRepository
 {
-    public TeachingAssistantRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : base(appDbContext, memoryCache) { }
+    public override async Task<TeachingAssistant> FindAsync(int id)
+    {
+        var TeachingAssistant = await base.FindAsync(id);
 
+        if (TeachingAssistant is not null)
+            await _appDbContext.Entry(TeachingAssistant).Reference(t => t.Department).LoadAsync();
+
+        return TeachingAssistant!;
+    }
+
+    public override async Task<ICollection<TeachingAssistant>> GetAllAsync(bool AsNoTracking = false)
+    {
+        var TeachingAssistants = await _appDbContext.TeachingAssistants
+            .Include(t => t.Department)
+            .ToListAsync();
+
+        return TeachingAssistants;
+    }
 }
-public class StudentSectionsRepository
-    : UniversityRepositery<StudentSections>
+public class StudentSectionsRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<StudentSections>(appDbContext, memoryCache)
     , IStudentSectionsRepository
 {
-    public StudentSectionsRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : base(appDbContext, memoryCache) { }
-
 }
-public class StudentDoctorsRepository
-    : UniversityRepositery<StudentDoctors>
+public class StudentDoctorsRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<StudentDoctors>(appDbContext, memoryCache)
     , IStudentDoctorRepository
 {
-    public StudentDoctorsRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : base(appDbContext, memoryCache) { }
-
 }
-public class StudentTeachingAssistantsRepository
-    : UniversityRepositery<StudentTeachingAssistants>
+public class StudentTeachingAssistantsRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<StudentTeachingAssistants>(appDbContext, memoryCache)
     , IStudentTeachingAssistantsRepository
 {
-    public StudentTeachingAssistantsRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : base(appDbContext, memoryCache) { }
-
 }
-public class HallRepository
-    : UniversityRepositery<Hall>
+public class HallRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<Hall>(appDbContext, memoryCache)
     , IHallRepository
 {
-    public HallRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : base(appDbContext, memoryCache) { }
-
 }
 public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
     : UniversityRepositery<Office>(appDbContext, memoryCache)
@@ -195,9 +202,26 @@ public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCach
 
         return result!;
     }
+    public async Task<string> IsOfficeAvillibleForTeachingAssistant(Office office, int DepId)
+    {
+        if (office.DepartmentId != DepId)
+            return "This ofiice is not avillible for teaching assistants in this department";
 
+        if (office.For != "Teaching Assistants")
+            return "Office is not for Teaching Assistants";
+
+        await _appDbContext.Entry(office).Collection(o => o.TeachingAssistants).LoadAsync();
+
+        if (office.TeachingAssistants.Count == 3)
+            return "Office is not avillible";
+
+        return "Office is avillible";
+    }
     public async Task<string> IsOfficeAvillibleForDoctor(Office office, int DepId)
     {
+        if (office.DepartmentId != DepId)
+            return "This ofiice is not avillible for teaching assistants in this department";
+
         if (office.For != "Doctors")
             return "Office is not for doctors";
 
@@ -228,26 +252,23 @@ public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCach
         return "Office is avillible";
     }
 }
-public class LabRepository
-    : UniversityRepositery<Lab>
+public class LabRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<Lab>(appDbContext, memoryCache)
     , ILabRepository
 {
-    public LabRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-        : base(appDbContext, memoryCache) { }
-
 }
-public class StudentSubjectRepository(AppDbContext AppDbContext, IMemoryCache memoryCache)
-        : UniversityRepositery<StudentSubject>(AppDbContext, memoryCache)
-    , IStudentSubjectRepository
+public class StudentCourseRepository(AppDbContext AppDbContext, IMemoryCache memoryCache)
+        : UniversityRepositery<StudentCourse>(AppDbContext, memoryCache)
+    , IStudentCourseRepository
 {
 }
-public class SubjectRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
-    : UniversityRepositery<Subject>(appDbContext, memoryCache)
-    , ISubjectRepository
+public class CourseRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
+    : UniversityRepositery<Course>(appDbContext, memoryCache)
+    , ICourseRepository
 {
-    public async override Task<ICollection<Subject>> GetAllWhere(Expression<Func<Subject, bool>> filter, bool AsNoTracking = false)
+    public async override Task<ICollection<Course>> GetAllWhere(Expression<Func<Course, bool>> filter, bool AsNoTracking = false)
     {
-        var Courses = await _appDbContext.Subjects.Include(c => c.Doctor)
+        var Courses = await _appDbContext.Courses.Include(c => c.Doctor)
             .Where(filter).ToListAsync();
         return Courses;
     }

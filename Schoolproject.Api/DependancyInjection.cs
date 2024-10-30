@@ -1,10 +1,14 @@
-﻿namespace Universityproject.Api;
+﻿using Universityproject.Api.Middlewares;
+
+namespace Universityproject.Api;
 
 public static class DependancyInjection
 {
     public static IServiceCollection AddWeb(
         this IServiceCollection services)
     {
+        services.AddScoped<GlobalHandlingMiddleware>();
+
         services.AddControllers();
 
         services.AddRateLimiter(opt => opt

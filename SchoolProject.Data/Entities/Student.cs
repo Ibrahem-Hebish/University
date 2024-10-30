@@ -11,8 +11,8 @@ public class Student
     public int DepId { get; set; }
     [ForeignKey(nameof(DepId))]
     public virtual Department Department { get; set; }
-    public virtual List<Subject> Subjects { get; set; } = [];
-    public virtual List<StudentSubject> Studentsubjects { get; set; } = [];
+    public virtual List<Course> Courses { get; set; } = [];
+    public virtual List<StudentCourse> StudentCourses { get; set; } = [];
     public virtual List<Doctor> Doctors { get; set; } = [];
     public virtual List<StudentDoctors> StudentDoctors { get; set; } = [];
     public virtual List<TeachingAssistant> TeachingAssistants { get; set; } = [];

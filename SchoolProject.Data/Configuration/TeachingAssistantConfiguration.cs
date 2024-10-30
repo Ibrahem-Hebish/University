@@ -1,6 +1,6 @@
 ﻿namespace UniversityProject.Data.Configuration;
 
-public partial class StudentSubjectConfiguration
+public partial class StudentCourseConfiguration
 {
     public class TeachingAssistantConfiguration
     : IEntityTypeConfiguration<TeachingAssistant>
@@ -17,9 +17,7 @@ public partial class StudentSubjectConfiguration
                 .WithMany(x => x.TeachingAssistants)
                 .HasForeignKey(x => x.DepartmentID);
 
-            builder.HasMany(x => x.Sections)
-                .WithOne(x => x.TeachingAssistant)
-                .HasForeignKey(x => x.TeachingAssistantId);
+
 
             builder.ToTable(nameof(TeachingAssistant));
         }

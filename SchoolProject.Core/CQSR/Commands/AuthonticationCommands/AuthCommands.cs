@@ -14,6 +14,6 @@ public class RefreshTokenCommand
 { }
 
 public record ConfirmEmailCommand(
-    string code)
+    string Code)
     : IRequest<Response<string>>
 { }

@@ -35,9 +35,9 @@ public static class DependancyInjection
 
         services.AddScoped<IUserTokenRepository, UserTokenRepository>();
 
-        services.AddScoped<ISubjectRepository, SubjectRepository>();
+        services.AddScoped<ICourseRepository, CourseRepository>();
 
-        services.AddScoped<IStudentSubjectRepository, StudentSubjectRepository>();
+        services.AddScoped<IStudentCourseRepository, StudentCourseRepository>();
 
         services.AddIdentityCore<User>(opt =>
         {

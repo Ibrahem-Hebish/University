@@ -1,4 +1,6 @@
-﻿namespace Universityproject.Api;
+﻿using Universityproject.Api.Middlewares;
+
+namespace Universityproject.Api;
 
 public static class AppExtensions
 {
@@ -27,6 +29,8 @@ public static class AppExtensions
         if (option is not null) app.UseRequestLocalization(option.Value);
 
         app.UseHttpsRedirection();
+
+        app.UseMiddleware<GlobalHandlingMiddleware>();
 
         app.UseCors("local");
 

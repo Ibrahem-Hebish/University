@@ -1,7 +1,7 @@
 ﻿namespace UniversityProject.Core.CQSR.Commands.StudentCommands;
 
 public record DeleteStudennt(
-    int id)
+    int Id)
     : IRequest<Response<string>>
 { }
 

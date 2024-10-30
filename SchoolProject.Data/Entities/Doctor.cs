@@ -12,5 +12,5 @@ public class Doctor
     public virtual Department Department { get; set; }
     public virtual List<Student> Students { get; set; } = [];
     public virtual List<StudentDoctors> StudentDoctors { get; set; } = [];
-    public virtual List<Subject> Subjects { get; set; }
+    public virtual List<Course> Courses { get; set; }
 }

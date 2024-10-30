@@ -28,7 +28,7 @@ public class RoleHandler(
         AddRoleCommand request,
         CancellationToken cancellationToken)
     {
-        var result = await _roleServices.AddRoleAsync(request.name);
+        var result = await _roleServices.AddRoleAsync(request.Name);
 
         if (result == "Success")
             return Created<string>();
@@ -40,7 +40,7 @@ public class RoleHandler(
         DeleteRole request,
         CancellationToken cancellationToken)
     {
-        var result = await _roleServices.DeleteRole(request.id);
+        var result = await _roleServices.DeleteRole(request.Id);
         switch (result)
         {
             case "Not found":
@@ -55,7 +55,7 @@ public class RoleHandler(
         UpdateRole request,
         CancellationToken cancellationToken)
     {
-        var result = await _roleServices.UpdateRole(request.currentName, request.newName);
+        var result = await _roleServices.UpdateRole(request.CurrentName, request.NewName);
 
         switch (result)
         {
@@ -88,7 +88,7 @@ public class RoleHandler(
         GetRole request,
         CancellationToken cancellationToken)
     {
-        var result = await _roleServices.GetRoleAsync(request.id);
+        var result = await _roleServices.GetRoleAsync(request.Id);
 
         if (result is null)
             return NotFouned<GetRoleDto>();
@@ -102,7 +102,7 @@ public class RoleHandler(
         GetUserRoles request,
         CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByIdAsync(request.id.ToString());
+        var user = await userManager.FindByIdAsync(request.Id.ToString());
 
         if (user is null)
             return BadRequest<ManageUserRoles>("User is not found");
@@ -147,7 +147,7 @@ public class RoleHandler(
         GetUserClaims request,
         CancellationToken cancellationToken)
     {
-        var user = await userManager.FindByIdAsync(request.id.ToString());
+        var user = await userManager.FindByIdAsync(request.Id.ToString());
 
         if (user is null) return BadRequest<Manageuserclaims>("User is not found");
 

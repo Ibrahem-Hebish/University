@@ -5,7 +5,7 @@ public class ConfirmEmailCommandValidator
 {
     public ConfirmEmailCommandValidator()
     {
-        RuleFor(x => x.code)
+        RuleFor(x => x.Code)
           .NotEmpty().WithMessage("{PropertyName} must not be empty")
           .NotNull().WithMessage("{PropertyName} must not be null");
     }

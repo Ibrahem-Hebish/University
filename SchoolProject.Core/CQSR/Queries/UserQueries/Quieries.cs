@@ -1,7 +1,7 @@
 ﻿namespace UniversityProject.Core.CQSR.Queries.UserQueries;
 
 public record GetUserById(
-    int id)
+    int Id)
     : IRequest<Response<GetUserDto>>
 { }
 

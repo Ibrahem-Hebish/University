@@ -8,20 +8,20 @@ public record GetAllStudents()
     : IRequest<Response<List<GetStudentDto>>>
 { }
 public record GetStudentByName(
-    string name)
+    string Name)
     : IRequest<Response<GetStudentDto>>
 { }
 public record GroupStudentsByDep(
-    string name)
+    string Name)
     : IRequest<Response<List<GetStudentDto>>>
 { }
 public record GroupStudentsBySub(
-    string name)
+    string Name)
     : IRequest<Response<List<GetStudentDto>>>
 { }
-public record StudentPagination(int pagenum,
-                                int pagesize,
-                                string? search,
+public record StudentPagination(int Pagenum,
+                                int Pagesize,
+                                string? Search,
                                 StudentOrderEnum StudentOrder)
     : IRequest<PaginationResponse<GetStudentDto>>
 { }

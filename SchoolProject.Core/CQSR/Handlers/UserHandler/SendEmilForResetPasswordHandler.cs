@@ -12,7 +12,7 @@ public class SendEmilForResetPasswordHandler(
         SendEmilForResetPassword request,
         CancellationToken cancellationToken)
     {
-        var result = await userService.SendCodeToResetPassword(request.email);
+        var result = await userService.SendCodeToResetPassword(request.Email);
 
         switch (result)
         {
@@ -32,7 +32,7 @@ public class SendEmilForResetPasswordHandler(
         ConfirmCodeToResetPassword request,
         CancellationToken cancellationToken)
     {
-        var result = await userService.ConfirmCodeToResetPassword(request.code, request.email);
+        var result = await userService.ConfirmCodeToResetPassword(request.Code, request.Email);
 
         switch (result)
         {
@@ -51,8 +51,8 @@ public class SendEmilForResetPasswordHandler(
         CancellationToken cancellationToken)
     {
         var result = await userService.ResetPassword(
-            request.email,
-            request.password);
+            request.Email,
+            request.Password);
 
         switch (result)
         {

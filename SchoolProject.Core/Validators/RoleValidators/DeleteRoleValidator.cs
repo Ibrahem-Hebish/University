@@ -5,7 +5,7 @@ public class DeleteRoleValidator
 {
     public DeleteRoleValidator()
     {
-        RuleFor(x => x.id)
+        RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id can not be empty")
             .NotNull().WithMessage("Id can not be null")
             .GreaterThanOrEqualTo(1).WithMessage("Id must be greater than 0");

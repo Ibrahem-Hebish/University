@@ -6,11 +6,11 @@ public interface IStudentRepository
 public interface IDepartmentRepository
     : IRepositiry<Department>
 { }
-public interface IStudentSubjectRepository
-    : IRepositiry<StudentSubject>
+public interface IStudentCourseRepository
+    : IRepositiry<StudentCourse>
 { }
-public interface ISubjectRepository
-    : IRepositiry<Subject>
+public interface ICourseRepository
+    : IRepositiry<Course>
 { }
 public interface ISectionRepository
     : IRepositiry<Section>
@@ -35,6 +35,8 @@ public interface IOfficeRepository
 {
     public Task<Office> FindByNameAsync(string Name);
     public Task<string> IsOfficeAvillibleForDoctor(Office office, int DepId);
+    public Task<string> IsOfficeAvillibleForTeachingAssistant(Office office, int DepId);
+
 }
 public interface IHallRepository
     : IRepositiry<Hall>

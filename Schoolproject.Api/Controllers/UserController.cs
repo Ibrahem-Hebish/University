@@ -30,10 +30,9 @@ public class UserController(
     [Route(Router.UserRouter.AddNewUser)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult> Create(
-        AddUser addUser)
+        AddNewUser Command)
     {
-        //if (addUser is null) return BadRequest();
-        var IsCreated = await mediator.Send(new AddNewUser(addUser));
+        var IsCreated = await mediator.Send(Command);
         return NewRsponse(IsCreated);
     }
 

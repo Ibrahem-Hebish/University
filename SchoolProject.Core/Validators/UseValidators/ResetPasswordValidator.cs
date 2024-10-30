@@ -5,18 +5,18 @@ public class ResetPasswordValidator
 {
     public ResetPasswordValidator()
     {
-        RuleFor(x => x.email)
+        RuleFor(x => x.Email)
            .NotEmpty().WithMessage("{PropertyName} must not be empty")
            .NotNull().WithMessage("{PropertyName} must not be null")
            .EmailAddress();
 
-        RuleFor(x => x.password)
+        RuleFor(x => x.Password)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null");
 
-        RuleFor(x => x.confirmpasswod)
+        RuleFor(x => x.Confirmpasswod)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null")
-            .Equal(x => x.password);
+            .Equal(x => x.Password);
     }
 }

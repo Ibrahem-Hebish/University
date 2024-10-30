@@ -6,9 +6,9 @@ public class AppDbContext
         , IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
     public DbSet<Student> Students { get; set; }
-    public DbSet<Subject> Subjects { get; set; }
+    public DbSet<Course> Courses { get; set; }
     public DbSet<Department> Departments { get; set; }
-    public DbSet<StudentSubject> StudentSubjects { get; set; }
+    public DbSet<StudentCourse> StudentCourses { get; set; }
     public DbSet<Hall> Halls { get; set; }
     public DbSet<Lab> Labs { get; set; }
     public DbSet<Office> Offices { get; set; }

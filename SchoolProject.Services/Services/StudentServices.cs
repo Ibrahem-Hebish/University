@@ -23,7 +23,7 @@ public class StudentServices(
     public IQueryable<Student> GetAsQueriable()
     {
         return studentRepository.AsNoTracking()
-            .Include(s => s.Subjects)
+            .Include(s => s.Courses)
             .Include(s => s.Department);
     }
 
@@ -42,10 +42,10 @@ public class StudentServices(
         return DepStudents.ToList();
     }
 
-    public async Task<ICollection<Student>> GroupStudentsBySubject(string subname)
+    public async Task<ICollection<Student>> GroupStudentsByCourse(string subname)
     {
         var DepStudents = await studentRepository.GetAllWhere
-            (s => s.Subjects.Select(s => s.Name.ToLower())
+            (s => s.Courses.Select(s => s.Name.ToLower())
             .Any(n => n == subname.ToLower()), true);
 
         return DepStudents.ToList();

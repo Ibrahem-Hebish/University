@@ -6,8 +6,8 @@ public partial class StudentMapping
     {
 
         CreateMap<AddStudennt, Student>()
-         .ForMember(s => s.Studentsubjects, opt => opt.Ignore())
+         .ForMember(s => s.StudentCourses, opt => opt.Ignore())
          .ForMember(s => s.Department, opt => opt.Ignore())
-         .ForMember(s => s.Subjects, opt => opt.Ignore()); ;
+         .ForMember(s => s.Courses, opt => opt.Ignore()); ;
     }
 }

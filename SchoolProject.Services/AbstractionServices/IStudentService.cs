@@ -16,7 +16,7 @@ public interface IStudentService
 
     public Task<ICollection<Student>> GroupStudentsByDepartment(string depname);
 
-    public Task<ICollection<Student>> GroupStudentsBySubject(string subname);
+    public Task<ICollection<Student>> GroupStudentsByCourse(string subname);
 
     IQueryable<Student> GetAsQueriable();
 

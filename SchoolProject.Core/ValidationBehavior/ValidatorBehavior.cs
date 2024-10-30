@@ -1,7 +1,10 @@
-﻿namespace UniversityProject.Core.ValidationBehavior;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace UniversityProject.Core.ValidationBehavior;
 
 public class ValidationBehavior<TRequest, TResponse>(
-    IEnumerable<IValidator<TRequest>> validators)
+    IEnumerable<IValidator<TRequest>> validators,
+    IHttpContextAccessor httpContextAccessor)
     : IPipelineBehavior<TRequest, TResponse>
    where TRequest : IRequest<TResponse>
 {
@@ -23,7 +26,11 @@ public class ValidationBehavior<TRequest, TResponse>(
                 .ToList();
 
             if (failures.Count > 0)
+            {
+                httpContextAccessor.HttpContext!.Response.StatusCode = (int)HttpStatusCode.BadRequest;
                 throw new Exception(failures.Select(f => f.ErrorMessage).First());
+
+            }
         }
 
         return await next();

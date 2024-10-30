@@ -17,7 +17,7 @@ public class DoctorConfiguration
             .WithMany(x => x.Doctors)
             .HasForeignKey(x => x.DepartmentID);
 
-        builder.HasMany(x => x.Subjects)
+        builder.HasMany(x => x.Courses)
             .WithOne(x => x.Doctor)
             .HasForeignKey(x => x.DoctorId);
 

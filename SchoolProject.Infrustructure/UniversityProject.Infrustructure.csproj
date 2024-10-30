@@ -8,16 +8,16 @@
 
   <ItemGroup>
     <Compile Remove="DepartmentRepositories\**" />
-    <Compile Remove="StudentSubjectRepositories\**" />
-    <Compile Remove="SubjectRepositories\**" />
+    <Compile Remove="StudentCourseRepositories\**" />
+    <Compile Remove="CourseRepositories\**" />
     <Compile Remove="UserRefreshTokenReposirory\**" />
     <EmbeddedResource Remove="DepartmentRepositories\**" />
-    <EmbeddedResource Remove="StudentSubjectRepositories\**" />
-    <EmbeddedResource Remove="SubjectRepositories\**" />
+    <EmbeddedResource Remove="StudentCourseRepositories\**" />
+    <EmbeddedResource Remove="CourseRepositories\**" />
     <EmbeddedResource Remove="UserRefreshTokenReposirory\**" />
     <None Remove="DepartmentRepositories\**" />
-    <None Remove="StudentSubjectRepositories\**" />
-    <None Remove="SubjectRepositories\**" />
+    <None Remove="StudentCourseRepositories\**" />
+    <None Remove="CourseRepositories\**" />
     <None Remove="UserRefreshTokenReposirory\**" />
   </ItemGroup>
 

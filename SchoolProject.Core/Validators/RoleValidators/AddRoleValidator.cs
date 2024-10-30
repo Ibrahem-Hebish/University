@@ -14,13 +14,13 @@ public class AddRoleValidator
     }
     public void RoleValidation()
     {
-        RuleFor(x => x.name)
+        RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Name can not be empty")
             .NotNull().WithMessage("Name can not be null");
     }
     public void CustomValidation()
     {
-        RuleFor(r => r.name)
+        RuleFor(r => r.Name)
             .MustAsync(async (key, cancilationtoken) => !await _roleServices.IsExsist(key))
             .WithMessage("RoleName exsists");
     }

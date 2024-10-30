@@ -8,7 +8,7 @@ public class EmailService(
     public async Task<string> SendEmailAsync(
         string email,
         string message,
-        string subject)
+        string Course)
     {
         try
         {
@@ -32,7 +32,7 @@ public class EmailService(
             var mimeMessage = new MimeMessage
             {
                 Body = bodyBuilder.ToMessageBody(),
-                Subject = subject
+                Subject = Course
             };
 
             mimeMessage.From.Add(new MailboxAddress(

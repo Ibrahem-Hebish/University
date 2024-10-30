@@ -107,11 +107,63 @@
 
             public const string GetAll = postfix + "GetAll";
 
-            public const string GetDoctorSubjects = postfix + "GetDoctorSubjects/{id}";
+            public const string GetDoctorCourses = postfix + "GetCourses/{id}";
 
             public const string Delete = postfix + "Delete/{id}";
 
-            public const string ChangeDoctorOffice = postfix + "ChangeDoctorOffice";
+            public const string AddDoctor = postfix + "Add";
+
+            public const string ChangeDoctorOffice = postfix + "ChangeOffice";
+
+        }
+        public static class TeachingAssistant
+        {
+            public const string postfix = rule + "TeachingAssistant/";
+
+            public const string Get = postfix + "Get/{id}";
+
+            public const string GetAll = postfix + "GetAll";
+
+            public const string Delete = postfix + "Delete/{id}";
+
+            public const string AddTeachingAssistant = postfix + "Add";
+
+            public const string ChangeOffice = postfix + "ChangeOffice";
+
+        }
+        public static class Section
+        {
+            public const string postfix = rule + "Section/";
+
+            public const string Get = postfix + "Get/{id}";
+
+            public const string GetAll = postfix + "GetAll";
+
+            public const string GetAllInSpecificTerm = postfix + "GetAllInSpecificTerm";
+
+            public const string GetSectionTeachingAssistant = postfix + "GetSectionTeachingAssistant";
+
+            public const string Delete = postfix + "Delete/{id}";
+
+            public const string AddTeachingAssistant = postfix + "Add";
+
+        }
+
+        public static class Course
+        {
+            public const string postfix = rule + "Course/";
+
+            public const string Get = postfix + "Get/{id}";
+
+            public const string GetAll = postfix + "GetAll";
+
+            public const string GetAllInSpecificTerm = postfix + "GetAllInSpecificTerm";
+
+            public const string GetCourseDoctor = postfix + "GetCourseDoctor";
+
+            public const string Delete = postfix + "Delete/{id}";
+
+            public const string AddTeachingAssistant = postfix + "Add";
 
         }
     }

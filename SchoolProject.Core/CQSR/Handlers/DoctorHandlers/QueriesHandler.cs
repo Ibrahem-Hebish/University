@@ -4,7 +4,7 @@ public class QueriesHandler(IDoctorRepository doctorRepository, IMapper mapper) 
     ResponseHandler,
     IRequestHandler<GetDoctor, Response<GetDoctorDto>>,
     IRequestHandler<GetAllDoctors, Response<List<GetDoctorDto>>>,
-    IRequestHandler<GetDoctorSubjects, Response<List<GetSubjectDto>>>
+    IRequestHandler<GetDoctorCourses, Response<List<GetCourseDto>>>
 {
     public async Task<Response<GetDoctorDto>> Handle(GetDoctor request, CancellationToken cancellationToken)
     {
@@ -32,23 +32,23 @@ public class QueriesHandler(IDoctorRepository doctorRepository, IMapper mapper) 
         return Success(DoctorsDtos);
     }
 
-    public async Task<Response<List<GetSubjectDto>>> Handle(GetDoctorSubjects request, CancellationToken cancellationToken)
+    public async Task<Response<List<GetCourseDto>>> Handle(GetDoctorCourses request, CancellationToken cancellationToken)
     {
         if (request.id <= 0)
-            return BadRequest<List<GetSubjectDto>>("Id must be greater than 0");
+            return BadRequest<List<GetCourseDto>>("Id must be greater than 0");
 
         var Doctor = await doctorRepository.FindAsync(request.id);
 
         if (Doctor == null)
-            return BadRequest<List<GetSubjectDto>>();
+            return BadRequest<List<GetCourseDto>>();
 
-        var DoctorSubjects = Doctor.Subjects.ToList();
+        var DoctorCourses = Doctor.Courses.ToList();
 
-        if (DoctorSubjects.Count == 0 || DoctorSubjects is null)
-            return NotFouned<List<GetSubjectDto>>("There is no subjects have been attached to doctor yet");
+        if (DoctorCourses.Count == 0 || DoctorCourses is null)
+            return NotFouned<List<GetCourseDto>>("There is no Courses have been attached to doctor yet");
 
-        var SubjectsDtos = mapper.Map<List<GetSubjectDto>>(DoctorSubjects);
+        var CoursesDtos = mapper.Map<List<GetCourseDto>>(DoctorCourses);
 
-        return Success(SubjectsDtos);
+        return Success(CoursesDtos);
     }
 }

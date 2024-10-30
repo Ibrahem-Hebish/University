@@ -10,14 +10,18 @@ public class Section
 
     public int Level { get; set; }
     public int Term { get; set; }
-    public virtual ICollection<Student> Students { get; set; } = [];
-    public virtual ICollection<StudentSections> StudentSections { get; set; } = [];
+    public virtual List<Student> Students { get; set; } = [];
+    public virtual List<StudentSections> StudentSections { get; set; } = [];
     public int? TeachingAssistantId { get; set; }
     [ForeignKey(nameof(TeachingAssistantId))]
     public virtual TeachingAssistant TeachingAssistant { get; set; }
-    public int SubjectId { get; set; }
-    [ForeignKey(nameof(SubjectId))]
-    public virtual Subject Subject { get; set; }
+    public int CourseId { get; set; }
+    [ForeignKey(nameof(CourseId))]
+    public virtual Course Course { get; set; }
+
+    public int DepartmentId { get; set; }
+    [ForeignKey(nameof(DepartmentId))]
+    public virtual Department Department { get; set; }
     public string? LabName { get; set; }
     [ForeignKey(nameof(LabName))]
     public virtual Lab Lab { get; set; }

@@ -8,8 +8,8 @@ public class StudentHandlerTests
     private readonly Mock<IStudentService> StudentserviceMock;
     private readonly IMapper _mapperMock;
     private readonly StudentMapping _studentMapping;
-    private readonly Mock<IStudentSubjectRepository> _studentSubjectRepositoryMock;
-    private readonly Mock<ISubjectRepository> _subjectRepositoryMock;
+    private readonly Mock<IStudentCourseRepository> _studentCourseRepositoryMock;
+    private readonly Mock<ICourseRepository> _CourseRepositoryMock;
     private readonly Mock<IStudentRepository> _studentRepositoryMock;
     private readonly Mock<ISectionRepository> _sectionRepositoryMock;
     private readonly StudentHandler _handler;
@@ -19,15 +19,15 @@ public class StudentHandlerTests
         _studentMapping = new();
         var configuration = new MapperConfiguration(c => c.AddProfile(_studentMapping));
         _mapperMock = new Mapper(configuration);
-        _studentSubjectRepositoryMock = new();
-        _subjectRepositoryMock = new();
+        _studentCourseRepositoryMock = new();
+        _CourseRepositoryMock = new();
         _sectionRepositoryMock = new();
         _studentRepositoryMock = new();
         _handler = new StudentHandler(
             StudentserviceMock.Object,
             _studentRepositoryMock.Object,
-            _studentSubjectRepositoryMock.Object,
-            _subjectRepositoryMock.Object,
+            _studentCourseRepositoryMock.Object,
+            _CourseRepositoryMock.Object,
             _sectionRepositoryMock.Object,
             _mapperMock); ;
     }
@@ -83,7 +83,7 @@ public class StudentHandlerTests
     public async Task Get_PaginatedList_Should_Not_Be_Null_Or_Empty()
     {
         var query = new StudentPagination(1, 10, null, StudentOrderEnum.Name);
-        var studentSubjects = new List<Subject>() { new() { Name = "Physics", Id = 1 } };
+        var studentCourses = new List<Course>() { new() { Name = "Physics", Id = 1 } };
         var department = new Department() { Name = "CS", Id = 1 };
         var student = new AsyncEnumerable<Student>(new List<Student>()
         {
@@ -94,11 +94,11 @@ public class StudentHandlerTests
                 Phone = "01092836457",
                 Address = "elmahalla",
                 Name = "Ali",
-                Subjects = studentSubjects,
+                Courses = studentCourses,
                 Department = department
             }
         });
-        StudentserviceMock.Setup(x => x.Filter(query.StudentOrder, query.search)).Returns(student.AsQueryable());
+        StudentserviceMock.Setup(x => x.Filter(query.StudentOrder, query.Search)).Returns(student.AsQueryable());
         var result = await _handler.Handle(query, CancellationToken.None);
         result.Should().NotBeNull();
     }

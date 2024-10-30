@@ -1,22 +1,22 @@
 ﻿namespace UniversityProject.Core.CQSR.Commands.RolesCommands;
 
 public record AddRoleCommand(
-    string name)
+    string Name)
     : IRequest<Response<string>>
 { }
 
 public record DeleteRole(
-    int id)
+    int Id)
     : IRequest<Response<string>>
 { }
 
 public record UpdateRole(
-    string currentName, string newName)
+    string CurrentName, string NewName)
     : IRequest<Response<string>>
 { }
 
 public record GetUserRoles(
-    int id)
+    int Id)
     : IRequest<Response<ManageUserRoles>>
 { }
 

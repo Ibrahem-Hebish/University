@@ -125,6 +125,55 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("UniversityProject.Data.Entities.Course", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Day")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("DoctorId")
+                        .HasColumnType("int");
+
+                    b.Property<TimeOnly>("EndTime")
+                        .HasColumnType("time");
+
+                    b.Property<string>("HallName")
+                        .HasColumnType("VARCHAR(2)");
+
+                    b.Property<int>("Level")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("VARCHAR");
+
+                    b.Property<TimeOnly>("StartTime")
+                        .HasColumnType("time");
+
+                    b.Property<int>("Term")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("HallName");
+
+                    b.ToTable("Course", (string)null);
+                });
+
             modelBuilder.Entity("UniversityProject.Data.Entities.Department", b =>
                 {
                     b.Property<int>("Id")
@@ -188,12 +237,17 @@ namespace UniversityProject.Infrustructure.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("VARCHAR");
 
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Floor")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Name");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Hall", (string)null);
                 });
@@ -209,12 +263,17 @@ namespace UniversityProject.Infrustructure.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("VARCHAR");
 
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Floor")
                         .IsRequired()
                         .HasMaxLength(1)
                         .HasColumnType("VARCHAR");
 
                     b.HasKey("Name");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Lab", (string)null);
                 });
@@ -230,6 +289,9 @@ namespace UniversityProject.Infrustructure.Migrations
                         .HasMaxLength(3)
                         .HasColumnType("VARCHAR");
 
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Floor")
                         .IsRequired()
                         .HasMaxLength(1)
@@ -240,6 +302,8 @@ namespace UniversityProject.Infrustructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Name");
+
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Office", (string)null);
                 });
@@ -282,9 +346,15 @@ namespace UniversityProject.Infrustructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Day")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DepartmentId")
+                        .HasColumnType("int");
 
                     b.Property<TimeOnly>("EndTime")
                         .HasColumnType("time");
@@ -303,9 +373,6 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.Property<TimeOnly>("StartTime")
                         .HasColumnType("time");
 
-                    b.Property<int>("SubjectId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("TeachingAssistantId")
                         .HasColumnType("int");
 
@@ -314,9 +381,11 @@ namespace UniversityProject.Infrustructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LabName");
+                    b.HasIndex("CourseId");
 
-                    b.HasIndex("SubjectId");
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("LabName");
 
                     b.HasIndex("TeachingAssistantId");
 
@@ -362,6 +431,21 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.ToTable("Students", (string)null);
                 });
 
+            modelBuilder.Entity("UniversityProject.Data.Entities.StudentCourse", b =>
+                {
+                    b.Property<int>("CourseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("CourseId", "StudentId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentCourse", (string)null);
+                });
+
             modelBuilder.Entity("UniversityProject.Data.Entities.StudentDoctors", b =>
                 {
                     b.Property<int>("StudentId")
@@ -392,21 +476,6 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.ToTable("StudentSections", (string)null);
                 });
 
-            modelBuilder.Entity("UniversityProject.Data.Entities.StudentSubject", b =>
-                {
-                    b.Property<int>("SubId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StuId")
-                        .HasColumnType("int");
-
-                    b.HasKey("SubId", "StuId");
-
-                    b.HasIndex("StuId");
-
-                    b.ToTable("StudentSubject", (string)null);
-                });
-
             modelBuilder.Entity("UniversityProject.Data.Entities.StudentTeachingAssistants", b =>
                 {
                     b.Property<int>("StudentId")
@@ -420,55 +489,6 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.HasIndex("TeachingAssistantId");
 
                     b.ToTable("StudentTeachingAssistants", (string)null);
-                });
-
-            modelBuilder.Entity("UniversityProject.Data.Entities.Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Day")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("DoctorId")
-                        .HasColumnType("int");
-
-                    b.Property<TimeOnly>("EndTime")
-                        .HasColumnType("time");
-
-                    b.Property<string>("HallName")
-                        .HasColumnType("VARCHAR(2)");
-
-                    b.Property<int>("Level")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("VARCHAR");
-
-                    b.Property<TimeOnly>("StartTime")
-                        .HasColumnType("time");
-
-                    b.Property<int>("Term")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
-
-                    b.HasIndex("DoctorId");
-
-                    b.HasIndex("HallName");
-
-                    b.ToTable("Subject", (string)null);
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.TeachingAssistant", b =>
@@ -669,6 +689,29 @@ namespace UniversityProject.Infrustructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("UniversityProject.Data.Entities.Course", b =>
+                {
+                    b.HasOne("UniversityProject.Data.Entities.Department", "Department")
+                        .WithMany("Courses")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UniversityProject.Data.Entities.Doctor", "Doctor")
+                        .WithMany("Courses")
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("UniversityProject.Data.Entities.Hall", "Hall")
+                        .WithMany("Courses")
+                        .HasForeignKey("HallName");
+
+                    b.Navigation("Department");
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Hall");
+                });
+
             modelBuilder.Entity("UniversityProject.Data.Entities.Department", b =>
                 {
                     b.HasOne("UniversityProject.Data.Entities.Doctor", "Manager")
@@ -695,25 +738,61 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.Navigation("Office");
                 });
 
+            modelBuilder.Entity("UniversityProject.Data.Entities.Hall", b =>
+                {
+                    b.HasOne("UniversityProject.Data.Entities.Department", "Deprtment")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Deprtment");
+                });
+
+            modelBuilder.Entity("UniversityProject.Data.Entities.Lab", b =>
+                {
+                    b.HasOne("UniversityProject.Data.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("UniversityProject.Data.Entities.Office", b =>
+                {
+                    b.HasOne("UniversityProject.Data.Entities.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.Navigation("Department");
+                });
+
             modelBuilder.Entity("UniversityProject.Data.Entities.Section", b =>
                 {
+                    b.HasOne("UniversityProject.Data.Entities.Course", "Course")
+                        .WithMany("Sections")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("UniversityProject.Data.Entities.Department", "Department")
+                        .WithMany("Sections")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("UniversityProject.Data.Entities.Lab", "Lab")
                         .WithMany("Sections")
                         .HasForeignKey("LabName");
 
-                    b.HasOne("UniversityProject.Data.Entities.Subject", "Subject")
-                        .WithMany("Sections")
-                        .HasForeignKey("SubjectId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("UniversityProject.Data.Entities.TeachingAssistant", "TeachingAssistant")
                         .WithMany("Sections")
-                        .HasForeignKey("TeachingAssistantId");
+                        .HasForeignKey("TeachingAssistantId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Department");
 
                     b.Navigation("Lab");
-
-                    b.Navigation("Subject");
 
                     b.Navigation("TeachingAssistant");
                 });
@@ -727,6 +806,25 @@ namespace UniversityProject.Infrustructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("UniversityProject.Data.Entities.StudentCourse", b =>
+                {
+                    b.HasOne("UniversityProject.Data.Entities.Course", "Course")
+                        .WithMany("StudentCourses")
+                        .HasForeignKey("CourseId")
+                        .OnDelete(DeleteBehavior.ClientNoAction)
+                        .IsRequired();
+
+                    b.HasOne("UniversityProject.Data.Entities.Student", "Student")
+                        .WithMany("StudentCourses")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("Student");
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.StudentDoctors", b =>
@@ -767,25 +865,6 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.Navigation("student");
                 });
 
-            modelBuilder.Entity("UniversityProject.Data.Entities.StudentSubject", b =>
-                {
-                    b.HasOne("UniversityProject.Data.Entities.Student", "student")
-                        .WithMany("Studentsubjects")
-                        .HasForeignKey("StuId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UniversityProject.Data.Entities.Subject", "subject")
-                        .WithMany("Studentsubjects")
-                        .HasForeignKey("SubId")
-                        .OnDelete(DeleteBehavior.ClientNoAction)
-                        .IsRequired();
-
-                    b.Navigation("student");
-
-                    b.Navigation("subject");
-                });
-
             modelBuilder.Entity("UniversityProject.Data.Entities.StudentTeachingAssistants", b =>
                 {
                     b.HasOne("UniversityProject.Data.Entities.Student", "Student")
@@ -803,29 +882,6 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.Navigation("Student");
 
                     b.Navigation("TeachingAssistant");
-                });
-
-            modelBuilder.Entity("UniversityProject.Data.Entities.Subject", b =>
-                {
-                    b.HasOne("UniversityProject.Data.Entities.Department", "Department")
-                        .WithMany("Subjects")
-                        .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("UniversityProject.Data.Entities.Doctor", "Doctor")
-                        .WithMany("Subjects")
-                        .HasForeignKey("DoctorId");
-
-                    b.HasOne("UniversityProject.Data.Entities.Hall", "Hall")
-                        .WithMany("Subjects")
-                        .HasForeignKey("HallName");
-
-                    b.Navigation("Department");
-
-                    b.Navigation("Doctor");
-
-                    b.Navigation("Hall");
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.TeachingAssistant", b =>
@@ -865,27 +921,36 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("UniversityProject.Data.Entities.Course", b =>
+                {
+                    b.Navigation("Sections");
+
+                    b.Navigation("StudentCourses");
+                });
+
             modelBuilder.Entity("UniversityProject.Data.Entities.Department", b =>
                 {
+                    b.Navigation("Courses");
+
                     b.Navigation("Doctors");
 
-                    b.Navigation("Students");
+                    b.Navigation("Sections");
 
-                    b.Navigation("Subjects");
+                    b.Navigation("Students");
 
                     b.Navigation("TeachingAssistants");
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.Doctor", b =>
                 {
-                    b.Navigation("StudentDoctors");
+                    b.Navigation("Courses");
 
-                    b.Navigation("Subjects");
+                    b.Navigation("StudentDoctors");
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.Hall", b =>
                 {
-                    b.Navigation("Subjects");
+                    b.Navigation("Courses");
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.Lab", b =>
@@ -909,20 +974,13 @@ namespace UniversityProject.Infrustructure.Migrations
 
             modelBuilder.Entity("UniversityProject.Data.Entities.Student", b =>
                 {
+                    b.Navigation("StudentCourses");
+
                     b.Navigation("StudentDoctors");
 
                     b.Navigation("StudentSections");
 
                     b.Navigation("StudentTeachingAssistants");
-
-                    b.Navigation("Studentsubjects");
-                });
-
-            modelBuilder.Entity("UniversityProject.Data.Entities.Subject", b =>
-                {
-                    b.Navigation("Sections");
-
-                    b.Navigation("Studentsubjects");
                 });
 
             modelBuilder.Entity("UniversityProject.Data.Entities.TeachingAssistant", b =>
