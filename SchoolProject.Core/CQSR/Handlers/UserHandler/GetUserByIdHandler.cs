@@ -12,7 +12,7 @@ public class GetUserByIdHandler(
         CancellationToken cancellationToken)
     {
         if (request.Id <= 0)
-            return new Response<GetUserDto>();
+            return BadRequest<GetUserDto>("Id must be greater than 0");
 
         var user = await userManager.FindByIdAsync(request.Id.ToString());
 

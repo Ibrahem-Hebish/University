@@ -10,9 +10,9 @@ public class AuthonticationController(
     public async Task<ActionResult> SignIn(
         SignInCommand signIn)
     {
-        var isCreated = await mediator.Send(signIn);
+        var result = await mediator.Send(signIn);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost]
@@ -21,9 +21,9 @@ public class AuthonticationController(
     public async Task<ActionResult> RefreshToken(
         RefreshTokenCommand Command)
     {
-        var isCreated = await mediator.Send(Command);
+        var result = await mediator.Send(Command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost]
@@ -32,21 +32,19 @@ public class AuthonticationController(
     public async Task<ActionResult> ValidateToken(
         ValidateTokenCommand Command)
     {
-        if (String.IsNullOrEmpty(Command.AccessToken)) return BadRequest("Input the data");
 
-        var isCreated = await mediator.Send(Command);
+        var result = await mediator.Send(Command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpGet]
     [Route(Router.AuthonticationRouter.ConfirmEmail)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult> ConfirmEmail(
-        string code)
+    public async Task<ActionResult> ConfirmEmail()
     {
-        var isCreated = await mediator.Send(new ConfirmEmailCommand(code));
+        var result = await mediator.Send(new ConfirmEmailCommand());
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 }

@@ -129,6 +129,7 @@
             public const string AddTeachingAssistant = postfix + "Add";
 
             public const string ChangeOffice = postfix + "ChangeOffice";
+            public const string AttachSectionToTeachingAssistant = postfix + "AttachSectionToTeachingAssistant";
 
         }
         public static class Section

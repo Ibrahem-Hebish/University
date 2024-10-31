@@ -13,7 +13,6 @@ public class RefreshTokenCommand
     : RefreshTokenDto, IRequest<Response<JwtToken>>
 { }
 
-public record ConfirmEmailCommand(
-    string Code)
+public record ConfirmEmailCommand()
     : IRequest<Response<string>>
 { }

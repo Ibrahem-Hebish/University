@@ -11,9 +11,9 @@ public class DoctorController(IMediator mediator) : AppController
 
     public async Task<ActionResult<GetDoctorDto>> Get(int id)
     {
-        var Doctors = await mediator.Send(new GetDoctor(id));
+        var result = await mediator.Send(new GetDoctor(id));
 
-        return NewRsponse(Doctors);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -23,9 +23,9 @@ public class DoctorController(IMediator mediator) : AppController
 
     public async Task<ActionResult<List<GetDoctorDto>>> GetAll()
     {
-        var Doctors = await mediator.Send(new GetAllDoctors());
+        var result = await mediator.Send(new GetAllDoctors());
 
-        return NewRsponse(Doctors);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -34,19 +34,20 @@ public class DoctorController(IMediator mediator) : AppController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<List<GetCourseDto>>> GetDoctorCourses(int id)
     {
-        var Doctors = await mediator.Send(new GetDoctorCourses(id));
+        var result = await mediator.Send(new GetDoctorCourses(id));
 
-        return NewRsponse(Doctors);
+        return NewRsponse(result);
     }
+
     [HttpPost]
     [Route(Router.DoctorRouter.AddDoctor)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<List<GetCourseDto>>> Create(AddNewDoctor Command)
     {
-        var Doctors = await mediator.Send(Command);
+        var result = await mediator.Send(Command);
 
-        return NewRsponse(Doctors);
+        return NewRsponse(result);
     }
 
     [HttpPut]
@@ -55,9 +56,9 @@ public class DoctorController(IMediator mediator) : AppController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<GetDoctorDto>> Delete(ChangeDoctorOffice Command)
     {
-        var Doctors = await mediator.Send(Command);
+        var result = await mediator.Send(Command);
 
-        return NewRsponse(Doctors);
+        return NewRsponse(result);
     }
 
     [HttpDelete]
@@ -66,8 +67,8 @@ public class DoctorController(IMediator mediator) : AppController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<List<GetCourseDto>>> Delete(int id)
     {
-        var Doctors = await mediator.Send(new DeleteDoctor(id));
+        var result = await mediator.Send(new DeleteDoctor(id));
 
-        return NewRsponse(Doctors);
+        return NewRsponse(result);
     }
 }

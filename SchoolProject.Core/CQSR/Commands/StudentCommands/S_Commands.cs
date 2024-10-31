@@ -5,7 +5,7 @@ public record DeleteStudennt(
     : IRequest<Response<string>>
 { }
 
-public class AddStudennt
+public class AddStudent
     : AddStudentDto, IRequest<Response<string>>
 { }
 

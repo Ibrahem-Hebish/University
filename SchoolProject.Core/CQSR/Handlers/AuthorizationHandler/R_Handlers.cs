@@ -74,6 +74,7 @@ public class RoleHandler(
         GetRoles request,
         CancellationToken cancellationToken)
     {
+
         var result = await _roleServices.GetRolesAsync();
 
         if (result is null)
@@ -88,6 +89,8 @@ public class RoleHandler(
         GetRole request,
         CancellationToken cancellationToken)
     {
+        if (request.Id <= 0)
+            return BadRequest<GetRoleDto>("Id must be greater than 0");
         var result = await _roleServices.GetRoleAsync(request.Id);
 
         if (result is null)
@@ -102,6 +105,9 @@ public class RoleHandler(
         GetUserRoles request,
         CancellationToken cancellationToken)
     {
+        if (request.Id <= 0)
+            return BadRequest<ManageUserRoles>("Id must be greater than 0");
+
         var user = await userManager.FindByIdAsync(request.Id.ToString());
 
         if (user is null)
@@ -111,21 +117,22 @@ public class RoleHandler(
 
         var systemroles = await _rolemanager.Roles.ToListAsync();
 
-        var manageuserroles = new ManageUserRoles();
-
-        manageuserroles.Userid = user.Id;
-
+        var manageuserroles = new ManageUserRoles
+        {
+            Userid = user.Id
+        };
         var cusromuserroles = new List<UserRoles>();
 
         if (systemroles is not null && systemroles.Count > 0)
         {
             foreach (var systemrole in systemroles)
             {
-                var role = new UserRoles();
+                var role = new UserRoles
+                {
+                    Id = systemrole.Id,
 
-                role.Id = systemrole.Id;
-
-                role.Name = systemrole.Name!;
+                    Name = systemrole.Name!
+                };
 
                 if (userroles.Contains(systemrole.Name!))
                     role.HasRole = true;
@@ -147,9 +154,12 @@ public class RoleHandler(
         GetUserClaims request,
         CancellationToken cancellationToken)
     {
+        if (request.Id <= 0) return
+                BadRequest<Manageuserclaims>("Id must be greater than 0");
+
         var user = await userManager.FindByIdAsync(request.Id.ToString());
 
-        if (user is null) return BadRequest<Manageuserclaims>("User is not found");
+        if (user is null) return NotFouned<Manageuserclaims>("User is not found");
 
         var manageuserclaims = await _roleServices.GetManageuserclaimsAsync(user);
 

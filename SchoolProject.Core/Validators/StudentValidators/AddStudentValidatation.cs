@@ -1,7 +1,7 @@
 ﻿namespace UniversityProject.Core.Validators.StudentValidators;
 
 public class AddStudentValidatation
-    : AbstractValidator<AddStudennt>
+    : AbstractValidator<AddStudent>
 {
     public AddStudentValidatation()
     {

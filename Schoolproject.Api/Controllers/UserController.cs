@@ -10,9 +10,9 @@ public class UserController(
     public async Task<ActionResult> GetById(
         int id)
     {
-        if (id <= 0) return BadRequest();
-        var IsCreated = await mediator.Send(new GetUserById(id));
-        return NewRsponse(IsCreated);
+        var result = await mediator.Send(new GetUserById(id));
+
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -21,9 +21,9 @@ public class UserController(
     [Authorize]
     public async Task<ActionResult> Get()
     {
-        var IsCreated = await mediator.Send(new GetUsers());
+        var result = await mediator.Send(new GetUsers());
 
-        return NewRsponse(IsCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost]
@@ -32,8 +32,9 @@ public class UserController(
     public async Task<ActionResult> Create(
         AddNewUser Command)
     {
-        var IsCreated = await mediator.Send(Command);
-        return NewRsponse(IsCreated);
+        var result = await mediator.Send(Command);
+
+        return NewRsponse(result);
     }
 
     [HttpPost]
@@ -42,8 +43,8 @@ public class UserController(
     public async Task<ActionResult> AddRoleToUser(
         AddRoleToUser command)
     {
-        var IsCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(IsCreated);
+        return NewRsponse(result);
     }
 }

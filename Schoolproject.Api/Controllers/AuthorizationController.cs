@@ -10,11 +10,10 @@ public class AuthorizationController(
     public async Task<ActionResult> GetRole(
         int id)
     {
-        if (id <= 0) return BadRequest("Id must be greater than 0");
 
-        var isCreated = await mediator.Send(new GetRole(id));
+        var result = await mediator.Send(new GetRole(id));
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -22,9 +21,9 @@ public class AuthorizationController(
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> GetRoles()
     {
-        var isCreated = await mediator.Send(new GetRoles());
+        var result = await mediator.Send(new GetRoles());
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -33,11 +32,10 @@ public class AuthorizationController(
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> ManageUserRoles(int id)
     {
-        if (id <= 0) return BadRequest("Id must be greater than 0");
 
-        var isCreated = await mediator.Send(new GetUserRoles(id));
+        var result = await mediator.Send(new GetUserRoles(id));
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -47,11 +45,10 @@ public class AuthorizationController(
     public async Task<ActionResult> ManageUserclaims(
         int id)
     {
-        if (id <= 0) return BadRequest("Id must be greater than 0");
 
-        var isCreated = await mediator.Send(new GetUserClaims(id));
+        var result = await mediator.Send(new GetUserClaims(id));
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost]
@@ -61,9 +58,9 @@ public class AuthorizationController(
     public async Task<ActionResult> AddRole(
         AddRoleCommand command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
     [HttpPut]
     [Route(Router.RoleRouter.UpdateRole)]
@@ -72,9 +69,9 @@ public class AuthorizationController(
     public async Task<ActionResult> UpdateRole(
         UpdateRole command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
     [HttpPut]
     [Route(Router.RoleRouter.Updateuserclaims)]
@@ -82,9 +79,9 @@ public class AuthorizationController(
     public async Task<ActionResult> UpdateUserClaims(
         [FromBody] Updateuserclaims command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpDelete]
@@ -93,9 +90,9 @@ public class AuthorizationController(
     public async Task<ActionResult> DeleteRole(
         DeleteRole command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
 }

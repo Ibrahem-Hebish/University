@@ -15,7 +15,7 @@ public record GroupStudentsByDep(
     string Name)
     : IRequest<Response<List<GetStudentDto>>>
 { }
-public record GroupStudentsBySub(
+public record GroupStudentsByCourse(
     string Name)
     : IRequest<Response<List<GetStudentDto>>>
 { }

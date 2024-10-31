@@ -13,10 +13,10 @@ public class StudentHandler(
     IRequestHandler<GetStudentById, Response<GetStudentDto>>,
     IRequestHandler<GetAllStudents, Response<List<GetStudentDto>>>,
     IRequestHandler<GetStudentByName, Response<GetStudentDto>>,
-    IRequestHandler<GroupStudentsBySub, Response<List<GetStudentDto>>>,
+    IRequestHandler<GroupStudentsByCourse, Response<List<GetStudentDto>>>,
     IRequestHandler<GroupStudentsByDep, Response<List<GetStudentDto>>>,
     IRequestHandler<StudentPagination, PaginationResponse<GetStudentDto>>,
-    IRequestHandler<AddStudennt, Response<string>>,
+    IRequestHandler<AddStudent, Response<string>>,
     IRequestHandler<UpdateStudent, Response<GetStudentDto>>,
     IRequestHandler<DeleteStudennt, Response<string>>
 
@@ -25,7 +25,8 @@ public class StudentHandler(
         GetStudentById request,
         CancellationToken cancellationToken)
     {
-
+        if (request.Id <= 0)
+            return BadRequest<GetStudentDto>("Id must be grater than 0");
         var student = await studentService.GetStudentById(request.Id);
 
         if (student is null) return NotFouned<GetStudentDto>();
@@ -39,7 +40,8 @@ public class StudentHandler(
     {
         var students = await studentService.GetAll();
 
-        if (students is null || students.Count == 0) return NotFouned<List<GetStudentDto>>();
+        if (students is null || students.Count == 0)
+            return NotFouned<List<GetStudentDto>>();
 
         var studentsDtos = mapper.Map<List<GetStudentDto>>(students);
 
@@ -50,6 +52,9 @@ public class StudentHandler(
         GetStudentByName request,
         CancellationToken cancellationToken)
     {
+        if (String.IsNullOrWhiteSpace(request.Name))
+            return BadRequest<GetStudentDto>();
+
         var Student = await studentService.GetStudentByName(request.Name);
 
         if (Student is null) return NotFouned<GetStudentDto>();
@@ -59,9 +64,12 @@ public class StudentHandler(
         return Success(s_dto);
     }
     public async Task<Response<List<GetStudentDto>>> Handle(
-        GroupStudentsBySub request,
+        GroupStudentsByCourse request,
         CancellationToken cancellationToken)
     {
+        if (String.IsNullOrWhiteSpace(request.Name))
+            return BadRequest<List<GetStudentDto>>();
+
         var Student = await studentService.GroupStudentsByCourse(request.Name);
 
         if (Student.Count == 0) return NotFouned<List<GetStudentDto>>();
@@ -74,6 +82,9 @@ public class StudentHandler(
         GroupStudentsByDep request,
         CancellationToken cancellationToken)
     {
+        if (String.IsNullOrWhiteSpace(request.Name))
+            return BadRequest<List<GetStudentDto>>();
+
         var Student = await studentService.GroupStudentsByDepartment(request.Name);
 
         if (Student.Count == 0) return NotFouned<List<GetStudentDto>>();
@@ -86,26 +97,19 @@ public class StudentHandler(
         StudentPagination request,
         CancellationToken cancellationToken)
     {
-        Expression<Func<Student, GetStudentDto>> expression = s => new GetStudentDto()
-        {
-            Name = s.Name,
-            Address = s.Address,
-            Phone = s.Phone,
-            DepName = s.Department.Name,
-            Term = s.Term,
-            Level = s.Level,
-        };
+        if (request.Pagenum < 0 || request.Pagesize < 0)
+            return new PaginationResponse<GetStudentDto> { Successed = false, Count = 0 };
 
         var Students = studentService.Filter(request.StudentOrder, request.Search);
 
-        var studentsdtos = Students.Select(expression);
+        var studentsDtos = mapper.Map<IQueryable<GetStudentDto>>(Students);
 
-        var paginatedlist = await studentsdtos.ToPaginate(request.Pagenum, request.Pagesize);
+        var paginatedlist = await studentsDtos.ToPaginate(request.Pagenum, request.Pagesize);
 
         return paginatedlist;
     }
     public async Task<Response<string>> Handle(
-        AddStudennt request,
+        AddStudent request,
         CancellationToken cancellationToken)
     {
         var StudentsNumber = await studentRepository.GetAllWhere(x =>
@@ -201,9 +205,12 @@ public class StudentHandler(
         DeleteStudennt request,
         CancellationToken cancellationToken)
     {
-        var s = await studentService.DeleteStudent(request.Id);
+        if (request.Id <= 0)
+            return BadRequest<string>("id must be grater than 0");
 
-        if (s == false)
+        var student = await studentService.DeleteStudent(request.Id);
+
+        if (student == false)
             return NotFouned<string>();
         return Deleted<string>();
 

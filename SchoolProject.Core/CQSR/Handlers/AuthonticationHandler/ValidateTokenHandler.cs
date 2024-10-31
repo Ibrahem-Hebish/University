@@ -9,6 +9,9 @@ public class ValidateTokenHandler(IAuthontication authonticationService)
         ValidateTokenCommand request,
         CancellationToken cancellationToken)
     {
+        if (String.IsNullOrEmpty(request.AccessToken))
+            return BadRequest<string>("Access token can not be null or empty");
+
         var result = await authonticationService.ValidateToken(request.AccessToken);
 
         if (result == "Invalid Token")

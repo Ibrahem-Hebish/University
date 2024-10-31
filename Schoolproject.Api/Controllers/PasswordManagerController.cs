@@ -10,9 +10,9 @@ public class PasswordManagerController(
     public async Task<ActionResult> Change(
         ChangePassword command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost(Router.UserRouter.SendCodeToResetPassword)]
@@ -20,9 +20,9 @@ public class PasswordManagerController(
     public async Task<ActionResult> SendCodeToReset(
         SendEmilForResetPassword command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost(Router.UserRouter.ConfirmCodeForResetPassword)]
@@ -30,9 +30,9 @@ public class PasswordManagerController(
     public async Task<ActionResult> ConfirmCodeForReset(
         ConfirmCodeToResetPassword command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 
     [HttpPost(Router.UserRouter.ResetPassword)]
@@ -40,8 +40,8 @@ public class PasswordManagerController(
     public async Task<ActionResult> Reset(
         ResetPassword command)
     {
-        var isCreated = await mediator.Send(command);
+        var result = await mediator.Send(command);
 
-        return NewRsponse(isCreated);
+        return NewRsponse(result);
     }
 }

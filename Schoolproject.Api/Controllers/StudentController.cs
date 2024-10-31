@@ -15,11 +15,10 @@ public class StudentController(
     public async Task<ActionResult<GetStudentDto>> GetById(
         int id)
     {
-        if (id <= 0) return BadRequest();
 
-        var s_dto = await mediator.Send(new GetStudentById(id));
+        var result = await mediator.Send(new GetStudentById(id));
 
-        return NewRsponse(s_dto);
+        return NewRsponse(result);
     }
     [HttpGet]
     [Route(Router.StudentRouter.GetAll)]
@@ -27,9 +26,9 @@ public class StudentController(
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<GetStudentDto>> Get()
     {
-        var s_dto = await mediator.Send(new GetAllStudents());
+        var result = await mediator.Send(new GetAllStudents());
 
-        return NewRsponse(s_dto);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -39,11 +38,10 @@ public class StudentController(
     public async Task<ActionResult<GetStudentDto>> GetByName(
         string name)
     {
-        if (name is null) return BadRequest();
 
-        var s_dto = await mediator.Send(new GetStudentByName(name));
+        var result = await mediator.Send(new GetStudentByName(name));
 
-        return NewRsponse(s_dto);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -53,11 +51,10 @@ public class StudentController(
     public async Task<ActionResult<List<GetStudentDto>>> Paginate(
         [FromQuery] StudentPagination sp)
     {
-        if (sp.Pagenum <= 0 || sp.Pagesize <= 0) return BadRequest();
 
-        var S_Dtos = await mediator.Send(sp);
+        var result = await mediator.Send(sp);
 
-        return Ok(S_Dtos);
+        return Ok(result);
     }
 
     [HttpGet]
@@ -67,11 +64,10 @@ public class StudentController(
     public async Task<ActionResult<List<GetStudentDto>>> GroupBySubName(
         string subname)
     {
-        if (string.IsNullOrWhiteSpace(subname)) return BadRequest();
 
-        var S_Dtos = await mediator.Send(new GroupStudentsBySub(subname));
+        var result = await mediator.Send(new GroupStudentsByCourse(subname));
 
-        return NewRsponse(S_Dtos);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -81,11 +77,10 @@ public class StudentController(
     public async Task<ActionResult<GetStudentDto>> GroupByDepartment(
         string Depname)
     {
-        if (Depname is null) return BadRequest();
 
-        var s_dto = await mediator.Send(new GroupStudentsByDep(Depname));
+        var result = await mediator.Send(new GroupStudentsByDep(Depname));
 
-        return NewRsponse(s_dto);
+        return NewRsponse(result);
     }
 
     [HttpPost]
@@ -93,13 +88,12 @@ public class StudentController(
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status201Created)]
     public async Task<ActionResult> Create(
-        [FromBody] AddStudennt AddStudent)
+        [FromBody] AddStudent AddStudent)
     {
-        if (AddStudent is null) return BadRequest();
 
-        var IsCreated = await mediator.Send(AddStudent);
+        var result = await mediator.Send(AddStudent);
 
-        return NewRsponse(IsCreated);
+        return NewRsponse(result);
     }
 
     [HttpPut]
@@ -109,11 +103,10 @@ public class StudentController(
     public async Task<ActionResult<GetStudentDto>> Update(
         UpdateStudent UpdateStudent)
     {
-        if (UpdateStudent is null) return BadRequest();
 
-        var s_dto = await mediator.Send(UpdateStudent);
+        var result = await mediator.Send(UpdateStudent);
 
-        return NewRsponse(s_dto);
+        return NewRsponse(result);
     }
 
     [HttpDelete]
@@ -123,10 +116,9 @@ public class StudentController(
     public async Task<ActionResult<string>> Delete(
         int id)
     {
-        if (id <= 0) return BadRequest();
 
-        var s_dto = await mediator.Send(new DeleteStudennt(id));
+        var result = await mediator.Send(new DeleteStudennt(id));
 
-        return NewRsponse(s_dto);
+        return NewRsponse(result);
     }
 }

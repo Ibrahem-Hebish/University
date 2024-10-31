@@ -11,9 +11,9 @@ public class CourseController(IMediator mediator) : AppController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<GetCourseDto>> Get(int id)
     {
-        var Section = await mediator.Send(new GetCourseById(id));
+        var result = await mediator.Send(new GetCourseById(id));
 
-        return NewRsponse(Section);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -22,9 +22,9 @@ public class CourseController(IMediator mediator) : AppController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<List<GetCourseDto>>> GetAll()
     {
-        var Sections = await mediator.Send(new GetAllCourses());
+        var result = await mediator.Send(new GetAllCourses());
 
-        return NewRsponse(Sections);
+        return NewRsponse(result);
     }
 
     [HttpGet]
@@ -33,19 +33,19 @@ public class CourseController(IMediator mediator) : AppController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<List<GetCourseDto>>> GetAllInSpecificTerm(int Level, int Term)
     {
-        var Sections = await mediator.Send(new GetAllCoursesInASpecificTerm(Level, Term));
+        var result = await mediator.Send(new GetAllCoursesInASpecificTerm(Level, Term));
 
-        return NewRsponse(Sections);
+        return NewRsponse(result);
     }
 
     [HttpGet]
     [Route(Router.Course.GetCourseDoctor)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public async Task<ActionResult<GetDoctorDto>> GetSectionTeachingAssistant(int id)
+    public async Task<ActionResult<GetDoctorDto>> GetCoursDoctor(int id)
     {
-        var TeachingAssistant = await mediator.Send(new GetCourseDoctor(id));
+        var result = await mediator.Send(new GetCourseDoctor(id));
 
-        return NewRsponse(TeachingAssistant);
+        return NewRsponse(result);
     }
 
 }

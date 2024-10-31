@@ -39,7 +39,7 @@ namespace UniversityProject.Testing.integrationtests
         public async Task AddStudentEndPoint_When_Send_Right_Data_Should_Return_StatusCode_201()
         {
             var client = factory.CreateClient();
-            var newstudent = new AddStudennt()
+            var newstudent = new AddStudent()
             { Name = "Ibrahem Ahmed", Address = "Elrahbien", Phone = "01224127241", DepId = 1, Level = 1, Term = 1 };
             var response = await client.PostAsJsonAsync("https://localhost:7056/Api/V1/Student/AddNewStudent", newstudent);
             var responsebody = await response.Content.ReadAsStringAsync();
