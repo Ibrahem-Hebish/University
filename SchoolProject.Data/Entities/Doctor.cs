@@ -7,7 +7,7 @@ public class Doctor
     public string? OfficeName { get; set; }
 
     [ForeignKey(nameof(OfficeName))]
-    public virtual Office Office { get; set; }
+    public virtual Office? Office { get; set; }
     public int DepartmentID { get; set; }
     public virtual Department Department { get; set; }
     public virtual List<Student> Students { get; set; } = [];

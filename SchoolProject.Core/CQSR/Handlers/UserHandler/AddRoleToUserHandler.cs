@@ -11,15 +11,15 @@ public class AddRoleToUserHandler(
         AddRoleToUser request,
         CancellationToken cancellationToken)
     {
-        var rolename = $"{request.role.Substring(0, 1).ToUpperInvariant()}" +
-            $"{request.role.Substring(1).ToLowerInvariant()}";
+        var rolename = $"{request.Role.Substring(0, 1).ToUpperInvariant()}" +
+            $"{request.Role.Substring(1).ToLowerInvariant()}";
 
         var result = await roleManager.Roles.Select(x => x.Name).ContainsAsync(rolename);
 
         if (!result)
             return NotFouned<bool>("Role is not found");
 
-        var user = await userManager.FindByNameAsync(request.username);
+        var user = await userManager.FindByNameAsync(request.Username);
 
         if (user is null)
             return NotFouned<bool>("User not found");

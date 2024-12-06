@@ -1,4 +1,6 @@
 ﻿
+using UniversityProject.Core.Dtos.SectionDtos;
+
 namespace UniversityProject.Core.CQSR.Handlers.StudentHandlers;
 
 public class StudentHandler(
@@ -12,6 +14,9 @@ public class StudentHandler(
     : ResponseHandler,
     IRequestHandler<GetStudentById, Response<GetStudentDto>>,
     IRequestHandler<GetAllStudents, Response<List<GetStudentDto>>>,
+    IRequestHandler<GetStudentCourses, Response<List<GetCourseDto>>>,
+    IRequestHandler<GetStudentSections, Response<List<GetSectionDto>>>,
+    IRequestHandler<GetStudentSchedule, Response<StudentSchedule>>,
     IRequestHandler<GetStudentByName, Response<GetStudentDto>>,
     IRequestHandler<GroupStudentsByCourse, Response<List<GetStudentDto>>>,
     IRequestHandler<GroupStudentsByDep, Response<List<GetStudentDto>>>,
@@ -214,5 +219,101 @@ public class StudentHandler(
             return NotFouned<string>();
         return Deleted<string>();
 
+    }
+
+    public async Task<Response<List<GetSectionDto>>> Handle(GetStudentSections request, CancellationToken cancellationToken)
+    {
+        if (request.Id <= 0)
+            return BadRequest<List<GetSectionDto>>("Id must be grater than 0");
+
+        var student = await studentRepository.FindAsync(request.Id);
+
+        if (student is null)
+            return BadRequest<List<GetSectionDto>>("There is no student with this id");
+
+        var studentSections = await studentRepository.GetStudentSections(student);
+
+        if (studentSections is null)
+            return NotFouned<List<GetSectionDto>>("There has not been sections attached to this student yet");
+
+        var sectionsDto = mapper.Map<List<GetSectionDto>>(studentSections);
+
+        return Success(sectionsDto);
+    }
+
+    public async Task<Response<List<GetCourseDto>>> Handle(GetStudentCourses request, CancellationToken cancellationToken)
+    {
+        if (request.Id <= 0)
+            return BadRequest<List<GetCourseDto>>("Id must be grater than 0");
+
+        var student = await studentRepository.FindAsync(request.Id);
+
+        if (student is null)
+            return BadRequest<List<GetCourseDto>>("There is no student with this id");
+
+        var studentCourses = await studentRepository.GetStudentCourses(student);
+
+        if (studentCourses is null)
+            return NotFouned<List<GetCourseDto>>("There has not been courses attached to this student yet");
+
+        var coursesDto = mapper.Map<List<GetCourseDto>>(studentCourses);
+
+        return Success(coursesDto);
+    }
+
+    public async Task<Response<StudentSchedule>> Handle(GetStudentSchedule request, CancellationToken cancellationToken)
+    {
+        if (request.Id <= 0)
+            return BadRequest<StudentSchedule>("Id must be grater than 0");
+
+        var student = await studentRepository.FindAsync(request.Id);
+
+        if (student is null)
+            return BadRequest<StudentSchedule>("There is no student with this id");
+
+        StudentSchedule studentSchedule = new()
+        {
+            StudentName = student.Name
+        };
+
+        var studentCourses = await studentRepository.GetStudentCourses(student);
+
+        if (studentCourses is not null)
+        {
+            foreach (var course in studentCourses)
+            {
+                Subject subject = new()
+                {
+                    Type = "Course",
+                    Name = course.Name,
+                    Place = "Hall" + course.HallName ?? "There is no hall yet",
+                    Day = course.Day,
+                    StartTime = course.StartTime,
+                    EndTime = course.EndTime
+                };
+                studentSchedule.Schedule.Add(subject);
+            }
+        }
+
+        var studentSections = await studentRepository.GetStudentSections(student);
+
+        if (studentSections is not null)
+        {
+            foreach (var section in studentSections)
+            {
+                Subject subject = new()
+                {
+                    Type = "section",
+                    Name = section.Name,
+                    Place = "Lab" + section.LabName ?? "There is no lab yet",
+                    Day = section.Day,
+                    StartTime = section.StartTime,
+                    EndTime = section.EndTime
+                };
+                studentSchedule.Schedule.Add(subject);
+            }
+        }
+
+        return Success(studentSchedule);
     }
 }

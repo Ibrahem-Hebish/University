@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "zb/+NRGOSxQaBLjd68ZiHVjVxrbO71udXPckSlOEWifpVN+qq5u5OOwr7s4USaowZ7VQ1SRs4duIQFtypMTcGA==",
+  "dgSpecHash": "11s8OuQmXYEZCs1F8SsI1Bt0Lt8a0CiISpVQDhBco4+SXTvW7r6zZfJ3MAJkvRE1JvcN6XP/+3xeHZAH/CFiUw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Core\\UniversityProject.Core.csproj",
+  "projectFilePath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Super magic\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
@@ -15,7 +15,6 @@
     "C:\\Users\\Super magic\\.nuget\\packages\\mailkit\\4.7.1.1\\mailkit.4.7.1.1.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\mediatr\\12.4.0\\mediatr.12.4.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\mediatr.contracts\\2.0.1\\mediatr.contracts.2.0.1.nupkg.sha512",
-    "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.aspnetcore.authentication.google\\8.0.8\\microsoft.aspnetcore.authentication.google.8.0.8.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.8\\microsoft.aspnetcore.authentication.jwtbearer.8.0.8.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.8\\microsoft.aspnetcore.cryptography.internal.8.0.8.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.8\\microsoft.aspnetcore.cryptography.keyderivation.8.0.8.nupkg.sha512",

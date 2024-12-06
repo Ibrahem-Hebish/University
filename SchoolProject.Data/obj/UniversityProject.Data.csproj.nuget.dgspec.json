@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {}
+    "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
+    "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
         "projectName": "UniversityProject.Data",
-        "projectPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
+        "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
         "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\obj\\",
+        "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",

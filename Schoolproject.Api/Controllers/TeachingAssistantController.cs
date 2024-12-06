@@ -1,6 +1,4 @@
-﻿using UniversityProject.Core.CQSR.Commands.Teaching_Assistants_Commands;
-
-namespace Universityproject.Api.Controllers;
+﻿namespace Universityproject.Api.Controllers;
 
 [ProducesResponseType(StatusCodes.Status404NotFound)]
 public class TeachingAssistantController(IMediator mediator) : AppController

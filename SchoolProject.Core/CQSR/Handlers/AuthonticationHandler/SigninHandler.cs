@@ -11,11 +11,13 @@ public class SignInHandler(UserManager<User> userManager, IAuthontication authon
     {
         var user = await userManager.FindByNameAsync(request.UserName);
 
-        if (user is null) return BadRequest<JwtToken>("Username or Password is wrong");
+        if (user is null)
+            return BadRequest<JwtToken>("Username or Password is wrong");
 
         var SignInResult = await userManager.CheckPasswordAsync(user, request.Password);
 
-        if (!SignInResult) return BadRequest<JwtToken>("Username or Password is wrong");
+        if (!SignInResult)
+            return BadRequest<JwtToken>("Username or Password is wrong");
 
         var Token = await authonticationservice.CreateToken(user);
 

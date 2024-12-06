@@ -2,86 +2,86 @@
 
 public class ResponseHandler
 {
-    public Response<T> Created<T>(string message = null!)
+    public static Response<T> Created<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.Created,
-            message = message ?? "Created Successfully",
+            Message = message ?? "Created Successfully",
             Success = true,
         };
     }
-    public Response<T> Deleted<T>(string message = null!)
+    public static Response<T> Deleted<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.NoContent,
-            message = message ?? "Deleted Successfully",
+            Message = message ?? "Deleted Successfully",
             Success = true,
         };
     }
-    public Response<T> NotFouned<T>(string message = null!)
+    public static Response<T> NotFouned<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.NotFound,
-            message = message ?? "Entity is not founed",
+            Message = message ?? "Entity is not founed",
             Success = false,
         };
     }
-    public Response<T> Success<T>(T data, string message = null!)
+    public static Response<T> Success<T>(T data, string message = null!)
     {
         return new Response<T>()
         {
             Data = data,
             StatusCode = HttpStatusCode.OK,
-            message = message ?? "Success",
+            Message = message ?? "Success",
             Success = true,
         };
     }
-    public Response<T> NoContent<T>(string message = null)
+    public static Response<T> NoContent<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.NoContent,
-            message = message ?? "Success process",
+            Message = message ?? "Success process",
             Success = true,
         };
     }
-    public Response<T> BadRequest<T>(string message = null!)
+    public static Response<T> BadRequest<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.BadRequest,
-            message = message ?? "Bad Request",
+            Message = message ?? "Bad Request",
             Success = false,
         };
     }
-    public Response<T> UnAuthorize<T>(string message = null!)
+    public static Response<T> UnAuthorize<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.Unauthorized,
-            message = message ?? "Unauthorized",
+            Message = message ?? "Unauthorized",
             Success = false,
         };
     }
-    public Response<T> InternalServerError<T>(string message = null!)
+    public static Response<T> InternalServerError<T>(string message = null!)
     {
         return new Response<T>()
         {
             StatusCode = HttpStatusCode.InternalServerError,
-            message = message ?? "An error happens while saving the data",
+            Message = message ?? "An error happens while saving the data",
             Success = false,
         };
     }
-    public Response<T> UnprocessableEntity<T>(T entity = null!) where T : class
+    public static Response<T> UnprocessableEntity<T>(T entity = null!) where T : class
     {
         return new Response<T>()
         {
             Data = entity,
             StatusCode = HttpStatusCode.UnprocessableEntity,
-            message = "UnprocessableEntity",
+            Message = "UnprocessableEntity",
             Success = false,
         };
     }

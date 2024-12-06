@@ -7,5 +7,5 @@ public class SendEmailCommand
 
     public string message { get; set; }
 
-    public string Course { get; set; }
+    public string Subject { get; set; }
 }

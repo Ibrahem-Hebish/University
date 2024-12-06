@@ -7,7 +7,7 @@ public static class Paginate
         int pagenumber = 1,
         int pagesize = 10)
     {
-        if (source is null) throw new ArgumentNullException("source can not be null");
+        ArgumentNullException.ThrowIfNull(source);
 
         pagenumber = pagenumber == 0 ? 1 : pagenumber;
 

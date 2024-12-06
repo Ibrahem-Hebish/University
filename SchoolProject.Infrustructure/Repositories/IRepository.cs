@@ -2,7 +2,10 @@
 
 public interface IStudentRepository
     : IRepositiry<Student>
-{ }
+{
+    Task<List<Course>> GetStudentCourses(Student student);
+    Task<List<Section>> GetStudentSections(Student student);
+}
 public interface IDepartmentRepository
     : IRepositiry<Department>
 { }
@@ -40,10 +43,14 @@ public interface IOfficeRepository
 }
 public interface IHallRepository
     : IRepositiry<Hall>
-{ }
+{
+    public Task<Hall> FindByNameAsync(string Name);
+}
 public interface ILabRepository
     : IRepositiry<Lab>
-{ }
+{
+    public Task<Lab> FindByNameAsync(string Name);
+}
 public interface IUserTokenRepository
     : IRepositiry<UserToken>
 { }

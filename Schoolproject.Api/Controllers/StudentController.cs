@@ -1,4 +1,5 @@
-﻿using UniversityProject.Core.Dtos.Student_Dtos;
+﻿using UniversityProject.Core.Dtos.SectionDtos;
+using UniversityProject.Core.Dtos.Student_Dtos;
 
 namespace Universityproject.Api.Controllers;
 
@@ -20,13 +21,47 @@ public class StudentController(
 
         return NewRsponse(result);
     }
+
     [HttpGet]
     [Route(Router.StudentRouter.GetAll)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public async Task<ActionResult<GetStudentDto>> Get()
+    public async Task<ActionResult<List<GetStudentDto>>> Get()
     {
         var result = await mediator.Send(new GetAllStudents());
+
+        return NewRsponse(result);
+    }
+
+    [HttpGet]
+    [Route(Router.StudentRouter.GetStudentCourses)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<List<GetCourseDto>>> GetStudentCourses(int Id)
+    {
+        var result = await mediator.Send(new GetStudentCourses(Id));
+
+        return NewRsponse(result);
+    }
+
+    [HttpGet]
+    [Route(Router.StudentRouter.GetStudentSections)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<List<GetSectionDto>>> GetStudentSections(int Id)
+    {
+        var result = await mediator.Send(new GetStudentSections(Id));
+
+        return NewRsponse(result);
+    }
+
+    [HttpGet]
+    [Route(Router.StudentRouter.GetStudentSchedule)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<List<GetSectionDto>>> GetStudentSchedule(int Id)
+    {
+        var result = await mediator.Send(new GetStudentSchedule(Id));
 
         return NewRsponse(result);
     }
@@ -35,6 +70,7 @@ public class StudentController(
     [Route(Router.StudentRouter.GetByName)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+
     public async Task<ActionResult<GetStudentDto>> GetByName(
         string name)
     {

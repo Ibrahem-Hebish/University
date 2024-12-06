@@ -92,22 +92,6 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Authentication.Google/8.0.8": {
-        "type": "package",
-        "compile": {
-          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
-            "related": ".xml"
-          }
-        },
-        "runtime": {
-          "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll": {
-            "related": ".xml"
-          }
-        },
-        "frameworkReferences": [
-          "Microsoft.AspNetCore.App"
-        ]
-      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.8": {
         "type": "package",
         "dependencies": {
@@ -1418,21 +1402,6 @@
         "lib/netstandard2.1/MailKit.xml",
         "mailkit.4.7.1.1.nupkg.sha512",
         "mailkit.nuspec"
-      ]
-    },
-    "Microsoft.AspNetCore.Authentication.Google/8.0.8": {
-      "sha512": "Hc6PfWcpNCSq9ZhesZSgLD62ACsxBuAx9jhkOv+No5tx+AdPPU+tonrxzM+PuTDvijOVPy4YydzuDK9NR4Z+PQ==",
-      "type": "package",
-      "path": "microsoft.aspnetcore.authentication.google/8.0.8",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Icon.png",
-        "THIRD-PARTY-NOTICES.TXT",
-        "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.dll",
-        "lib/net8.0/Microsoft.AspNetCore.Authentication.Google.xml",
-        "microsoft.aspnetcore.authentication.google.8.0.8.nupkg.sha512",
-        "microsoft.aspnetcore.authentication.google.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.JwtBearer/8.0.8": {
@@ -3332,9 +3301,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
-      "EntityFrameworkCore.EncryptColumn >= 6.0.8",
       "MailKit >= 4.7.1.1",
-      "Microsoft.AspNetCore.Authentication.Google >= 8.0.8",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.8",
       "Microsoft.Extensions.Configuration >= 8.0.0",
       "Microsoft.Extensions.Configuration.Json >= 8.0.0",
@@ -3348,11 +3315,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Services\\UniversityProject.Services.csproj",
+      "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj",
       "projectName": "UniversityProject.Services",
-      "projectPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Services\\UniversityProject.Services.csproj",
+      "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj",
       "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Services\\obj\\",
+      "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3369,11 +3336,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
-              "projectPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj"
+            "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
+              "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj"
             },
-            "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
-              "projectPath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj"
+            "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
+              "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj"
             }
           }
         }
@@ -3388,17 +3355,9 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
-          "EntityFrameworkCore.EncryptColumn": {
-            "target": "Package",
-            "version": "[6.0.8, )"
-          },
           "MailKit": {
             "target": "Package",
             "version": "[4.7.1.1, )"
-          },
-          "Microsoft.AspNetCore.Authentication.Google": {
-            "target": "Package",
-            "version": "[8.0.8, )"
           },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",

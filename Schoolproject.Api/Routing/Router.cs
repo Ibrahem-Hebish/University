@@ -11,6 +11,12 @@
 
             public const string GetAll = postfix + "GetAll";
 
+            public const string GetStudentCourses = postfix + "GetStudentCourses/{Id}";
+
+            public const string GetStudentSections = postfix + "GetStudentSections/{Id}";
+
+            public const string GetStudentSchedule = postfix + "GetStudentSchedule/{Id}";
+
             public const string GetByName = postfix + "name";
 
             public const string GroupBySubname = postfix + "GroupBySubname";
@@ -31,7 +37,7 @@
         {
             public const string postfix = rule + "User/";
 
-            public const string GetById = postfix + "id";
+            public const string GetById = postfix + "{id}";
 
             public const string GetUsers = postfix + "GetUsers";
 
@@ -52,6 +58,8 @@
             public const string ConfirmCodeForResetPassword = postfix + "ConfirmCodeForResetPassword";
 
             public const string ResetPassword = postfix + "ResetPassword";
+
+            public const string CheckIfEmailExsist = postfix + "CheckIfEmailExsist/{Email}";
         }
         public static class AuthonticationRouter
         {
@@ -166,6 +174,37 @@
 
             public const string AddTeachingAssistant = postfix + "Add";
 
+        }
+
+        public static class Hall
+        {
+            public const string postfix = rule + "Hall/";
+
+            public const string GetById = postfix + "Get/{Name}";
+
+            public const string GetAll = postfix + "GetAll";
+        }
+
+        public static class Lab
+        {
+            public const string postfix = rule + "Lab/";
+
+            public const string GetById = postfix + "Get/{Name}";
+
+            public const string GetAll = postfix + "GetAll";
+        }
+
+        public static class Office
+        {
+            public const string postfix = rule + "Office/";
+
+            public const string GetById = postfix + "Get/{Name}";
+
+            public const string GetAll = postfix + "GetAll";
+
+            public const string GetStaff = postfix + "GetStaff/{Name}";
+
+            public const string Delete = postfix + "Delete/{Name}";
         }
     }
 }

@@ -130,7 +130,7 @@ public class Commands(
 
         await teachingAssistantRepository.UpdateAsync(TeachingAssistant, request.Id);
 
-        return Success<string>($"Attaching section to {TeachingAssistant.Name} got sucssefully");
+        return Success($"Attaching section to {TeachingAssistant.Name} got sucssefully");
 
     }
 }

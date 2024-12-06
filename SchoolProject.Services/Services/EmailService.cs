@@ -8,7 +8,7 @@ public class EmailService(
     public async Task<string> SendEmailAsync(
         string email,
         string message,
-        string Course)
+        string subject)
     {
         try
         {
@@ -21,7 +21,7 @@ public class EmailService(
 
             client.Authenticate(
                 sendemailsetting.CurrentValue.Email,
-                configuration["sendingemailpassword"]);
+                configuration["SENDING_EMAIL_PASSWORD"]);
 
             var bodyBuilder = new BodyBuilder()
             {
@@ -32,7 +32,7 @@ public class EmailService(
             var mimeMessage = new MimeMessage
             {
                 Body = bodyBuilder.ToMessageBody(),
-                Subject = Course
+                Subject = subject
             };
 
             mimeMessage.From.Add(new MailboxAddress(
@@ -40,7 +40,7 @@ public class EmailService(
                 sendemailsetting.CurrentValue.Email));
 
             mimeMessage.To.Add(new MailboxAddress(
-                "Client",
+                email[..email.IndexOf('@')],
                 email));
 
             await client.SendAsync(mimeMessage);

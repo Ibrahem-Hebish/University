@@ -10,7 +10,7 @@ public interface IRepositiry<T>
     Task<T> AddAsync(T entity);
     Task<ICollection<T>> AddRangeAsync(ICollection<T> entities);
     Task<T> UpdateAsync(T entity, int id);
-    Task<bool> DeleteAsync(T entity, int id);
+    Task<bool> DeleteAsync(T entity, object id);
     Task<bool> DeleteRangeAsync(ICollection<T> entities);
 
     IQueryable<T> AsNoTracking();

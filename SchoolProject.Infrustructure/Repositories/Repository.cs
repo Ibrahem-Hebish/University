@@ -9,9 +9,25 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
         var Student = await base.FindAsync(id);
 
         if (Student != null)
-            await base._appDbContext.Entry(Student).Reference(s => s.Department).LoadAsync();
+            await _appDbContext.Entry(Student).Reference(s => s.Department).LoadAsync();
 
         return Student!;
+    }
+
+    public async Task<List<Course>> GetStudentCourses(Student student)
+    {
+
+        await _appDbContext.Entry(student).Collection(s => s.Courses).LoadAsync();
+
+        return student.Courses!;
+    }
+
+    public async Task<List<Section>> GetStudentSections(Student student)
+    {
+
+        await _appDbContext.Entry(student).Collection(s => s.Sections).LoadAsync();
+
+        return student.Sections!;
     }
     public override async Task<ICollection<Student>> GetAllAsync(
         bool AsNoTracking = false)
@@ -175,6 +191,41 @@ public class HallRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
         : UniversityRepositery<Hall>(appDbContext, memoryCache)
     , IHallRepository
 {
+    public async Task<Hall> FindByNameAsync(string Name)
+    {
+        if (!_memoryCache.TryGetValue($"{typeof(Hall).Name}:{Name}", out Hall? result))
+        {
+            var Entity = await _appDbContext.Halls
+                     .SingleOrDefaultAsync(o => o.Name.ToLower() == Name.ToLower());
+
+            if (Entity is not null)
+            {
+                await _appDbContext.Entry(Entity).Reference(o => o.Deprtment).LoadAsync();
+
+                var options = Set_memoryCacheOptions();
+
+                _memoryCache.Set($"{typeof(Hall).Name}:{Name}", Entity, options);
+
+                await Console.Out.WriteLineAsync($"{typeof(Hall).Name} with id {Name} is comming from DB");
+            }
+
+            return Entity!;
+        }
+        await Console.Out.WriteLineAsync($"{typeof(Hall).Name} with id {Name} is comming from Cacheing");
+
+        return result!;
+    }
+
+    public override async Task<ICollection<Hall>> GetAllAsync(bool AsNoTracking = false)
+    {
+        var result = _appDbContext.Halls.Include(o => o.Deprtment);
+
+        if (AsNoTracking)
+            result.AsNoTracking();
+
+        return await result.ToListAsync();
+
+    }
 }
 public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
     : UniversityRepositery<Office>(appDbContext, memoryCache)
@@ -185,7 +236,12 @@ public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCach
         if (!_memoryCache.TryGetValue($"{typeof(Office).Name}:{Name}", out Office? result))
         {
             var Entity = await _appDbContext.Offices
-                     .SingleOrDefaultAsync(o => o.Name.ToLower() == Name.ToLower());
+                .Include(o => o.TeachingAssistants)
+                .Include(o => o.Doctors)
+                .Include(o => o.Users)
+                .Include(o => o.Department)
+                .AsSplitQuery()
+                .SingleOrDefaultAsync(o => o.Name.ToLower() == Name.ToLower());
 
             if (Entity is not null)
             {
@@ -251,11 +307,56 @@ public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCach
 
         return "Office is avillible";
     }
+
+    public async override Task<ICollection<Office>> GetAllAsync(bool AsNoTracking = false)
+    {
+        var result = _appDbContext.Offices.Include(o => o.Department);
+
+        if (AsNoTracking)
+            result.AsNoTracking();
+
+        return await result.ToListAsync();
+    }
 }
 public class LabRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
         : UniversityRepositery<Lab>(appDbContext, memoryCache)
     , ILabRepository
 {
+    public async Task<Lab> FindByNameAsync(string Name)
+    {
+        if (!_memoryCache.TryGetValue($"{typeof(Lab).Name}:{Name}", out Lab? result))
+        {
+            var Entity = await _appDbContext.Labs
+                     .SingleOrDefaultAsync(o => o.Name.ToLower() == Name.ToLower());
+
+            if (Entity is not null)
+            {
+
+                await _appDbContext.Entry(Entity).Reference(o => o.Department).LoadAsync();
+
+                var options = Set_memoryCacheOptions();
+
+                _memoryCache.Set($"{typeof(Lab).Name}:{Name}", Entity, options);
+
+                await Console.Out.WriteLineAsync($"{typeof(Lab).Name} with id {Name} is comming from DB");
+            }
+
+            return Entity!;
+        }
+        await Console.Out.WriteLineAsync($"{typeof(Lab).Name} with id {Name} is comming from Cacheing");
+
+        return result!;
+    }
+
+    public async override Task<ICollection<Lab>> GetAllAsync(bool AsNoTracking = false)
+    {
+        var result = _appDbContext.Labs.Include(o => o.Department);
+
+        if (AsNoTracking)
+            result.AsNoTracking();
+
+        return await result.ToListAsync();
+    }
 }
 public class StudentCourseRepository(AppDbContext AppDbContext, IMemoryCache memoryCache)
         : UniversityRepositery<StudentCourse>(AppDbContext, memoryCache)

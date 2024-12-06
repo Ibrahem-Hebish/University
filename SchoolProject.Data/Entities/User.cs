@@ -9,5 +9,5 @@ public class User : IdentityUser<int>
     public virtual List<UserToken> Tokens { get; set; } = [];
     public string? OfficeName { get; set; }
     [ForeignKey(nameof(OfficeName))]
-    public Office Office { get; set; }
+    public Office? Office { get; set; }
 }

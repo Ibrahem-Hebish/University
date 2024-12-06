@@ -8,3 +8,5 @@ public record GetUserById(
 public record GetUsers
     : IRequest<Response<List<GetUserDto>>>
 { }
+
+public record CheckIfEmailExsist(string Email) : IRequest<Response<bool>> { }

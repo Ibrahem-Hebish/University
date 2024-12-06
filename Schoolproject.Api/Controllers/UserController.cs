@@ -26,6 +26,16 @@ public class UserController(
         return NewRsponse(result);
     }
 
+    [HttpGet]
+    [Route(Router.UserRouter.CheckIfEmailExsist)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<ActionResult> CheckIfEmailExsist(string Email)
+    {
+        var result = await mediator.Send(new CheckIfEmailExsist(Email));
+
+        return NewRsponse(result);
+    }
+
     [HttpPost]
     [Route(Router.UserRouter.AddNewUser)]
     [ProducesResponseType(StatusCodes.Status201Created)]

@@ -5,7 +5,7 @@ public class AddNewUser : AddUser,
 { }
 
 public record AddRoleToUser(
-    string username, string role)
+    string Username, string Role)
     : IRequest<Response<bool>>
 { }
 

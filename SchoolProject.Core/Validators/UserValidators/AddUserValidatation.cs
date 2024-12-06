@@ -21,7 +21,7 @@ public class AddUserValidatation
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null")
-            .EmailAddress();
+            .EmailAddress().WithMessage("{PropertyName} must be valid");
 
         RuleFor(x => x.ConfirmedPassword)
             .Equal(x => x.Password).WithMessage("ConfirmedPassword must equal password");

@@ -8,6 +8,6 @@ public class SendEmilForResetPasswordVAlidator
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null")
-            .EmailAddress();
+            .EmailAddress().WithMessage("{PropertyName} must be valid"); ;
     }
 }

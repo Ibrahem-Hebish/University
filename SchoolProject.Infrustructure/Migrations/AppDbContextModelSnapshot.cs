@@ -731,7 +731,8 @@ namespace UniversityProject.Infrustructure.Migrations
 
                     b.HasOne("UniversityProject.Data.Entities.Office", "Office")
                         .WithMany("Doctors")
-                        .HasForeignKey("OfficeName");
+                        .HasForeignKey("OfficeName")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Department");
 
@@ -894,7 +895,8 @@ namespace UniversityProject.Infrustructure.Migrations
 
                     b.HasOne("UniversityProject.Data.Entities.Office", "Office")
                         .WithMany("TeachingAssistants")
-                        .HasForeignKey("OfficeName");
+                        .HasForeignKey("OfficeName")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Department");
 
@@ -905,7 +907,8 @@ namespace UniversityProject.Infrustructure.Migrations
                 {
                     b.HasOne("UniversityProject.Data.Entities.Office", "Office")
                         .WithMany("Users")
-                        .HasForeignKey("OfficeName");
+                        .HasForeignKey("OfficeName")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Office");
                 });

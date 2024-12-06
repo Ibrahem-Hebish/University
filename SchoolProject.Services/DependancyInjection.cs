@@ -14,21 +14,14 @@ public static class DependancyInjection
 
         services.AddScoped<IEmailService, EmailService>();
 
-        services.Configure<SendEmailSetting>(
-             new ConfigurationBuilder()
-             .AddJsonFile("ServiceSettings.json")
-             .Build()
-             .GetSection("Email"));
+        var configuration = new ConfigurationBuilder().AddJsonFile("ServiceSettings.json")
+             .Build();
 
-        services.Configure<JwtOptions>(new ConfigurationBuilder()
-            .AddJsonFile("ServiceSettings.json")
-            .Build()
-            .GetSection("jwt"));
+        services.Configure<SendEmailSetting>(configuration.GetSection("Email"));
 
-        var jwt = new ConfigurationBuilder()
-            .AddJsonFile("ServiceSettings.json")
-            .Build()
-            .GetSection("jwt").Get<JwtOptions>();
+        services.Configure<JwtOptions>(configuration.GetSection("jwt"));
+
+        var jwt = configuration.GetSection("jwt").Get<JwtOptions>();
 
         var environmentvariablesConfiguration = new ConfigurationBuilder()
             .AddEnvironmentVariables().Build();

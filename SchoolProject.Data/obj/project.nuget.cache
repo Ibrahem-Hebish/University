@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "L3cBopeX08go8JtSl9+ihpfA8oRFesE3wh0UhiUAi337pPRHkadV3p9x3o6jMEKiCuROdttNkiHrOD2CGbTi4A==",
+  "dgSpecHash": "I8o+CzbkzDU6yN35izxz2JQ3hlaIdybEMJu1X9wpDDk90MqffV2yaquFAY9jmgNNRqQDfEekWqZHeNyS5xxXcQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Super magic\\source\\repos\\Schoolproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
+  "projectFilePath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Super magic\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

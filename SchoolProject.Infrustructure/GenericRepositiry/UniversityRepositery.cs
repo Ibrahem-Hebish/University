@@ -107,7 +107,7 @@ public class UniversityRepositery<T>
 
         return entities;
     }
-    public virtual async Task<bool> DeleteAsync(T entity, int id)
+    public virtual async Task<bool> DeleteAsync(T entity, object id)
     {
         _appDbContext.Set<T>().Remove(entity);
 

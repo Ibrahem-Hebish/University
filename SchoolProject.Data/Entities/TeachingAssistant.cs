@@ -7,7 +7,7 @@
         public string? OfficeName { get; set; }
 
         [ForeignKey(nameof(OfficeName))]
-        public virtual Office Office { get; set; }
+        public virtual Office? Office { get; set; }
         public int DepartmentID { get; set; }
         [ForeignKey(nameof(DepartmentID))]
         public virtual Department Department { get; set; }

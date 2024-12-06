@@ -1,4 +1,6 @@
-﻿namespace UniversityProject.Core.CQSR.Queries.StudentQueries;
+﻿using UniversityProject.Core.Dtos.SectionDtos;
+
+namespace UniversityProject.Core.CQSR.Queries.StudentQueries;
 
 public record GetStudentById(
     int Id)
@@ -7,6 +9,11 @@ public record GetStudentById(
 public record GetAllStudents()
     : IRequest<Response<List<GetStudentDto>>>
 { }
+
+public record GetStudentCourses(int Id) : IRequest<Response<List<GetCourseDto>>> { }
+public record GetStudentSections(int Id) : IRequest<Response<List<GetSectionDto>>> { }
+
+public record GetStudentSchedule(int Id) : IRequest<Response<StudentSchedule>> { }
 public record GetStudentByName(
     string Name)
     : IRequest<Response<GetStudentDto>>

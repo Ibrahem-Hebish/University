@@ -12,7 +12,7 @@ public class ChangePasswordValidator
         RuleFor(x => x.Email)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null")
-            .EmailAddress();
+            .EmailAddress().WithMessage("{PropertyName} must be valid");
 
         RuleFor(x => x.Password)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")

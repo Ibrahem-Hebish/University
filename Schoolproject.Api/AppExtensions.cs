@@ -30,6 +30,8 @@ public static class AppExtensions
 
         app.UseHttpsRedirection();
 
+        app.UseCors("local");
+
         app.UseMiddleware<GlobalHandlingMiddleware>();
 
         app.UseCors("local");

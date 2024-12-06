@@ -5,11 +5,11 @@ public class AddRoleTOUserValidator
 {
     public AddRoleTOUserValidator()
     {
-        RuleFor(x => x.username)
+        RuleFor(x => x.Username)
            .NotEmpty().WithMessage("{PropertyName} must not be empty")
            .NotNull().WithMessage("{PropertyName} must not be null");
 
-        RuleFor(x => x.role)
+        RuleFor(x => x.Role)
             .NotEmpty().WithMessage("{PropertyName} must not be empty")
             .NotNull().WithMessage("{PropertyName} must not be null");
     }
