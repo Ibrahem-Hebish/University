@@ -15,6 +15,7 @@ public static class DependancyInjection
         services.AddScoped<IEmailService, EmailService>();
 
         var configuration = new ConfigurationBuilder().AddJsonFile("ServiceSettings.json")
+             .AddEnvironmentVariables()
              .Build();
 
         services.Configure<SendEmailSetting>(configuration.GetSection("Email"));
@@ -22,9 +23,6 @@ public static class DependancyInjection
         services.Configure<JwtOptions>(configuration.GetSection("jwt"));
 
         var jwt = configuration.GetSection("jwt").Get<JwtOptions>();
-
-        var environmentvariablesConfiguration = new ConfigurationBuilder()
-            .AddEnvironmentVariables().Build();
 
         services.AddAuthentication()
                 .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, opt =>
@@ -41,7 +39,7 @@ public static class DependancyInjection
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(
                             Encoding.UTF8.GetBytes(
-                                environmentvariablesConfiguration["signingkey"]!))
+                                configuration["signingkey"]!))
                     };
                 });
 

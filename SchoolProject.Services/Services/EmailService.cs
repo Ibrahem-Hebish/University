@@ -1,8 +1,9 @@
-﻿
+﻿using MailKit.Security;
+
 namespace UniversityProject.Services.Services;
 
 public class EmailService(
-    IOptionsMonitor<SendEmailSetting> sendemailsetting, IConfiguration configuration)
+    IOptions<SendEmailSetting> sendemailsetting, IConfiguration configuration)
     : IEmailService
 {
     public async Task<string> SendEmailAsync(
@@ -15,12 +16,12 @@ public class EmailService(
             using var client = new SmtpClient();
 
             await client.ConnectAsync(
-                sendemailsetting.CurrentValue.ClientEmail,
-                sendemailsetting.CurrentValue.Port,
-                true);
+                sendemailsetting.Value.ClientEmail,
+                sendemailsetting.Value.Port,
+                SecureSocketOptions.StartTls);
 
             client.Authenticate(
-                sendemailsetting.CurrentValue.Email,
+                sendemailsetting.Value.Email,
                 configuration["SENDING_EMAIL_PASSWORD"]);
 
             var bodyBuilder = new BodyBuilder()
@@ -36,8 +37,8 @@ public class EmailService(
             };
 
             mimeMessage.From.Add(new MailboxAddress(
-                sendemailsetting.CurrentValue.Name,
-                sendemailsetting.CurrentValue.Email));
+                sendemailsetting.Value.Name,
+                sendemailsetting.Value.Email));
 
             mimeMessage.To.Add(new MailboxAddress(
                 email[..email.IndexOf('@')],

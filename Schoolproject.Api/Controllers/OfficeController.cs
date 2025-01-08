@@ -1,5 +1,6 @@
 ﻿using UniversityProject.Core.CQSR.Commands.OfficeCommands;
 using UniversityProject.Core.CQSR.Queries.OfficeQueries;
+using UniversityProject.Core.Dtos.OfficeDtos;
 
 namespace Universityproject.Api.Controllers;
 
@@ -32,6 +33,16 @@ public class OfficeController(IMediator mediator) : AppController
     public async Task<ActionResult<List<Office>>> GetStaff(string Name)
     {
         var result = await mediator.Send(new GetStaffInOffice(Name));
+
+        return NewRsponse(result);
+    }
+
+    [HttpPut]
+    [Route(Router.Office.ChangeName)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<GetOffice>> ChangeName(UpdateOfficeName command)
+    {
+        var result = await mediator.Send(command);
 
         return NewRsponse(result);
     }

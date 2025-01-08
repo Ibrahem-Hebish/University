@@ -183,6 +183,10 @@
             public const string GetById = postfix + "Get/{Name}";
 
             public const string GetAll = postfix + "GetAll";
+
+            public const string Delete = postfix + "Delete/{Name}";
+
+            public const string ChangeName = postfix + "ChangeName";
         }
 
         public static class Lab
@@ -192,6 +196,10 @@
             public const string GetById = postfix + "Get/{Name}";
 
             public const string GetAll = postfix + "GetAll";
+
+            public const string Delete = postfix + "Delete/{Name}";
+
+            public const string ChangeName = postfix + "ChangeName";
         }
 
         public static class Office
@@ -205,6 +213,8 @@
             public const string GetStaff = postfix + "GetStaff/{Name}";
 
             public const string Delete = postfix + "Delete/{Name}";
+
+            public const string ChangeName = postfix + "ChangeName";
         }
     }
 }

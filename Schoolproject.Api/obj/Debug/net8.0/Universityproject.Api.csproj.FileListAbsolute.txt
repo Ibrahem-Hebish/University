@@ -191,7 +191,6 @@ C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\
 C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\MediatR.Contracts.dll
 C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\MicroElements.OpenApi.FluentValidation.dll
 C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\MicroElements.Swashbuckle.FluentValidation.dll
-C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.Google.dll
 C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 C:\Users\Super magic\source\repos\universituproject\Schoolproject.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll

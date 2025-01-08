@@ -130,7 +130,7 @@ public class UniversityRepositery<T>
 
         return true;
     }
-    public async Task<T> UpdateAsync(T entity, int id)
+    public async Task<T> UpdateAsync(T entity, object id)
     {
         _appDbContext.Set<T>().Update(entity);
 

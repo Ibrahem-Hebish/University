@@ -5,7 +5,7 @@
     "LifeTime": 3
   },
   "Email": {
-    "Port": 465,
+    "Port": 587,
     "ClientEmail": "Smtp.gmail.com",
     "Email": "ibrahemhebish@gmail.com",
     "Name": "Ibrahem Hebish"

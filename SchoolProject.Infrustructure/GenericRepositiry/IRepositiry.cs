@@ -9,7 +9,7 @@ public interface IRepositiry<T>
     Task<ICollection<T>> GetAllWhere(Expression<Func<T, bool>> filter, bool AsNoTracking = false);
     Task<T> AddAsync(T entity);
     Task<ICollection<T>> AddRangeAsync(ICollection<T> entities);
-    Task<T> UpdateAsync(T entity, int id);
+    Task<T> UpdateAsync(T entity, object id);
     Task<bool> DeleteAsync(T entity, object id);
     Task<bool> DeleteRangeAsync(ICollection<T> entities);
 
