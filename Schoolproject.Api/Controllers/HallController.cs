@@ -25,6 +25,18 @@ public class HallController(IMediator mediator) : AppController
 
         return NewRsponse(result);
     }
+
+    [HttpGet]
+    [Route(Router.Hall.GetHallCourses)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<ActionResult<List<GetCourseDto>>> GetHallCourses(string Name)
+    {
+        var result = await mediator.Send(new GetHallCourses(Name));
+
+        return NewRsponse(result);
+    }
+
+
     [HttpPut]
     [Route(Router.Hall.ChangeName)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]

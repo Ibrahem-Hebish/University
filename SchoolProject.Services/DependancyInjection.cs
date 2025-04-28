@@ -4,6 +4,8 @@ public static class DependancyInjection
 {
     public static IServiceCollection AddServices(this IServiceCollection services)
     {
+        services.AddHttpContextAccessor();
+
         services.AddScoped<IAuthontication, Authontication>();
 
         services.AddScoped<IStudentService, StudentServices>();
@@ -13,6 +15,8 @@ public static class DependancyInjection
         services.AddScoped<IUserService, UserService>();
 
         services.AddScoped<IEmailService, EmailService>();
+
+        //services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
 
         var configuration = new ConfigurationBuilder().AddJsonFile("ServiceSettings.json")
              .AddEnvironmentVariables()

@@ -5,6 +5,7 @@ namespace UniversityProject.Core.ValidationBehavior;
 public class ValidationBehavior<TRequest, TResponse>(
     IEnumerable<IValidator<TRequest>> validators,
     IHttpContextAccessor httpContextAccessor)
+
     : IPipelineBehavior<TRequest, TResponse>
    where TRequest : IRequest<TResponse>
 {

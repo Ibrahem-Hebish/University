@@ -10,7 +10,6 @@ global using System.Net;
 global using System.Net.Http.Json;
 global using System.Text.Json;
 global using UniversityProject.Core.CQSR.Commands.StudentCommands;
-global using UniversityProject.Core.CQSR.Handlers.RoleHandler;
 global using UniversityProject.Core.CQSR.Handlers.StudentHandlers;
 global using UniversityProject.Core.CQSR.Queries.RoleQueries;
 global using UniversityProject.Core.CQSR.Queries.StudentQueries;
@@ -25,3 +24,4 @@ global using UniversityProject.Infrustructure.StudentRepositories;
 global using UniversityProject.Services.AbstractionServices;
 global using UniversityProject.Testing.Helpers;
 global using Xunit;
+

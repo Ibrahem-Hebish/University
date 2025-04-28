@@ -89,7 +89,7 @@
 
             public const string AddRole = postfix + "AddRole";
 
-            public const string DeleteRole = postfix + "DeleteRole";
+            public const string DeleteRole = postfix + "DeleteRole/{id}";
 
             public const string UpdateRole = postfix + "UpdateRole";
 
@@ -181,6 +181,8 @@
             public const string postfix = rule + "Hall/";
 
             public const string GetById = postfix + "Get/{Name}";
+
+            public const string GetHallCourses = postfix + "GetHallCourses/{Name}";
 
             public const string GetAll = postfix + "GetAll";
 

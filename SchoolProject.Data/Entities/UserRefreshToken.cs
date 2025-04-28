@@ -12,7 +12,7 @@ public class UserToken
     public DateTime AddedDate { get; set; }
     public DateTime ExpiredDate { get; set; }
     public string AccessToken { get; set; }
-    public string Token { get; set; }
+    public string RefreshToken { get; set; }
     [InverseProperty(nameof(User.Tokens))]
     public virtual User User { get; set; }
 

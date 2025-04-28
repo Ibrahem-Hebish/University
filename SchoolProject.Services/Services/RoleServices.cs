@@ -81,9 +81,9 @@ public class RoleServices(
         return "Success";
     }
 
-    public async Task<Manageuserclaims> GetManageuserclaimsAsync(User user)
+    public async Task<ManageUserClaims> GetManageuserclaimsAsync(User user)
     {
-        var manageuserclaims = new Manageuserclaims
+        var manageuserclaims = new ManageUserClaims
         {
             Userid = user.Id
         };

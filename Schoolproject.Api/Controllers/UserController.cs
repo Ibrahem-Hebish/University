@@ -18,7 +18,6 @@ public class UserController(
     [HttpGet]
     [Route(Router.UserRouter.GetUsers)]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    [Authorize]
     public async Task<ActionResult> Get()
     {
         var result = await mediator.Send(new GetUsers());

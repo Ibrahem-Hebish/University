@@ -17,7 +17,7 @@ namespace UniversityProject.Infrustructure.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.8")
+                .HasAnnotation("ProductVersion", "9.0.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -624,7 +624,7 @@ namespace UniversityProject.Infrustructure.Migrations
                     b.Property<bool>("IsUsed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Token")
+                    b.Property<string>("RefreshToken")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -731,8 +731,7 @@ namespace UniversityProject.Infrustructure.Migrations
 
                     b.HasOne("UniversityProject.Data.Entities.Office", "Office")
                         .WithMany("Doctors")
-                        .HasForeignKey("OfficeName")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("OfficeName");
 
                     b.Navigation("Department");
 
@@ -895,8 +894,7 @@ namespace UniversityProject.Infrustructure.Migrations
 
                     b.HasOne("UniversityProject.Data.Entities.Office", "Office")
                         .WithMany("TeachingAssistants")
-                        .HasForeignKey("OfficeName")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("OfficeName");
 
                     b.Navigation("Department");
 
@@ -907,8 +905,7 @@ namespace UniversityProject.Infrustructure.Migrations
                 {
                     b.HasOne("UniversityProject.Data.Entities.Office", "Office")
                         .WithMany("Users")
-                        .HasForeignKey("OfficeName")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("OfficeName");
 
                     b.Navigation("Office");
                 });

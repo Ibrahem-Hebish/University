@@ -47,10 +47,10 @@ public class UniversityRepositery<T>
 
         return entity2!;
     }
-    public virtual async Task<ICollection<T>> GetAllAsync(
+    public virtual async Task<IEnumerable<T>> GetAllAsync(
         bool AsNoTracking = false)
     {
-        if (!_memoryCache.TryGetValue(typeof(T).Name, out ICollection<T>? value))
+        if (!_memoryCache.TryGetValue(typeof(T).Name, out IEnumerable<T>? value))
         {
 
             var query = _appDbContext.Set<T>().AsQueryable();
@@ -66,7 +66,7 @@ public class UniversityRepositery<T>
         }
         return value!;
     }
-    public virtual async Task<ICollection<T>> GetAllWhere(
+    public virtual async Task<IEnumerable<T>> GetAllWhere(
         Expression<Func<T, bool>> filter
         , bool AsNoTracking = false)
     {
@@ -96,8 +96,8 @@ public class UniversityRepositery<T>
 
         return Result.Entity;
     }
-    public virtual async Task<ICollection<T>> AddRangeAsync(
-        ICollection<T> entities)
+    public virtual async Task<IEnumerable<T>> AddRangeAsync(
+        IEnumerable<T> entities)
     {
         _appDbContext.Set<T>().AddRange(entities);
 
@@ -120,7 +120,7 @@ public class UniversityRepositery<T>
         return true;
     }
 
-    public async Task<bool> DeleteRangeAsync(ICollection<T> entities)
+    public async Task<bool> DeleteRangeAsync(IEnumerable<T> entities)
     {
         _appDbContext.Set<T>().RemoveRange(entities);
 

@@ -24,15 +24,14 @@ public static class AppExtensions
 
             app.UseSwaggerUI();
         }
+
+        app.UseMiddleware<GlobalHandlingMiddleware>();
+
         var option = app.Services.GetService<IOptions<RequestLocalizationOptions>>();
 
         if (option is not null) app.UseRequestLocalization(option.Value);
 
         app.UseHttpsRedirection();
-
-        app.UseCors("local");
-
-        app.UseMiddleware<GlobalHandlingMiddleware>();
 
         app.UseCors("local");
 

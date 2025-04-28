@@ -29,7 +29,7 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
 
         return student.Sections!;
     }
-    public override async Task<ICollection<Student>> GetAllAsync(
+    public override async Task<IEnumerable<Student>> GetAllAsync(
         bool AsNoTracking = false)
     {
         if (AsNoTracking)
@@ -49,7 +49,7 @@ public class StudentRepository(AppDbContext appDbContext, IMemoryCache memoryCac
         return students2;
     }
 
-    public override async Task<ICollection<Student>> GetAllWhere(
+    public override async Task<IEnumerable<Student>> GetAllWhere(
         Expression<Func<Student, bool>> filter
         , bool AsNoTracking = false)
     {
@@ -113,7 +113,7 @@ public class SectionRepository(AppDbContext appDbContext, IMemoryCache memoryCac
     : UniversityRepositery<Section>(appDbContext, memoryCache)
     , ISectionRepository
 {
-    public async override Task<ICollection<Section>> GetAllWhere(Expression<Func<Section, bool>> filter, bool AsNoTracking = false)
+    public async override Task<IEnumerable<Section>> GetAllWhere(Expression<Func<Section, bool>> filter, bool AsNoTracking = false)
     {
         var Sections = _appDbContext.Sections
             .Include(s => s.TeachingAssistant)
@@ -143,7 +143,7 @@ public class DoctorRepository(AppDbContext appDbContext, IMemoryCache memoryCach
 
         return Doctor!;
     }
-    public async override Task<ICollection<Doctor>> GetAllAsync(bool AsNoTracking = false)
+    public async override Task<IEnumerable<Doctor>> GetAllAsync(bool AsNoTracking = false)
     {
         return await _appDbContext.Doctors.Include(d => d.Department).ToListAsync();
     }
@@ -163,7 +163,7 @@ public class TeachingAssistantRepository(AppDbContext appDbContext, IMemoryCache
         return TeachingAssistant!;
     }
 
-    public override async Task<ICollection<TeachingAssistant>> GetAllAsync(bool AsNoTracking = false)
+    public override async Task<IEnumerable<TeachingAssistant>> GetAllAsync(bool AsNoTracking = false)
     {
         var TeachingAssistants = await _appDbContext.TeachingAssistants
             .Include(t => t.Department)
@@ -216,7 +216,7 @@ public class HallRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
         return result!;
     }
 
-    public override async Task<ICollection<Hall>> GetAllAsync(bool AsNoTracking = false)
+    public override async Task<IEnumerable<Hall>> GetAllAsync(bool AsNoTracking = false)
     {
         var result = _appDbContext.Halls.Include(o => o.Deprtment);
 
@@ -308,7 +308,7 @@ public class OfficeRepository(AppDbContext appDbContext, IMemoryCache memoryCach
         return "Office is avillible";
     }
 
-    public async override Task<ICollection<Office>> GetAllAsync(bool AsNoTracking = false)
+    public async override Task<IEnumerable<Office>> GetAllAsync(bool AsNoTracking = false)
     {
         var result = _appDbContext.Offices.Include(o => o.Department);
 
@@ -348,7 +348,7 @@ public class LabRepository(AppDbContext appDbContext, IMemoryCache memoryCache)
         return result!;
     }
 
-    public async override Task<ICollection<Lab>> GetAllAsync(bool AsNoTracking = false)
+    public async override Task<IEnumerable<Lab>> GetAllAsync(bool AsNoTracking = false)
     {
         var result = _appDbContext.Labs.Include(o => o.Department);
 
@@ -367,7 +367,7 @@ public class CourseRepository(AppDbContext appDbContext, IMemoryCache memoryCach
     : UniversityRepositery<Course>(appDbContext, memoryCache)
     , ICourseRepository
 {
-    public async override Task<ICollection<Course>> GetAllWhere(Expression<Func<Course, bool>> filter, bool AsNoTracking = false)
+    public async override Task<IEnumerable<Course>> GetAllWhere(Expression<Func<Course, bool>> filter, bool AsNoTracking = false)
     {
         var Courses = await _appDbContext.Courses.Include(c => c.Doctor)
             .Where(filter).ToListAsync();

@@ -1,7 +1,9 @@
-﻿namespace UniversityProject.Core.Validators.Claims;
+﻿using UpdateUserClaims = UniversityProject.Core.CQSR.Commands.RolesCommands.UpdateUserClaims;
+
+namespace UniversityProject.Core.Validators.Claims;
 
 public class UpdateUserClaimsValidator
-    : AbstractValidator<Updateuserclaims>
+    : AbstractValidator<UpdateUserClaims>
 {
     public UpdateUserClaimsValidator()
     {

@@ -77,7 +77,7 @@ public class AuthorizationController(
     [Route(Router.RoleRouter.Updateuserclaims)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> UpdateUserClaims(
-        [FromBody] Updateuserclaims command)
+        [FromBody] UpdateUserClaims command)
     {
         var result = await mediator.Send(command);
 
@@ -88,9 +88,9 @@ public class AuthorizationController(
     [Route(Router.RoleRouter.DeleteRole)]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult> DeleteRole(
-        DeleteRole command)
+        int id)
     {
-        var result = await mediator.Send(command);
+        var result = await mediator.Send(new DeleteRole(id));
 
         return NewRsponse(result);
     }

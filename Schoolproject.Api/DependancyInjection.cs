@@ -12,12 +12,18 @@ public static class DependancyInjection
     {
         services.AddScoped<GlobalHandlingMiddleware>();
 
-        services.AddControllers();
+        services.AddControllers()
+        .AddJsonOptions(o =>
+        {
+            o.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+            o.JsonSerializerOptions.WriteIndented = true;
+        }
+        );
 
         services.AddRateLimiter(opt => opt
              .AddSlidingWindowLimiter(policyName: "slidingPolicy", options =>
             {
-                options.PermitLimit = 4;
+                options.PermitLimit = 10;
 
                 options.Window = TimeSpan.FromSeconds(12);
 
@@ -28,16 +34,16 @@ public static class DependancyInjection
                 options.QueueLimit = 2;
             }));
 
-        services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
+        //services.AddTransient<IActionContextAccessor, ActionContextAccessor>();
 
-        services.AddScoped<IUrlHelper>(opt =>
-        {
-            var contextaction = opt.GetRequiredService<IActionContextAccessor>().ActionContext;
+        //services.AddScoped<IUrlHelper>(opt =>
+        //{
+        //    var contextaction = opt.GetRequiredService<IActionContextAccessor>().ActionContext;
 
-            var factory = opt.GetRequiredService<IUrlHelperFactory>();
+        //    var factory = opt.GetRequiredService<IUrlHelperFactory>();
 
-            return factory.GetUrlHelper(contextaction!);
-        });
+        //    return factory.GetUrlHelper(contextaction!);
+        //});
 
         services.AddCors(c =>
         {

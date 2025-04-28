@@ -9,6 +9,6 @@ public class JwtToken
 public class RefreshToken
 {
     public string UserName { get; set; } = null!;
-    public string Token { get; set; } = null!;
+    public string Refresh_Token { get; set; } = null!;
     public DateTime ExpirationDate { get; set; }
 }

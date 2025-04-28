@@ -23,7 +23,7 @@ public class Authontication(
             IsUsed = true,
             IsExpired = false,
             AccessToken = AccessToken,
-            Token = jwtToken.Token.Token,
+            RefreshToken = jwtToken.Token.Refresh_Token,
             AddedDate = DateTime.UtcNow,
             ExpiredDate = jwtToken.Token.ExpirationDate,
             Userid = user.Id,
@@ -72,10 +72,10 @@ public class Authontication(
     }
 
     public Task<JwtToken> RefreshToken(User user,
-                                      string Token,
+                                      string AccessToken,
                                       DateTime expireddate)
     {
-        var jwtToken = CreateJwtToken(user, Token);
+        var jwtToken = CreateJwtToken(user, AccessToken);
 
         jwtToken.Token.ExpirationDate = expireddate;
 
@@ -84,20 +84,20 @@ public class Authontication(
 
     public async Task<string> ValidateDetails(JwtSecurityToken jwtSecurityToken,
                                               string AccessToken,
-                                              string Token)
+                                              string RefreshToken)
     {
         if (jwtSecurityToken is null)
-            return "Access Token is null";
+            return "Access Token is not recognised";
 
         if (!jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256))
             return "Algorism is wrong";
 
         if (jwtSecurityToken.ValidTo > DateTime.UtcNow)
-            return "Token is not expired";
+            return "AccessToken is not expired";
 
         var userToken = await userTokenRepository
-                 .GetOneAsync(rt => rt.Token == Token &&
-                 rt.AccessToken == AccessToken);
+                 .GetOneAsync(ut => ut.RefreshToken == RefreshToken &&
+                 ut.AccessToken == AccessToken);
 
         if (userToken is null)
             return "Invalid Token";
@@ -175,7 +175,7 @@ public class Authontication(
             Token = new RefreshToken()
             {
                 UserName = user.UserName!,
-                Token = GenereteToken(),
+                Refresh_Token = GenereteToken(),
                 ExpirationDate = DateTime.UtcNow.AddMonths(1)
             }
         };

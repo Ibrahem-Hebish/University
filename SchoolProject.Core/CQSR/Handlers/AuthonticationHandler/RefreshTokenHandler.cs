@@ -21,14 +21,14 @@ public class TokenHandler(
 
         switch (validationresult)
         {
-            case "Access Token is null":
-                return BadRequest<JwtToken>("Access Token is null");
+            case "Access Token is not recognised":
+                return BadRequest<JwtToken>("Access Token is not recognised");
 
             case "Algorism is wrong":
                 return UnAuthorize<JwtToken>();
 
-            case "Token is not expired":
-                return BadRequest<JwtToken>("Token is not expired");
+            case "AccessToken is not expired":
+                return BadRequest<JwtToken>("AccessToken is not expired");
 
             case "Invalid Token":
                 return UnAuthorize<JwtToken>();

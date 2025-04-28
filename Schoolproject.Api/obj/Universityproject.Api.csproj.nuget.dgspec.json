@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Super magic\\source\\repos\\universituproject\\Schoolproject.Api\\Universityproject.Api.csproj": {}
+    "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\Schoolproject.Api\\Universityproject.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Super magic\\source\\repos\\universituproject\\Schoolproject.Api\\Universityproject.Api.csproj": {
+    "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\Schoolproject.Api\\Universityproject.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\Schoolproject.Api\\Universityproject.Api.csproj",
+        "projectUniqueName": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\Schoolproject.Api\\Universityproject.Api.csproj",
         "projectName": "Universityproject.Api",
-        "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\Schoolproject.Api\\Universityproject.Api.csproj",
+        "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\Schoolproject.Api\\Universityproject.Api.csproj",
         "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\Schoolproject.Api\\obj\\",
+        "outputPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\Schoolproject.Api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\UniversityProject.Core.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\UniversityProject.Core.csproj"
               }
             }
           }
@@ -46,25 +46,25 @@
           "dependencies": {
             "MicroElements.Swashbuckle.FluentValidation": {
               "target": "Package",
-              "version": "[6.0.0, )"
+              "version": "[6.1.0, )"
             },
             "Microsoft.EntityFrameworkCore.Proxies": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[9.0.1, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.8, )"
+              "version": "[9.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.7.1, )"
+              "version": "[7.2.0, )"
             }
           },
           "imports": [
@@ -90,14 +90,14 @@
         }
       }
     },
-    "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj": {
+    "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\UniversityProject.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\UniversityProject.Core.csproj",
         "projectName": "UniversityProject.Core",
-        "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj",
+        "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\UniversityProject.Core.csproj",
         "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\obj\\",
+        "outputPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -114,14 +114,14 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj"
               },
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj"
               },
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Services\\UniversityProject.Services.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Services\\UniversityProject.Services.csproj"
               }
             }
           }
@@ -169,14 +169,14 @@
         }
       }
     },
-    "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
+    "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
+        "projectUniqueName": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj",
         "projectName": "UniversityProject.Data",
-        "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj",
+        "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj",
         "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\obj\\",
+        "outputPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -244,14 +244,14 @@
         }
       }
     },
-    "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
+    "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj",
+        "projectUniqueName": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj",
         "projectName": "UniversityProject.Infrustructure",
-        "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj",
+        "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj",
         "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\obj\\",
+        "outputPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -268,8 +268,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj"
               }
             }
           }
@@ -335,14 +335,14 @@
         }
       }
     },
-    "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj": {
+    "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Services\\UniversityProject.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj",
+        "projectUniqueName": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Services\\UniversityProject.Services.csproj",
         "projectName": "UniversityProject.Services",
-        "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\UniversityProject.Services.csproj",
+        "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Services\\UniversityProject.Services.csproj",
         "packagesPath": "C:\\Users\\Super magic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Services\\obj\\",
+        "outputPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Services\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Super magic\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -359,11 +359,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Data\\UniversityProject.Data.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Data\\UniversityProject.Data.csproj"
               },
-              "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
-                "projectPath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj"
+              "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj": {
+                "projectPath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Infrustructure\\UniversityProject.Infrustructure.csproj"
               }
             }
           }

@@ -1,11 +1,12 @@
-﻿namespace UniversityProject.Services.Services;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace UniversityProject.Services.Services;
 
 public class UserService(
     AppDbContext AppDBcontext,
     IEmailService emailService,
     UserManager<User> userManager,
-    IActionContextAccessor contextAccessor,
-    IUrlHelper urlHelper)
+    IHttpContextAccessor httpContextAccessor)
 
     : IUserService
 {
@@ -22,17 +23,14 @@ public class UserService(
 
             if (IsExsist2 is not null) return ("Try another email");
 
-            var code = Guid.NewGuid();
-
             TemporaryUserStore.Users.Add(user);
 
             TemporaryUserStore.Passwords.Add(password);
 
-            var httpRequest = contextAccessor.ActionContext!.HttpContext.Request;
+            var httpRequest = httpContextAccessor.HttpContext?.Request;
             var url = httpRequest.Scheme
                 + "://"
-                + httpRequest.Host + urlHelper.Action(
-                "ConfirmEmail", "Authontication", new { code });
+                + httpRequest.Host + "/Authontication/ConfirmEmail";
 
             var message = await emailService.SendEmailAsync(
                 user.Email!,

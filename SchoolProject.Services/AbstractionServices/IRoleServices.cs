@@ -15,6 +15,6 @@ public interface IRoleServices
 
     public Task<string> DeleteRole(int id);
 
-    public Task<Manageuserclaims> GetManageuserclaimsAsync(User user);
+    public Task<ManageUserClaims> GetManageuserclaimsAsync(User user);
 
 }

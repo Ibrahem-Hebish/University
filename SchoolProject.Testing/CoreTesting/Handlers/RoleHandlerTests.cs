@@ -1,4 +1,6 @@
-﻿namespace UniversityProject.Testing.CoreTesting.Handlers;
+﻿using UniversityProject.Core.CQSR.Handlers.RoleHandler.Queries;
+
+namespace UniversityProject.Testing.CoreTesting.Handlers;
 
 public class RoleHandlerTests
 {
@@ -21,13 +23,13 @@ public class RoleHandlerTests
     [Fact]
     public async Task Get_All_Roles_Should_Not_Be_Null()
     {
-        var handler = new RoleHandler
-            (_appDbContext.Object, _roleServices.Object, _mapper, _userManager.Object, _roleManager.Object);
-        List<Role> roles = new()
-        {
-            new Role { Id = 1,Name = "Admin"},
-            new Role { Id = 2,Name = "User"}
-        };
+        var handler = new GetRolesHandler
+            (_roleServices.Object, _mapper);
+        List<Role> roles =
+        [
+            new Role { Id = 1, Name = "Admin" },
+            new Role { Id = 2, Name = "User" }
+        ];
         var query = new GetRoles();
         _roleServices.Setup(s => s.GetRolesAsync()).Returns(Task.FromResult(roles));
         var result = await handler.Handle(query, CancellationToken.None);

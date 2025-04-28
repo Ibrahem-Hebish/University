@@ -1,27 +1,30 @@
-﻿
-using System.Text.Json;
+﻿using System.Text.Json;
 
-namespace Universityproject.Api.Middlewares
+namespace Universityproject.Api.Middlewares;
+
+public class GlobalHandlingMiddleware : IMiddleware
 {
-    public class GlobalHandlingMiddleware : IMiddleware
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
-        public async Task InvokeAsync(HttpContext context, RequestDelegate next)
+        try
         {
-            try
+            await next(context);
+        }
+        catch (Exception ex)
+        {
+            ProblemDetails problemDetails = new()
             {
-                await next(context);
-            }
-            catch (Exception ex)
-            {
-                ProblemDetails problemDetails = new()
-                {
-                    Status = context.Response.StatusCode,
-                    Detail = ex.Message,
-                };
-                context.Response.ContentType = "application/json";
-                await context.Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
+                Status =
+                context.Response.StatusCode == 0
+                ? (int)HttpStatusCode.InternalServerError
+                : context.Response.StatusCode,
 
-            }
+                Detail = ex.Message,
+            };
+
+            context.Response.ContentType = "application/json";
+            await context.Response.WriteAsync(JsonSerializer.Serialize(problemDetails));
+
         }
     }
 }

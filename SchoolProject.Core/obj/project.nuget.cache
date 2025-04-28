@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "11s8OuQmXYEZCs1F8SsI1Bt0Lt8a0CiISpVQDhBco4+SXTvW7r6zZfJ3MAJkvRE1JvcN6XP/+3xeHZAH/CFiUw==",
+  "dgSpecHash": "edZNX1tcp+OEjPNOrFXWNSlC4mxgE7A5crQRtwH8dDBX/M5nI4lkM7q6IwN2PX64cIjcISKUB6X/FUUIAo1wpQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Super magic\\source\\repos\\universituproject\\SchoolProject.Core\\UniversityProject.Core.csproj",
+  "projectFilePath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Core\\UniversityProject.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Super magic\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
