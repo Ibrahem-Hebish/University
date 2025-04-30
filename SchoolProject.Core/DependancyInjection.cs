@@ -16,8 +16,7 @@ public static class DependancyInjection
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddMediatR(
-            c => c.RegisterServicesFromAssembly(
-                Assembly.GetExecutingAssembly()));
+            c => c.RegisterServicesFromAssemblyContaining<AddRoleValidator>());
 
         services.AddValidatorsFromAssembly(typeof(AddRoleValidator).Assembly);
 

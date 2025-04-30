@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9NwRaJ7cRY37K6/fB9nGHrBW15AdFsnZEn3f2tQEdI0mIPJynQi3Wj+k5SKzKEtLEwN2r/w1GuwTb4XbwqCMFw==",
+  "dgSpecHash": "ViRMn1cT8IL7mzp5+Z15oa24ZSx+zsU1Zne0+cybjHbQOdOk5bcpZa4vlD1c3JtRHWUcWudJ/O8Tq4oi3D5L2A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\SchoolProject.Testing\\UniversityProject.Testing.csproj",
   "expectedPackageFiles": [
@@ -89,6 +89,7 @@
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.testplatform.objectmodel\\17.6.0\\microsoft.testplatform.objectmodel.17.6.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.testplatform.testhost\\17.6.0\\microsoft.testplatform.testhost.17.6.0.nupkg.sha512",
+    "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.win32.primitives\\4.3.0\\microsoft.win32.primitives.4.3.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\mimekit\\4.7.1\\mimekit.4.7.1.nupkg.sha512",

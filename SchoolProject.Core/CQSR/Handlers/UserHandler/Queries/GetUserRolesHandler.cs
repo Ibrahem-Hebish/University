@@ -1,7 +1,7 @@
 ﻿namespace UniversityProject.Core.CQSR.Handlers.UserHandler.Queries;
 
 public class GetUserRolesHandler(UserManager<User> userManager,
-    RoleManager<Role> roleManager, IMapper mapper) :
+    RoleManager<Role> roleManager) :
   ResponseHandler, IRequestHandler<GetUserRoles, Response<ManageUserRoles>>
 
 {

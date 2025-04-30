@@ -1,5 +1,5 @@
 ﻿namespace UniversityProject.Core.CQSR.Commands.AuthonticationCommands;
 
-public record ConfirmEmailCommand()
+public record ConfirmEmailCommand
     : IRequest<Response<string>>
 { }

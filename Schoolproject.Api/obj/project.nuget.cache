@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ePXeblj3321OjJjTKSsnJ7EpSh0+fNzTvFCBB3j3s0qYXpU4HNNVeUyr8tY3qIir8WLa5BJI3/gl94vJmGirwA==",
+  "dgSpecHash": "HBg93MkNwDB2L5p3MvfPmtjv2DojphCMtRq/93UAavZ+vW83AAVnbUJBUWWweHsX4m3EACAz2mhKYJed7Zxy7A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Super magic\\OneDrive\\Desktop\\University\\Schoolproject.Api\\Universityproject.Api.csproj",
   "expectedPackageFiles": [
@@ -73,6 +73,7 @@
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.identitymodel.tokens\\7.1.2\\microsoft.identitymodel.tokens.7.1.2.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.openapi\\1.6.22\\microsoft.openapi.1.6.22.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.sqlserver.server\\1.0.0\\microsoft.sqlserver.server.1.0.0.nupkg.sha512",
+    "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.19.5\\microsoft.visualstudio.azure.containers.tools.targets.1.19.5.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\microsoft.win32.systemevents\\6.0.0\\microsoft.win32.systemevents.6.0.0.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\mimekit\\4.7.1\\mimekit.4.7.1.nupkg.sha512",
     "C:\\Users\\Super magic\\.nuget\\packages\\mono.texttemplating\\3.0.0\\mono.texttemplating.3.0.0.nupkg.sha512",
