@@ -12,7 +12,6 @@ public static class DependancyInjection
     {
         services.AddHttpContextAccessor();
 
-        // services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
         services.AddAutoMapper(Assembly.GetExecutingAssembly());
 
         services.AddMediatR(

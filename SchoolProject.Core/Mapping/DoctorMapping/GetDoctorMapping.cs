@@ -5,6 +5,6 @@ public partial class DoctorMapping
     public void GetDoctorMap()
     {
         CreateMap<Doctor, GetDoctorDto>()
-            .ForMember(d => d.DepartmentName, opt => opt.MapFrom(d => d.Department.Name));
+            .ForMember(d => d.DepartmentName, opt => opt.MapFrom(src => src.Department.Name));
     }
 }

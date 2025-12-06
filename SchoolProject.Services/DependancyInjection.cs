@@ -16,8 +16,6 @@ public static class DependancyInjection
 
         services.AddScoped<IEmailService, EmailService>();
 
-        //services.AddScoped<IHttpContextAccessor, HttpContextAccessor>();
-
         var configuration = new ConfigurationBuilder().AddJsonFile("ServiceSettings.json")
              .AddEnvironmentVariables()
              .Build();

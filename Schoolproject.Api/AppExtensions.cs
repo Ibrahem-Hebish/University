@@ -1,4 +1,5 @@
 ﻿using Universityproject.Api.Middlewares;
+using UniversityProject.Infrustructure.Data;
 
 namespace Universityproject.Api;
 
@@ -10,6 +11,8 @@ public static class AppExtensions
         using (var scope = app.Services.CreateScope())
         {
             var usermanager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+
+            var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
             var rolemanager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
 
